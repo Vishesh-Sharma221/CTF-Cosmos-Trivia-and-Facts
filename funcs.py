@@ -56,7 +56,7 @@ def listen():  #stt func to get input from the user's mic
 def quiz():      # Function To Start Another Quiz
     print("Do you want to start the quiz? (Yes/No): ")           # Ask If Want To Take One More Quiz Or Not
         
-    if tts.lower == "yes":
+    if tts.lower() == "yes":
         talk("Do you want to start the quiz? (Yes or No)")
     else:
         pass

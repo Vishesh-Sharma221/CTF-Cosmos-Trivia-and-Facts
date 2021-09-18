@@ -56,7 +56,7 @@ def listen():  #stt func to get input from the user's mic
 def quiz():      # Function To Start Another Quiz
     print("Do you want to start the quiz? (Yes/No): ")           # Ask If Want To Take One More Quiz Or Not
         
-    if tts.lower == "yes":
+    if tts.lower() == "yes":
         talk("Do you want to start the quiz? (Yes or No)")
     else:
         pass
@@ -72,7 +72,7 @@ def quiz():      # Function To Start Another Quiz
             ans1,ans2,ans3,ans4=ques[r][2],ques[r][3],ques[r][4],ques[r][5]     # Assigning Variables To All The Options
 
             print(f"\nQuestion {str(ques_no)}: {ques[r][1]}\n 1. {ques[r][2]}\n 2. {ques[r][3]}\n 3. {ques[r][4]}\n 4. {ques[r][5]}")    # Displaying Question Along With Options
-            if tts.lower == "yes":
+            if tts.lower() == "yes":
                 talk(f"\nQuestion {str(ques_no)}: {ques[r][1]}\nThe options are:\n first, {ques[r][2]}\n second, {ques[r][3]}\n third, {ques[r][4]}\n and fourth, {ques[r][5]}")
             else:
                 pass
@@ -105,7 +105,7 @@ def quiz():      # Function To Start Another Quiz
 
 def check_quiz_ans(answer,r,ans1,ans2,ans3,ans4):    # Function To Take And Check The Answer
     print("\nEnter you answer (option 1, 2, 3, or 4) or enter 'stop' to exit the trivia: ")
-    if tts.lower == "yes":
+    if tts.lower() == "yes":
         talk("Enter the correct option number ")
     else:
         pass
@@ -119,7 +119,7 @@ def check_quiz_ans(answer,r,ans1,ans2,ans3,ans4):    # Function To Take And Chec
         if ((answer=="1" or answer==str(ques[r][6]).lower()) and ans1==ques[r][6]) or ((answer=="2" or answer==str(ques[r][6]).lower()) and ans2==ques[r][6])\
         or ((answer=="3" or answer==str(ques[r][6]).lower()) and ans3==ques[r][6]) or ((answer=="4" or answer==str(ques[r][6]).lower()) and ans4==ques[r][6]):       # If Answer Wrong
             print("\nYour answer is correct!")    # If Answer Right
-            if tts.lower == "yes":
+            if tts.lower() == "yes":
                 talk("Your answer is CORRECT!")
             else:
                 pass
@@ -129,7 +129,7 @@ def check_quiz_ans(answer,r,ans1,ans2,ans3,ans4):    # Function To Take And Chec
 
         else:
             print(f"\nYour answer is incorrect.\nThe correct answer to this question is {ques[r][6]}.")
-            if tts.lower == "yes":
+            if tts.lower() == "yes":
                 talk(f"\nYour answer is incorrect.\nThe correct answer to this question is; {ques[r][6]}.")
             else:
                 pass
@@ -138,7 +138,7 @@ def check_quiz_ans(answer,r,ans1,ans2,ans3,ans4):    # Function To Take And Chec
         if (answer=="1" and ans1!=ques[r][6]) or (answer=="2" and ans2!=ques[r][6])\
         or (answer=="3" and ans3!=ques[r][6]) or (answer=="4" and ans4!=ques[r][6] or answer==" "):       # If Answer Wrong
             print(f"\nYour answer is incorrect.\nThe correct answer to this question is {ques[r][6]}.")
-            if tts.lower == "yes":
+            if tts.lower() == "yes":
                 talk(f"\nYour answer is incorrect.\nThe correct answer to this question is; {ques[r][6]}.")
             else:
                 pass
@@ -148,13 +148,13 @@ def check_quiz_ans(answer,r,ans1,ans2,ans3,ans4):    # Function To Take And Chec
 
         else:
             print("\nYour answer is correct!")    # If Answer Right
-            if tts.lower == "yes":
+            if tts.lower() == "yes":
                 talk("Your answer is CORRECT!")
             else:
                 pass
     
 def rapid_fire():
-    if tts.lower == "yes":
+    if tts.lower() == "yes":
         talk("Do you want to start a rapid fire questionare?")
     else:
         pass
@@ -173,7 +173,7 @@ def rapid_fire():
     
             quess=f"\nQuestion {str(ques_no)}: {ques[r][1]}"       # Displaying Question Along With Options
             print(quess)
-            if tts.lower == "yes":
+            if tts.lower() == "yes":
                 talk(quess)
             else:
                 pass
@@ -193,13 +193,13 @@ def check_rapid_ans(answer,r):
     if answer!=str(ques[r][6]).upper():
         result = f"\nYour answer is incorrect.\nThe correct answer to this question is {ques[r][6]}." # If Answer Wrong
         print(result)
-        if tts.lower == "yes":
+        if tts.lower() == "yes":
             talk(result)
         else:
             pass
     else:
         print("\nYour answer is correct!")    # If Answer Right
-        if tts.lower == "yes":
+        if tts.lower() == "yes":
             talk("Your answer is correct!")
         else:
             pass
@@ -213,12 +213,12 @@ def facts():                         #Defining facts function
         lis = ["Quite Amazing isn't it?","WOW!","Wow that's so cool!","Woah!","Haha nice","I love this one","This is actually crazy!"]
         fact = random.choice(facts)
         print("Did you know? " + fact + ".")
-        if tts.lower == "yes":
+        if tts.lower() == "yes":
             talk("Did you know? " + fact)
         else:
             pass
         var = random.choice(lis)
-        if tts.lower == "yes":
+        if tts.lower() == "yes":
             talk(var)
         else:
             pass
@@ -227,7 +227,7 @@ def facts():                         #Defining facts function
 
 def space_facts():
     while True:
-        if tts.lower == "yes":
+        if tts.lower() == "yes":
             talk("Press enter to load your space fact or type anything to exit")
         else:
             pass
@@ -264,12 +264,12 @@ def pl_fax():                         #Defining func
    
 def home():
     print("\n Welcome to the home page! Choose a game mode to start with!")
-    if tts.lower == "yes":
+    if tts.lower() == "yes":
         talk("Welcome to the home page! Choose a game mode to start with!")
     else:
         pass
     print("\n SPACE QUIZ \n RAPID FIRE \n SPACE FACTS")
-    if tts.lower == "yes":
+    if tts.lower() == "yes":
         talk("Type in a game mode you want to play!")
     else:
         pass
@@ -287,7 +287,7 @@ def home():
         space_facts()
     else:
         print("Please enter a valid game mode!")
-        if tts.lower == "yes":
+        if tts.lower() == "yes":
             talk("Please enter a valid game mode!")
             
         else:
