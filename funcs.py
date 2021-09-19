@@ -303,6 +303,7 @@ def home():
     elif "space facts" in game_mode.lower():
         space_facts()
     elif "exit" in game_mode.lower():
+        exit()
     else:
         print("Please enter a valid game mode!")
         if "yes" in tts.lower():
