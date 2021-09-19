@@ -168,8 +168,9 @@ def check_quiz_ans(answer,r,ans1,ans2,ans3,ans4):    # Function To Take And Chec
             else:
                 pass
     
-def rapid_fire():
+rapid_fire_score = 0
 
+def rapid_fire():
     if stt.lower() == "yes":
         print("Do you want to start a Rapid Fire Questionnaire? (Yes/No): ")
         if tts.lower() == "yes":
@@ -195,6 +196,7 @@ def rapid_fire():
         home()  
 
 def check_rapid_ans(answer,r):
+    global rapid_fire_score
     if stt.lower() == "yes":
         print("Answer: ")
         answer = listen().upper()
@@ -202,16 +204,21 @@ def check_rapid_ans(answer,r):
         answer = input("Answer: ").upper()
 
     if str(ques[r][6]).upper() in answer:
+        rapid_fire_score += 1
         print("\nYour answer is correct!")    # If Answer Right
+        print(f"\nCurrent Score : {rapid_fire_score}")
         if tts.lower() == "yes":
             talk("Your answer is correct!")
+            talk(f"\nCurrent Score : {rapid_fire_score}")
         else:
             pass
     else:
         result = f"\nYour answer is incorrect.\nThe correct answer to this question is {ques[r][6]}." # If Answer Wrong
         print(result)
+        print(f"\nCurrent Score : {rapid_fire_score}")
         if tts.lower() == "yes":
             talk(result)
+            talk(f"\nCurrent Score : {rapid_fire_score}")
         else:
             pass
 # ANSHUMAN'S FUNCTIONS
