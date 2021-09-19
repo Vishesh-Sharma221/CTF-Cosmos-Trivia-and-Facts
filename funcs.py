@@ -29,6 +29,7 @@ print("\n WELCOME TO CTF! CHOOSE THE SETTINGS BEFORE YOU START PLAYING THE GAME!
 tts = input("\n\n Do you want to use text-to-speech to read questions? (yes/no): ")
 stt = input("\n\n Do you want to use microphone to answer questions? (yes/no): ")
 
+
 def talk(audio):  #tts func to make our program say something
     engine.say(audio)
     engine.runAndWait()
@@ -102,9 +103,10 @@ def quiz():      # Function To Start Another Quiz
     else:
         home()  # FOR NOW Exit
 
-
+score = 0
 
 def check_quiz_ans(answer,r,ans1,ans2,ans3,ans4):    # Function To Take And Check The Answer
+    global score
     print("\nEnter you answer (option 1, 2, 3, or 4) or enter 'stop' to exit the trivia: ")
     if "yes" in tts.lower():
         talk("Enter the correct option number ")
@@ -117,11 +119,15 @@ def check_quiz_ans(answer,r,ans1,ans2,ans3,ans4):    # Function To Take And Chec
         answer=input()
 
     try:
-        if ((answer=="1" or answer==str(ques[r][6]).lower()) and ans1==ques[r][6]) or ((answer=="2" or answer==str(ques[r][6]).lower()) and ans2==ques[r][6])\
-        or ((answer=="3" or answer==str(ques[r][6]).lower()) and ans3==ques[r][6]) or ((answer=="4" or answer==str(ques[r][6]).lower()) and ans4==ques[r][6]):       # If Answer Wrong
+        if (("1" in answer or str(ques[r][6]).lower() in answer) and ques[r][6] in ans1) or (("2" in answer or str(ques[r][6]).lower() in answer) and ques[r][6] in ans2)\
+        or (("3" in answer or str(ques[r][6]).lower() in answer) and ques[r][6] in ans3) or (("4" in answer or str(ques[r][6]).lower() in answer) and ques[r][6] in ans4):       # If Answer Wrong
             print("\nYour answer is correct!")    # If Answer Right
+            score += 1
+            time.sleep(1)
+            print("\n Current Score: ", score)
             if "yes" in tts.lower():
                 talk("Your answer is CORRECT!")
+                talk(f"\n Current Score: {score}")
             else:
                 pass
 
@@ -130,8 +136,11 @@ def check_quiz_ans(answer,r,ans1,ans2,ans3,ans4):    # Function To Take And Chec
 
         else:
             print(f"\nYour answer is incorrect.\nThe correct answer to this question is {ques[r][6]}.")
+            time.sleep(1)
+            print("\n Current Score: ", score)
             if "yes" in tts.lower():
                 talk(f"\nYour answer is incorrect.\nThe correct answer to this question is; {ques[r][6]}.")
+                talk(f"\n Current Score: {score}")
             else:
                 pass
         
@@ -139,8 +148,10 @@ def check_quiz_ans(answer,r,ans1,ans2,ans3,ans4):    # Function To Take And Chec
         if (answer=="1" and ans1!=ques[r][6]) or (answer=="2" and ans2!=ques[r][6])\
         or (answer=="3" and ans3!=ques[r][6]) or (answer=="4" and ans4!=ques[r][6] or answer==" "):       # If Answer Wrong
             print(f"\nYour answer is incorrect.\nThe correct answer to this question is {ques[r][6]}.")
+            print("\n Current Score: ", score)
             if "yes" in tts.lower():
                 talk(f"\nYour answer is incorrect.\nThe correct answer to this question is; {ques[r][6]}.")
+                talk(f"\n Current Score: {score}")
             else:
                 pass
     
@@ -148,9 +159,12 @@ def check_quiz_ans(answer,r,ans1,ans2,ans3,ans4):    # Function To Take And Chec
             home()
 
         else:
+            score += 1
             print("\nYour answer is correct!")    # If Answer Right
+            print("\n Current Score: ", score)
             if "yes" in tts.lower():
                 talk("Your answer is CORRECT!")
+                talk("\n Current Score: ", score)
             else:
                 pass
     
@@ -209,12 +223,12 @@ def facts():                         #Defining facts function
         lis = ["Quite Amazing isn't it?","WOW!","Wow that's so cool!","Woah!","Haha nice","I love this one","This is actually crazy!"]
         fact = random.choice(facts)
         print("Did you know? " + fact + ".")
-        if tts.lower == "yes":
+        if tts.lower() == "yes":
             talk("Did you know? " + fact)
         else:
             pass
         var = random.choice(lis)
-        if tts.lower == "yes":
+        if tts.lower() == "yes":
             talk(var)
         else:
             pass
