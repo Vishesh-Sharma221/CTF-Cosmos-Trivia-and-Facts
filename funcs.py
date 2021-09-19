@@ -29,7 +29,6 @@ print("\n WELCOME TO CTF! CHOOSE THE SETTINGS BEFORE YOU START PLAYING THE GAME!
 tts = input("\n\n Do you want to use text-to-speech to read questions? (yes/no): ")
 stt = input("\n\n Do you want to use microphone to answer questions? (yes/no): ")
 
-
 def talk(audio):  #tts func to make our program say something
     engine.say(audio)
     engine.runAndWait()
@@ -107,7 +106,8 @@ score = 0
 
 def check_quiz_ans(answer,r,ans1,ans2,ans3,ans4):    # Function To Take And Check The Answer
     global score
-    print("\nEnter you answer (option 1, 2, 3, or 4) or enter 'stop' to exit the trivia: ")
+    print("\nEnter you answer (option 1, 2, 3, or 4) or enter 'stop' to exit the trivia.")
+    print("Answer: ", end="")
     if "yes" in tts.lower():
         talk("Enter the correct option number ")
     else:
@@ -285,7 +285,7 @@ def home():
         talk("Welcome to the home page! Choose a game mode to start with!")
     else:
         pass
-    print("\n SPACE QUIZ \n RAPID FIRE \n SPACE FACTS")
+    print("\n SPACE QUIZ \n RAPID FIRE \n SPACE FACTS \n\n EXIT")
     if "yes" in tts.lower():
         talk("Type in a game mode you want to play!")
     else:
@@ -302,6 +302,7 @@ def home():
         rapid_fire()
     elif "space facts" in game_mode.lower():
         space_facts()
+    elif "exit" in game_mode.lower():
     else:
         print("Please enter a valid game mode!")
         if "yes" in tts.lower():
