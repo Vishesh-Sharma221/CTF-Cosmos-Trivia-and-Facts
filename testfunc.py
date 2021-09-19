@@ -5,6 +5,7 @@ from os import extsep
 import random
 import pyttsx3
 import speech_recognition as sr
+import time
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
