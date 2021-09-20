@@ -137,7 +137,7 @@ def check_quiz_ans(answer,r,ans1,ans2,ans3,ans4,ques_no):    # Function To Take 
         else:
             print(f"\nYour answer is incorrect.\nThe correct answer to this question is {ques[r][6]}.")
             time.sleep(1)
-           print(f"\n Current Score: {score}" if ques_no<5 else f"\n Your final score is: {score}")
+            print(f"\n Current Score: {score}" if ques_no<5 else f"\n Your final score is: {score}")
             if "yes" in tts.lower():
                 talk(f"\nYour answer is incorrect.\nThe correct answer to this question is; {ques[r][6]}.")
                 talk(f"\n Current Score: {score}" if ques_no<5 else f"\n Your final score is: {score}")
