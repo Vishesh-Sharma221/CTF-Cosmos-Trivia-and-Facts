@@ -5,8 +5,6 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty
 
-kv = Builder.load_file("mymain.kv")
-
 class Home(Screen):
     pass
 class GameMode(Screen):
@@ -134,6 +132,8 @@ class EndScreen(Screen):
     pass
 class WindowManager(ScreenManager):
     pass
+
+kv = Builder.load_file("mymain.kv")
 
 class MyMainApp(App):
     def build(self):
