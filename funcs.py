@@ -78,7 +78,7 @@ def quiz():      # Function To Start Another Quiz
             else:
                 pass
                         
-            check_quiz_ans(answer="",r=r,ans1=ans1,ans2=ans2,ans3=ans3,ans4=ans4)  # Calling Function To Check The Answer
+            check_quiz_ans(answer="",r=r,ans1=ans1,ans2=ans2,ans3=ans3,ans4=ans4,ques_no=ques_no)  # Calling Function To Check The Answer
             
             # removing the used ques for this quiz
             looplist.insert(0, ques.pop(r))
@@ -104,7 +104,7 @@ def quiz():      # Function To Start Another Quiz
 
 score = 0
 
-def check_quiz_ans(answer,r,ans1,ans2,ans3,ans4):    # Function To Take And Check The Answer
+def check_quiz_ans(answer,r,ans1,ans2,ans3,ans4,ques_no):    # Function To Take And Check The Answer
     global score
     print("\nEnter you answer (option 1, 2, 3, or 4) or enter 'stop' to exit the trivia.")
     print("Answer: ", end="")
@@ -124,10 +124,10 @@ def check_quiz_ans(answer,r,ans1,ans2,ans3,ans4):    # Function To Take And Chec
             print("\nYour answer is correct!")    # If Answer Right
             score += 1
             time.sleep(1)
-            print("\n Current Score: ", score)
+            print(f"\n Current Score: {score}" if ques_no<5 else f"\n Your final score is: {score}")
             if "yes" in tts.lower():
                 talk("Your answer is CORRECT!")
-                talk(f"\n Current Score: {score}")
+                talk(f"\n Current Score: {score}" if ques_no<5 else f"\n Your final score is: {score}")
             else:
                 pass
 
@@ -137,21 +137,36 @@ def check_quiz_ans(answer,r,ans1,ans2,ans3,ans4):    # Function To Take And Chec
         else:
             print(f"\nYour answer is incorrect.\nThe correct answer to this question is {ques[r][6]}.")
             time.sleep(1)
-            print("\n Current Score: ", score)
+           print(f"\n Current Score: {score}" if ques_no<5 else f"\n Your final score is: {score}")
             if "yes" in tts.lower():
                 talk(f"\nYour answer is incorrect.\nThe correct answer to this question is; {ques[r][6]}.")
-                talk(f"\n Current Score: {score}")
+                talk(f"\n Current Score: {score}" if ques_no<5 else f"\n Your final score is: {score}")
             else:
                 pass
-        
+        if ques_no==5 and score>3:
+            mesage=f"Well played!!"
+            print(mesage)
+            if "yes" in tts.lower():
+                talk(mesage)
+        if ques_no==5 and score==2:
+            mesage=f"Not bad! Nice played!"
+            print(mesage)
+            if "yes" in tts.lower():
+                talk(mesage)
+        if ques_no==5 and score<2:
+            mesage=f"Better luck next time!"
+            print(mesage)
+            if "yes" in tts.lower():
+                talk(mesage)
+
     except:
         if (answer=="1" and ans1!=ques[r][6]) or (answer=="2" and ans2!=ques[r][6])\
         or (answer=="3" and ans3!=ques[r][6]) or (answer=="4" and ans4!=ques[r][6] or answer==" "):       # If Answer Wrong
             print(f"\nYour answer is incorrect.\nThe correct answer to this question is {ques[r][6]}.")
-            print("\n Current Score: ", score)
+            print(f"\n Current Score: {score}" if ques_no<5 else f"\n Your final score is: {score}")
             if "yes" in tts.lower():
                 talk(f"\nYour answer is incorrect.\nThe correct answer to this question is; {ques[r][6]}.")
-                talk(f"\n Current Score: {score}")
+                talk(f"\n Current Score: {score}" if ques_no<5 else f"\n Your final score is: {score}")
             else:
                 pass
     
@@ -161,12 +176,27 @@ def check_quiz_ans(answer,r,ans1,ans2,ans3,ans4):    # Function To Take And Chec
         else:
             score += 1
             print("\nYour answer is correct!")    # If Answer Right
-            print("\n Current Score: ", score)
+            print(f"\n Current Score: {score}" if ques_no<5 else f"\n Your final score is: {score}")
             if "yes" in tts.lower():
                 talk("Your answer is CORRECT!")
-                talk("\n Current Score: ", score)
+                talk(f"\n Current Score: {score}" if ques_no<5 else f"\n Your final score is: {score}")
             else:
                 pass
+        if ques_no==5 and score>3:
+            mesage=f"Well played!!"
+            print(mesage)
+            if "yes" in tts.lower():
+                talk(mesage)
+        if ques_no==5 and score==2:
+            mesage=f"Not bad! Nice played!"
+            print(mesage)
+            if "yes" in tts.lower():
+                talk(mesage)
+        if ques_no==5 and score<2:
+            mesage=f"Better luck next time!"
+            print(mesage)
+            if "yes" in tts.lower():
+                talk(mesage)
     
 rapid_fire_score = 0
 
