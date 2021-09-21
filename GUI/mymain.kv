@@ -87,7 +87,15 @@ WindowManager:
 
 <Quiz>:
     name: "quiz"
-    
+    BoxLayout:
+        orientation:"vertical"
+        Label:
+            # id: textlabel
+            text: root.textin
+            size_hint_x: None
+            size: self.texture_size
+            pos_hint: {'top':0.5,'right':0.55}
+
 <RapidFire>:
     name: "rapidfire"
 
