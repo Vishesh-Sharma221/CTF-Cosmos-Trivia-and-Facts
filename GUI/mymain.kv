@@ -87,14 +87,44 @@ WindowManager:
 
 <Quiz>:
     name: "quiz"
-    BoxLayout:
-        orientation:"vertical"
-        Label:
-            # id: textlabel
-            text: root.textin
-            size_hint_x: None
-            size: self.texture_size
-            pos_hint: {'top':0.5,'right':0.55}
+    GridLayout:
+        cols: 2
+        
+        GridLayout:
+            cols: 1
+            pos_hint: {'x': 0, 'y': 0}
+            size_hint: (.8, 1)
+
+            GridLayout:
+                cols: 1
+                size_hint: (.8, .25)
+
+                Label:
+                    id: questionlabel
+                    text: root.question
+                    pos_hint: {'top':0.5,'right':0.5}
+            
+            GridLayout:
+                cols: 1
+                size_hint: (.8, .75)
+                
+                Button:
+                    text: root.opt1
+                    size_hint: (1, .25)
+                Button:
+                    text: root.opt2
+                    size_hint: (1, .25)
+                Button:
+                    text: root.opt3
+                    size_hint: (1, .25)
+                Button:
+                    text: root.opt4
+                    size_hint: (1, .25)
+
+        GridLayout:
+            cols: 1
+            pos_hint: {'x': 1, 'y': 0}
+            size_hint: (.2, 1)
 
 <RapidFire>:
     name: "rapidfire"
