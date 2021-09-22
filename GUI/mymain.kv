@@ -99,10 +99,14 @@ WindowManager:
                 cols: 1
                 size_hint: (.8, .25)
 
-                Label:
+                WrappedLabel:
                     id: questionlabel
                     text: root.question
-                    pos_hint: {'top':0.5,'right':0.5}
+                    # pos_hint: {'top':0.5,'right':0.5}
+                    halign: 'left'
+                    valign: 'middle'
+                    padding_x: 10
+                    text_size: self.size
             
             GridLayout:
                 cols: 1
@@ -110,16 +114,28 @@ WindowManager:
                 
                 Button:
                     text: root.opt1
+                    text_size: self.size
                     size_hint: (1, .25)
+                    valign: 'middle'
+                    padding_x: 10
                 Button:
                     text: root.opt2
+                    text_size: self.size
                     size_hint: (1, .25)
+                    valign: 'middle'
+                    padding_x: 10
                 Button:
                     text: root.opt3
+                    text_size: self.size
                     size_hint: (1, .25)
+                    valign: 'middle'
+                    padding_x: 10
                 Button:
                     text: root.opt4
+                    text_size: self.size
                     size_hint: (1, .25)
+                    valign: 'middle'
+                    padding_x: 10
 
         GridLayout:
             cols: 1
