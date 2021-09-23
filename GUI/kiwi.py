@@ -15,7 +15,6 @@ from kivy.properties import ObjectProperty
 from kivy.properties import StringProperty
 
 Window.size=(600,500)
-kv = Builder.load_file("mymain.kv")
 
 #requirements
 import csv
@@ -95,6 +94,8 @@ class WrappedLabel(Label):
             width=lambda *x:
             self.setter('text_size')(self, (self.width, None)),
             texture_size=lambda *x: self.setter('height')(self, self.texture_size[1]))
+
+kv = Builder.load_file("mymain.kv")
 
 class MyMainApp(App):
     title="Space"
