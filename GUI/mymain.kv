@@ -1,7 +1,11 @@
-WindowManager:
+WindowManager:#:kivy !
     Home:
     GameMode:
-    Quiz:
+    QuizQues1:
+    QuizQues2:
+    QuizQues3:
+    QuizQues4:
+    QuizQues5:
     RapidFire:
     Facts:
     SolarFacts:
@@ -42,7 +46,7 @@ WindowManager:
             font_size: (root.width**2 + root.height**2)/14**4
             
             on_release:
-                app.root.current = "quiz"
+                app.root.current = "quizques1"
                 root.manager.transition.direction = "left"
 
         Button:
@@ -85,8 +89,8 @@ WindowManager:
                 app.root.current = "home"
                 root.manager.transition.direction = "right"
 
-<Quiz>:
-    name: "quiz"
+<QuizQues1>:
+    name: "quizques1"
     GridLayout:
         cols: 2
         
@@ -142,17 +146,280 @@ WindowManager:
             pos_hint: {'x': 1, 'y': 0}
             size_hint: (.2, 1)
 
-<RapidFire>:
+            Button:
+                text: "Next Question"
+                size_hint: (1, .2)
+                
+                on_release:
+                    app.root.current = "quizques2"
+
+<QuizQues2>:
+    name: "quizques2"
+    GridLayout:
+        cols: 2
+        
+        GridLayout:
+            cols: 1
+            pos_hint: {'x': 0, 'y': 0}
+            size_hint: (.8, 1)
+
+            GridLayout:
+                cols: 1
+                size_hint: (.8, .25)
+
+                WrappedLabel:
+                    id: questionlabel
+                    text: root.question
+                    # pos_hint: {'top':0.5,'right':0.5}
+                    halign: 'left'
+                    valign: 'middle'
+                    padding_x: 10
+                    text_size: self.size
+            
+            GridLayout:
+                cols: 1
+                size_hint: (.8, .75)
+                
+                Button:
+                    text: root.opt1
+                    text_size: self.size
+                    size_hint: (1, .25)
+                    valign: 'middle'
+                    padding_x: 10
+                Button:
+                    text: root.opt2
+                    text_size: self.size
+                    size_hint: (1, .25)
+                    valign: 'middle'
+                    padding_x: 10
+                Button:
+                    text: root.opt3
+                    text_size: self.size
+                    size_hint: (1, .25)
+                    valign: 'middle'
+                    padding_x: 10
+                Button:
+                    text: root.opt4
+                    text_size: self.size
+                    size_hint: (1, .25)
+                    valign: 'middle'
+                    padding_x: 10
+
+        GridLayout:
+            cols: 1
+            pos_hint: {'x': 1, 'y': 0}
+            size_hint: (.2, 1)
+
+            Button:
+                text: "Next Question"
+                size_hint: (1, .2)
+                
+                on_release:
+                    app.root.current = "quizques3"
+
+<QuizQues3>:
+    name: "quizques3"
+    GridLayout:
+        cols: 2
+        
+        GridLayout:
+            cols: 1
+            pos_hint: {'x': 0, 'y': 0}
+            size_hint: (.8, 1)
+
+            GridLayout:
+                cols: 1
+                size_hint: (.8, .25)
+
+                WrappedLabel:
+                    id: questionlabel
+                    text: root.question
+                    # pos_hint: {'top':0.5,'right':0.5}
+                    halign: 'left'
+                    valign: 'middle'
+                    padding_x: 10
+                    text_size: self.size
+            
+            GridLayout:
+                cols: 1
+                size_hint: (.8, .75)
+                
+                Button:
+                    text: root.opt1
+                    text_size: self.size
+                    size_hint: (1, .25)
+                    valign: 'middle'
+                    padding_x: 10
+                Button:
+                    text: root.opt2
+                    text_size: self.size
+                    size_hint: (1, .25)
+                    valign: 'middle'
+                    padding_x: 10
+                Button:
+                    text: root.opt3
+                    text_size: self.size
+                    size_hint: (1, .25)
+                    valign: 'middle'
+                    padding_x: 10
+                Button:
+                    text: root.opt4
+                    text_size: self.size
+                    size_hint: (1, .25)
+                    valign: 'middle'
+                    padding_x: 10
+
+        GridLayout:
+            cols: 1
+            pos_hint: {'x': 1, 'y': 0}
+            size_hint: (.2, 1)
+
+            Button:
+                text: "Next Question"
+                size_hint: (1, .2)
+                
+                on_release:
+                    app.root.current = "quizques4"
+
+<QuizQues4>:
+    name: "quizques4"
+    GridLayout:
+        cols: 2
+        
+        GridLayout:
+            cols: 1
+            pos_hint: {'x': 0, 'y': 0}
+            size_hint: (.8, 1)
+
+            GridLayout:
+                cols: 1
+                size_hint: (.8, .25)
+
+                WrappedLabel:
+                    id: questionlabel
+                    text: root.question
+                    # pos_hint: {'top':0.5,'right':0.5}
+                    halign: 'left'
+                    valign: 'middle'
+                    padding_x: 10
+                    text_size: self.size
+            
+            GridLayout:
+                cols: 1
+                size_hint: (.8, .75)
+                
+                Button:
+                    text: root.opt1
+                    text_size: self.size
+                    size_hint: (1, .25)
+                    valign: 'middle'
+                    padding_x: 10
+                Button:
+                    text: root.opt2
+                    text_size: self.size
+                    size_hint: (1, .25)
+                    valign: 'middle'
+                    padding_x: 10
+                Button:
+                    text: root.opt3
+                    text_size: self.size
+                    size_hint: (1, .25)
+                    valign: 'middle'
+                    padding_x: 10
+                Button:
+                    text: root.opt4
+                    text_size: self.size
+                    size_hint: (1, .25)
+                    valign: 'middle'
+                    padding_x: 10
+
+        GridLayout:
+            cols: 1
+            pos_hint: {'x': 1, 'y': 0}
+            size_hint: (.2, 1)
+
+            Button:
+                text: "Next Question"
+                size_hint: (1, .2)
+                
+                on_release:
+                    app.root.current = "quizques5"
+
+<QuizQues5>:
+    name: "quizques5"
+    GridLayout:
+        cols: 2
+        
+        GridLayout:
+            cols: 1
+            pos_hint: {'x': 0, 'y': 0}
+            size_hint: (.8, 1)
+
+            GridLayout:
+                cols: 1
+                size_hint: (.8, .25)
+
+                WrappedLabel:
+                    id: questionlabel
+                    text: root.question
+                    # pos_hint: {'top':0.5,'right':0.5}
+                    halign: 'left'
+                    valign: 'middle'
+                    padding_x: 10
+                    text_size: self.size
+            
+            GridLayout:
+                cols: 1
+                size_hint: (.8, .75)
+                
+                Button:
+                    text: root.opt1
+                    text_size: self.size
+                    size_hint: (1, .25)
+                    valign: 'middle'
+                    padding_x: 10
+                Button:
+                    text: root.opt2
+                    text_size: self.size
+                    size_hint: (1, .25)
+                    valign: 'middle'
+                    padding_x: 10
+                Button:
+                    text: root.opt3
+                    text_size: self.size
+                    size_hint: (1, .25)
+                    valign: 'middle'
+                    padding_x: 10
+                Button:
+                    text: root.opt4
+                    text_size: self.size
+                    size_hint: (1, .25)
+                    valign: 'middle'
+                    padding_x: 10
+
+        GridLayout:
+            cols: 1
+            pos_hint: {'x': 1, 'y': 0}
+            size_hint: (.2, 1)
+
+            Button:
+                text: "Next Question"
+                size_hint: (1, .2)
+                
+                on_release:
+                    # app.root.current = "quizques2"
+
+<RapidFire@Screen>:
     name: "rapidfire"
 
-<Facts>:
+<Facts@Screen>:
     name: "facts"
 
-<SolarFacts>:
+<SolarFacts@Screen>:
     name: "solarfacts"
 
-<Result>:
+<Result@Screen>:
     name: "result"
 
-<EndScreen>:
+<EndScreen@Screen>:
     name: "endscreen"

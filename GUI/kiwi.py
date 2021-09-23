@@ -16,6 +16,7 @@ from kivy.properties import StringProperty
 
 Window.size=(600,500)
 
+
 #requirements
 import csv
 from os import extsep
@@ -36,15 +37,16 @@ class Home(Screen):
 class GameMode(Screen):
     pass
 
+quiz_score = 0
+class QuizQues1(Screen):
+    global quiz_score
+    global ques
+    global looplist
 
-class Quiz(Screen):
-    
     #functions
-    score = 0
-    ques_no=1
     r=random.randint(1,len(ques)-1)
     ans1,ans2,ans3,ans4=ques[r][2],ques[r][3],ques[r][4],ques[r][5]
-    question=StringProperty(f"\nQuestion {str(ques_no)}: {ques[r][1]}")
+    question=StringProperty(f"\nQuestion 1: {ques[r][1]}")
     opt1=StringProperty(f"1.    {ques[r][2]}")
     opt2=StringProperty(f"2.    {ques[r][3]}")
     opt3=StringProperty(f"3.    {ques[r][4]}")
@@ -57,8 +59,6 @@ class Quiz(Screen):
         for i in range(len(looplist)):
             ques.insert(1, looplist.pop(i))
 
-    
-
     def check_quiz_ans(self, answer,r,ans1,ans2,ans3,ans4):
     
         if (answer=="1" and ans1!=ques[r][6]) or (answer=="2" and ans2!=ques[r][6])\
@@ -67,22 +67,103 @@ class Quiz(Screen):
             
 
         else:
-            Quiz.score += 1
+            QuizQues1.score += 1
 
-            
+class QuizQues2(Screen):
+    global quiz_score
+    global ques
+    global looplist
 
+    #functions
+    r=random.randint(1,len(ques)-1)
+    ans1,ans2,ans3,ans4=ques[r][2],ques[r][3],ques[r][4],ques[r][5]
+    question=StringProperty(f"\nQuestion 2: {ques[r][1]}")
+    opt1=StringProperty(f"1.    {ques[r][2]}")
+    opt2=StringProperty(f"2.    {ques[r][3]}")
+    opt3=StringProperty(f"3.    {ques[r][4]}")
+    opt4=StringProperty(f"4.    {ques[r][5]}")
+     
+    # removing the used ques for this quiz
+    looplist.insert(0, ques.pop(r))
 
+    if len(ques)==1:
+        for i in range(len(looplist)):
+            ques.insert(1, looplist.pop(i))
 
-class RapidFire(Screen):
-    pass
-class Facts(Screen):
-    pass
-class SolarFacts(Screen):
-    pass
-class Result(Screen):
-    pass
-class EndScreen(Screen):
-    pass
+class QuizQues3(Screen):
+    global quiz_score
+    global ques
+    global looplist
+    
+    #functions
+    r=random.randint(1,len(ques)-1)
+    ans1,ans2,ans3,ans4=ques[r][2],ques[r][3],ques[r][4],ques[r][5]
+    question=StringProperty(f"\nQuestion 3: {ques[r][1]}")
+    opt1=StringProperty(f"1.    {ques[r][2]}")
+    opt2=StringProperty(f"2.    {ques[r][3]}")
+    opt3=StringProperty(f"3.    {ques[r][4]}")
+    opt4=StringProperty(f"4.    {ques[r][5]}")
+     
+    # removing the used ques for this quiz
+    looplist.insert(0, ques.pop(r))
+
+    if len(ques)==1:
+        for i in range(len(looplist)):
+            ques.insert(1, looplist.pop(i))
+
+class QuizQues4(Screen):
+    global quiz_score
+    global ques
+    global looplist
+    
+    #functions
+    r=random.randint(1,len(ques)-1)
+    ans1,ans2,ans3,ans4=ques[r][2],ques[r][3],ques[r][4],ques[r][5]
+    question=StringProperty(f"\nQuestion 4: {ques[r][1]}")
+    opt1=StringProperty(f"1.    {ques[r][2]}")
+    opt2=StringProperty(f"2.    {ques[r][3]}")
+    opt3=StringProperty(f"3.    {ques[r][4]}")
+    opt4=StringProperty(f"4.    {ques[r][5]}")
+     
+    # removing the used ques for this quiz
+    looplist.insert(0, ques.pop(r))
+
+    if len(ques)==1:
+        for i in range(len(looplist)):
+            ques.insert(1, looplist.pop(i))
+
+class QuizQues5(Screen):
+    global quiz_score
+    global ques
+    global looplist
+    
+    #functions
+    r=random.randint(1,len(ques)-1)
+    ans1,ans2,ans3,ans4=ques[r][2],ques[r][3],ques[r][4],ques[r][5]
+    question=StringProperty(f"\nQuestion 5: {ques[r][1]}")
+    opt1=StringProperty(f"1.    {ques[r][2]}")
+    opt2=StringProperty(f"2.    {ques[r][3]}")
+    opt3=StringProperty(f"3.    {ques[r][4]}")
+    opt4=StringProperty(f"4.    {ques[r][5]}")
+     
+    # removing the used ques for this quiz
+    looplist.insert(0, ques.pop(r))
+
+    if len(ques)==1:
+        for i in range(len(looplist)):
+            ques.insert(1, looplist.pop(i))
+
+# class RapidFire(Screen):
+#     pass
+# class Facts(Screen):
+#     pass
+# class SolarFacts(Screen):
+#     pass
+# class Result(Screen):
+#     pass
+# class EndScreen(Screen):
+#     pass
+
 class WindowManager(ScreenManager):
     pass
 
