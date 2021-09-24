@@ -1,5 +1,6 @@
 WindowManager:#:kivy !
     Home:
+    Setting:
     GameMode:
     QuizQues1:
     QuizQues2:
@@ -14,25 +15,61 @@ WindowManager:#:kivy !
 
 <Home>:
     name: "home"
-    
-    GridLayout:
-        cols: 1
-        
-        Button:
-            text: "Game Modes"
-            pos_hint: {'x': 0, 'y': 0}
-            size_hint: (1, 1)
-            font_size: (root.width**2 + root.height**2)/14**4
-            
-            on_release:
-                app.root.current = "gamemode"
-                root.manager.transition.direction = "left"
-        
-        # Button:
-            # text: "Settings"
-            # pos_hint: {'x':0, 'y':.5}
-            # size_hint: (1, .5)
+    canvas.before:
+        # Color:
+        #     rgba: (1, 1, 1, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "images/Home.png"
 
+    Button:
+        text: "Play"
+        pos_hint: {"center_x":.5, "center_y":.6}
+        size_hint: None, None
+        size: "150dp","75dp"
+        background_color: .52, .52, .52, 1
+        # font_size: (root.width**2 + root.height**2)/14**4
+        
+        on_release:
+            app.root.current = "gamemode"
+            root.manager.transition.direction = "left"
+    
+    Button:
+        text: "Settings"
+        pos_hint: {"center_x":.5, "center_y":.45}
+        size_hint: None, None
+        size: "150dp","75dp"
+        background_color: .52, .52, .52, 1
+        # font_size: (root.width**2 + root.height**2)/14**4
+
+        on_release:
+            app.root.current = "gamemode"
+            root.manager.transition.direction = "left"
+
+    Button:
+        text: "Info"
+        pos_hint: {"center_x":.5, "center_y":.3}
+        size_hint: None, None
+        size: "150dp","75dp"
+        background_color: .52, .52, .52, 1
+
+        on_release:
+            app.root.current = "gamemode"
+            root.manager.transition.direction = "left"
+    Button:
+        text: "Exit"
+        pos_hint: {"center_x":.5, "center_y":.15}
+        size_hint: None, None
+        size: "150dp","75dp"
+        background_color: .52, .52, .52, 1
+
+        on_release:
+            app.root.current = "gamemode"
+            root.manager.transition.direction = "left"
+
+<Setting>:
+    name: "setting"
 <GameMode>:
     name: "gamemode"
     
@@ -122,24 +159,40 @@ WindowManager:#:kivy !
                     size_hint: (1, .25)
                     valign: 'middle'
                     padding_x: 10
+                    on_release:
+                        root.inputA
+                        root.check_quiz_ans
+                        self.background_color = (0,1,0,1) if root.ans == "true" else (1,0,0,1)
                 Button:
                     text: root.opt2
                     text_size: self.size
                     size_hint: (1, .25)
                     valign: 'middle'
                     padding_x: 10
+                    on_release:
+                        root.inputB
+                        root.check_quiz_ans
+                        self.background_color = (0,1,0,1) if root.ans == "true" else (1,0,0,1)
                 Button:
                     text: root.opt3
                     text_size: self.size
                     size_hint: (1, .25)
                     valign: 'middle'
                     padding_x: 10
+                    on_release:
+                        root.inputC
+                        root.check_quiz_ans
+                        self.background_color = (0,1,0,1) if root.ans == "true" else (1,0,0,1)
                 Button:
                     text: root.opt4
                     text_size: self.size
                     size_hint: (1, .25)
                     valign: 'middle'
                     padding_x: 10
+                    on_release:
+                        root.inputD
+                        root.check_quiz_ans
+                        self.background_color = (0,1,0,1) if root.ans == "true" else (1,0,0,1)
 
         GridLayout:
             cols: 1
@@ -407,19 +460,20 @@ WindowManager:#:kivy !
                 size_hint: (1, .2)
                 
                 on_release:
+                    app.root.current = "gamemode"
                     # app.root.current = "quizques2"
 
-<RapidFire@Screen>:
+<RapidFire>:
     name: "rapidfire"
 
-<Facts@Screen>:
+<Facts>:
     name: "facts"
 
-<SolarFacts@Screen>:
+<SolarFacts>:
     name: "solarfacts"
 
-<Result@Screen>:
+<Result>:
     name: "result"
 
-<EndScreen@Screen>:
+<EndScreen>:
     name: "endscreen"

@@ -1,4 +1,6 @@
+from re import A
 import kivy
+from kivy.metrics import dp
 from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import ScreenManager, Screen
@@ -14,8 +16,9 @@ from kivy.core.window import Window
 from kivy.properties import ObjectProperty
 from kivy.properties import StringProperty
 
-Window.size=(600,500)
-
+#window size
+wfac=3
+Window.size=(dp((40-wfac)*9), dp((40-wfac)*16))
 
 #requirements
 import csv
@@ -34,14 +37,28 @@ for x in read_ques_file:
 looplist=[]
 class Home(Screen):
     pass
-class GameMode(Screen):
+
+class Setting(Screen):
     pass
 
+class GameMode(Screen):
+    pass
+r=random.randint(1,len(ques)-1)
 quiz_score = 0
+check=""
+
 class QuizQues1(Screen):
     global quiz_score
     global ques
     global looplist
+    global r
+    global check
+    
+    A=0
+    B=0
+    C=0
+    D=0
+    ans=StringProperty(f"{check}")
 
     #functions
     r=random.randint(1,len(ques)-1)
@@ -51,7 +68,7 @@ class QuizQues1(Screen):
     opt2=StringProperty(f"2.    {ques[r][3]}")
     opt3=StringProperty(f"3.    {ques[r][4]}")
     opt4=StringProperty(f"4.    {ques[r][5]}")
-     
+    
     # removing the used ques for this quiz
     looplist.insert(0, ques.pop(r))
 
@@ -59,20 +76,31 @@ class QuizQues1(Screen):
         for i in range(len(looplist)):
             ques.insert(1, looplist.pop(i))
 
-    def check_quiz_ans(self, answer,r,ans1,ans2,ans3,ans4):
-    
-        if (answer=="1" and ans1!=ques[r][6]) or (answer=="2" and ans2!=ques[r][6])\
-        or (answer=="3" and ans3!=ques[r][6]) or (answer=="4" and ans4!=ques[r][6] or answer==" "):
-            checked=f"\nYour answer is incorrect.\nThe correct answer to this question is {ques[r][6]}."
-            
-
+    def inputA(self, button):
+        self.A="1"
+    def inputB(self, button):
+        self.A="2"
+    def inputC(self, button):
+        self.A="3"
+    def inputD(self, button):
+        self.A="4"
+    def check_quiz_ans(self):
+        global quiz_score
+        global check
+        if (self.A=="1" and self.ans1==ques[r][6]) or (self.A=="2" and self.ans2==ques[r][6])\
+        or (self.A=="3" and self.ans3==ques[r][6]) or (self.A=="4" and self.ans4==ques[r][6]):
+            quiz_score += 1
+            check="true"
         else:
-            QuizQues1.score += 1
+            check="false"
+        
+        self.ans=StringProperty(f"{check}")
 
 class QuizQues2(Screen):
     global quiz_score
     global ques
     global looplist
+    global r
 
     #functions
     r=random.randint(1,len(ques)-1)
@@ -94,6 +122,7 @@ class QuizQues3(Screen):
     global quiz_score
     global ques
     global looplist
+    global r
     
     #functions
     r=random.randint(1,len(ques)-1)
@@ -115,6 +144,7 @@ class QuizQues4(Screen):
     global quiz_score
     global ques
     global looplist
+    global r
     
     #functions
     r=random.randint(1,len(ques)-1)
@@ -136,7 +166,8 @@ class QuizQues5(Screen):
     global quiz_score
     global ques
     global looplist
-    
+    global r
+
     #functions
     r=random.randint(1,len(ques)-1)
     ans1,ans2,ans3,ans4=ques[r][2],ques[r][3],ques[r][4],ques[r][5]
@@ -153,16 +184,24 @@ class QuizQues5(Screen):
         for i in range(len(looplist)):
             ques.insert(1, looplist.pop(i))
 
-# class RapidFire(Screen):
-#     pass
-# class Facts(Screen):
-#     pass
-# class SolarFacts(Screen):
-#     pass
-# class Result(Screen):
-#     pass
-# class EndScreen(Screen):
-#     pass
+    quiz_score=0
+
+class RapidFire(Screen):
+    pass
+
+class Facts(Screen):
+    pass
+
+class SolarFacts(Screen):
+    pass
+
+class Result(Screen):
+    pass
+
+class EndScreen(Screen):
+    pass
+
+
 
 class WindowManager(ScreenManager):
     pass
@@ -178,11 +217,11 @@ class WrappedLabel(Label):
 
 kv = Builder.load_file("mymain.kv")
 
-class MyMainApp(App):
-    title="Space"
+class CTFApp(App):
+    title="CTF - Cosmos Trivia and Facts"
     icon="black-hole-icon.ico"
     def build(self):
         return kv
 
 if __name__ == "__main__":
-    MyMainApp().run()
+    CTFApp().run()
