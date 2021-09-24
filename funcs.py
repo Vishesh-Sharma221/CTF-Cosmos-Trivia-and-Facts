@@ -289,8 +289,8 @@ def pl_fax():                         #Defining func
     inpt=input("Would you like to know info about specific solar system bodies? (y/n) : ").lower()               #Asking user would they like to know facts about a specific planet
     if "y" in inpt:
         
-        print("--Our solar system's celestial bodies list is below (from closest to farthest from the centre)--\n0. Sun\n1. Mercury\n2. Venus\n3. Earth\n4. Moon\n5. Mars\n6. Jupiter\n7. Saturn\n8. Uranus\n9. Neptune\n10. Pluto ")
-        inx=int(input("Select the corresponding serial no. of celestial body's info you would you like to know : "))  #asking user to select a planet
+        print("--Our solar system's celestial bodies list is below (from closest to farthest from the centre)--\n0. Sun\n1. Mercury\n2. Venus\n3. Earth\n4. Moon\n5. Mars\n6. Jupiter\n7. Saturn\n8. Uranus\n9. Neptune ")
+        inx=int(input("Select the corresponding serial no. of celestial body's info you would you like to know : "))  #asking user to select a body
         with open("space.txt","r") as f:
 
             lines = [inx]
