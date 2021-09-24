@@ -1,4 +1,16 @@
-WindowManager:#:kivy !
+#:kivy 2.0.0
+#:import NoTransition kivy.uix.screenmanager.NoTransition
+#:import CardTransition kivy.uix.screenmanager.CardTransition
+#:import WipeTransition kivy.uix.screenmanager.WipeTransition
+#:import SlideTransition kivy.uix.screenmanager.SlideTransition
+#:import SwapTransition kivy.uix.screenmanager.SwapTransition
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+#:import FallOutTransition kivy.uix.screenmanager.FallOutTransition
+#:import RiseInTransition kivy.uix.screenmanager.RiseInTransition
+
+
+WindowManager:
+    transition: SlideTransition()
     Home:
     Setting:
     GameMode:
@@ -21,7 +33,7 @@ WindowManager:#:kivy !
         Rectangle:
             pos: self.pos
             size: self.size
-            source: "images/Home.png"
+            source: "images/Home_vs.jpg"
 
     Button:
         text: "Play"
@@ -29,11 +41,10 @@ WindowManager:#:kivy !
         size_hint: None, None
         size: "150dp","75dp"
         background_color: .52, .52, .52, 1
-        # font_size: (root.width**2 + root.height**2)/14**4
         
         on_release:
             app.root.current = "gamemode"
-            root.manager.transition.direction = "left"
+            
     
     Button:
         text: "Settings"
@@ -41,11 +52,9 @@ WindowManager:#:kivy !
         size_hint: None, None
         size: "150dp","75dp"
         background_color: .52, .52, .52, 1
-        # font_size: (root.width**2 + root.height**2)/14**4
 
         on_release:
-            app.root.current = "gamemode"
-            root.manager.transition.direction = "left"
+            app.root.current = "setting"
 
     Button:
         text: "Info"
@@ -56,7 +65,6 @@ WindowManager:#:kivy !
 
         on_release:
             app.root.current = "gamemode"
-            root.manager.transition.direction = "left"
     Button:
         text: "Exit"
         pos_hint: {"center_x":.5, "center_y":.15}
@@ -66,7 +74,6 @@ WindowManager:#:kivy !
 
         on_release:
             app.root.current = "gamemode"
-            root.manager.transition.direction = "left"
 
 <Setting>:
     name: "setting"
@@ -80,51 +87,46 @@ WindowManager:#:kivy !
             text: "Space Quiz"
             pos_hint: {'x': 0, 'y': .8}
             size_hint: (1, .2)
-            font_size: (root.width**2 + root.height**2)/14**4
+            background_color: .52, .52, .52, 1
             
             on_release:
                 app.root.current = "quizques1"
-                root.manager.transition.direction = "left"
 
         Button:
             text: "Rapid Fire"
             pos_hint: {'x': 0, 'y': .6}
             size_hint: (1, .2)
-            font_size: (root.width**2 + root.height**2)/14**4
+            background_color: .52, .52, .52, 1
             
             on_release:
                 app.root.current = "rapidfire"
-                root.manager.transition.direction = "left"        
 
         Button:
             text: "Space Facts"
             pos_hint: {'x': 0, 'y': .4}
             size_hint: (1, .2)
-            font_size: (root.width**2 + root.height**2)/14**4
+            background_color: .52, .52, .52, 1
             
             on_release:
                 app.root.current = "facts"
-                root.manager.transition.direction = "left"
 
         Button:
             text: "Planet Facts"
             pos_hint: {'x': 0, 'y': .2}
             size_hint: (1, .2)
-            font_size: (root.width**2 + root.height**2)/14**4
+            background_color: .52, .52, .52, 1
             
             on_release:
                 app.root.current = "solarfacts"
-                root.manager.transition.direction = "left" 
 
         Button:
             text: "Home"
             pos_hint: {'x': 0, 'y': 0}
             size_hint: (1, .2)
-            font_size: (root.width**2 + root.height**2)/14**4
+            background_color: .52, .52, .52, 1
             
             on_release:
                 app.root.current = "home"
-                root.manager.transition.direction = "right"
 
 <QuizQues1>:
     name: "quizques1"
@@ -205,7 +207,7 @@ WindowManager:#:kivy !
                 
                 on_release:
                     app.root.current = "quizques2"
-
+                    
 <QuizQues2>:
     name: "quizques2"
     GridLayout:
@@ -461,7 +463,7 @@ WindowManager:#:kivy !
                 
                 on_release:
                     app.root.current = "gamemode"
-                    # app.root.current = "quizques2"
+                    root.manager.transition.direction = "right"
 
 <RapidFire>:
     name: "rapidfire"

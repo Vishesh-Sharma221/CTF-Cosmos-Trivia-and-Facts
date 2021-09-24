@@ -219,7 +219,7 @@ kv = Builder.load_file("mymain.kv")
 
 class CTFApp(App):
     title="CTF - Cosmos Trivia and Facts"
-    icon="black-hole-icon.ico"
+    icon="images/appicon.ico"
     def build(self):
         return kv
 
