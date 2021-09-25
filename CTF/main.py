@@ -19,7 +19,7 @@ import pyttsx3
 import speech_recognition as sr
 import time
 
-ques_file=open("GUI/questions.csv")
+ques_file=open("CTF/questions.csv")
 read_ques_file=csv.reader(ques_file)
 ques=[]         # 1-Q, 2-O1, 3-O2, 4-O3, 5-O4, 6-A
 for x in read_ques_file:
@@ -27,7 +27,7 @@ for x in read_ques_file:
 r=random.randint(0,len(ques)-1)
 loopques=[]
 
-fact_file=open("GUI/facts.txt")
+fact_file=open("CTF/facts.txt")
 facts=fact_file.readlines()
 rf=random.randint(1,len(facts)-1)
 loopfact=[]
@@ -40,7 +40,7 @@ class Setting(Screen):
     pass
 
 class Info(Screen):
-    file=open("GUI/info.txt")
+    file=open("CTF/info.txt")
     info=file.read()
     infos = StringProperty(f"{info}")
 
