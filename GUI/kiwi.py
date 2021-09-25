@@ -154,6 +154,70 @@ class RapidFire(Screen):
 
         return data
 
+
+
+    global ques
+    global loopques
+    global r
+    
+    if len(ques)==1:
+        for i in range(len(loopques)):
+            ques.insert(1, loopques.pop(i))
+
+    #default vals
+    quiz_score = StringProperty("0")
+    check=StringProperty("")
+    ques_no=1
+
+    #variables    
+    A=StringProperty("0")
+
+    ans=StringProperty(f"{check}")
+    nexttohome=StringProperty("Next")
+    
+    r=random.randint(1,len(ques)-1)
+    ans1,ans2,ans3,ans4=ques[r][2],ques[r][3],ques[r][4],ques[r][5]
+    question=StringProperty(f"\nQuestion {int(ques_no)}:\n{ques[r][1]}")
+
+    # removing the used ques for this quiz
+    loopques.insert(0, ques.pop(r))
+
+    def start_rapid_ques(self, buttonnext, buttonhome):
+        global ques
+        global loopques
+        global r
+        
+        if len(ques)==1:
+            for i in range(len(loopques)):
+                ques.insert(1, loopques.pop(i))
+
+        #functions
+        self.ques_no+=1
+        r=random.randint(1,len(ques)-1)
+        self.ans1,self.ans2,self.ans3,self.ans4=ques[r][2],ques[r][3],ques[r][4],ques[r][5]
+        self.question=f"\nQuestion {int(self.ques_no)}: {ques[r][1]}"
+        
+        # removing the used ques for this quiz
+        loopques.insert(0, ques.pop(r))
+
+        if self.ques_no==5:
+            self.ques_no=1
+            buttonhome.disabled = False
+            buttonnext.disabled = True
+
+    
+    def check_rapid_ans(self):
+        global quiz_score
+        global check
+        if (self.A=="1" and self.ans1==ques[r][6]) or (self.A=="2" and self.ans2==ques[r][6])\
+        or (self.A=="3" and self.ans3==ques[r][6]) or (self.A=="4" and self.ans4==ques[r][6]):
+            self.quiz_score += 1
+            check="true"
+        else:
+            check="false"
+        
+        self.ans=f"{check}"
+
 class Facts(Screen):
     global facts
     global loopfact

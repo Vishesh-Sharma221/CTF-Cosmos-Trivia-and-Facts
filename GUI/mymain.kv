@@ -290,7 +290,73 @@ WindowManager:
 
 <RapidFire>:
     name: "rapidfire"
-    
+    canvas.before:
+        Color:
+            rgba: hex("#181818")
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            
+    GridLayout:
+        cols: 1
+
+        GridLayout:
+            cols: 1
+            size_hint: (1, .25)
+
+            WrappedLabel:
+                id: questionlabel
+                text: root.question
+                # pos_hint: {'top':0.5,'right':0.5}
+                halign: 'left'
+                valign: 'top'
+                padding_x: 10
+                text_size: self.size
+                font_size: 20
+        
+        GridLayout:
+            cols: 2
+            size_hint: (1, .75)
+            
+            GridLayout:
+                cols: 1
+                size_hint: (.8, 1)
+                
+                TextInput:
+                    text: "Enter Your Answer Here"
+                
+            GridLayout:
+                cols: 1
+                pos_hint: {'x': 1, 'y': 0}
+                size_hint: (.2, 1)
+
+                Button:
+                    id: btnquiznextques
+                    text: "Next"
+                    size_hint: 1, None
+                    height: 111
+                    
+                    on_release:
+                        root.start_rapid_ques(self, btnrapidtohome)
+
+                Button:
+                    id: btnquizaudio
+                    text: "Audio"
+                    size_hint: 1, None
+                    height: 111
+                    
+                    on_release:
+                        app.talk(root.question)
+
+                Button:
+                    id: btnrapidtohome
+                    text: "Home"
+                    size_hint: 1, None
+                    height: 111
+                    disabled: True
+
+                    on_release:
+                        app.root.current = "home"
 
 
 <Facts>:
