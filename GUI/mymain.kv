@@ -41,7 +41,7 @@ WindowManager:
         color: hex("#E7005E")
         pos_hint: {"center_x":.5, "center_y":.9}
     
-    Label:
+    Label:  
         text: "Cosmos Trivia and Facts"
         size: self.size
         font_name: "fonts/righteous.ttf"
@@ -307,6 +307,63 @@ WindowManager:
 
 <Facts>:
     name: "facts"
+    
+    GridLayout:
+        cols: 1
+        
+        GridLayout:
+            cols: 1
+
+            WrappedLabel:
+                text: root.diduno
+                halign: 'left'
+                valign: 'top'
+                padding_x: 10
+                font_size: 30
+                pos_hint: {'center_x': .5, 'center_y':.5}
+                size_hint: 1, .4
+
+            WrappedLabel:
+                id: factlabel
+                text: root.fact
+                halign: 'left'
+                valign: 'top'
+                padding_x: 10
+                font_size: 20
+                pos_hint: {'center_x': .5, 'center_y':.5}
+                size_hint: 1, .6
+        
+        GridLayout:
+            cols: 2
+            
+            Button:
+                id: btnmorefact
+                text: root.morefact
+                size_hint: (.65,1)
+                pos_hint: {'left': 0, 'center_y':.5}
+                on_release:
+                    root.show_more_facts(self)
+
+            Button:
+                id: btnfactaudio
+                text: "Audio"
+                size_hint: (.15,1)
+                pos_hint: {'right': 1, 'center_y':.5}
+        
+        GridLayout:
+            cols: 1
+            
+            Button:
+                id: btnfacttohome
+                text: "Home"
+                disabled: False
+                size_hint: (.8,.8)
+                pos_hint: {'center_x': .5, 'center_y':.5}
+
+                on_release:
+                    app.root.current = "home"
+
+    
 
 <SolarFacts>:
     name: "solarfacts"

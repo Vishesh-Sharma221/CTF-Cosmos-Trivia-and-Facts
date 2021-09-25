@@ -24,8 +24,15 @@ read_ques_file=csv.reader(ques_file)
 ques=[]         # 1-Q, 2-O1, 3-O2, 4-O3, 5-O4, 6-A
 for x in read_ques_file:
     ques.append(x)
-r=1
-looplist=[]
+r=random.randint(0,len(ques)-1)
+loopques=[]
+
+fact_file=open("facts.txt")
+facts=fact_file.readlines()
+rf=random.randint(1,len(facts)-1)
+loopfact=[]
+
+
 class Home(Screen):
     pass
 
@@ -42,9 +49,13 @@ class GameMode(Screen):
 
 class Quiz(Screen):
     global ques
-    global looplist
+    global loopques
     global r
     
+    if len(ques)==1:
+        for i in range(len(loopques)):
+            ques.insert(1, loopques.pop(i))
+
     #default vals
     quiz_score = StringProperty("0")
     check=StringProperty("")
@@ -67,14 +78,19 @@ class Quiz(Screen):
     opt4=StringProperty(f"4.    {ques[r][5]}")
 
     # removing the used ques for this quiz
-    looplist.insert(0, ques.pop(r))
+    loopques.insert(0, ques.pop(r))
 
-    if len(ques)==1:
-        for i in range(len(looplist)):
-            ques.insert(1, looplist.pop(i))
+    
 
     def start_quiz_ques(self, buttonnext, buttonhome):
+        global ques
+        global loopques
+        global r
         
+        if len(ques)==1:
+            for i in range(len(loopques)):
+                ques.insert(1, loopques.pop(i))
+
         #functions
         self.ques_no+=1
         r=random.randint(1,len(ques)-1)
@@ -86,20 +102,14 @@ class Quiz(Screen):
         self.opt4=f"4.    {ques[r][5]}"
         
         # removing the used ques for this quiz
-        looplist.insert(0, ques.pop(r))
+        loopques.insert(0, ques.pop(r))
 
-        if len(ques)==1:
-            for i in range(len(looplist)):
-                ques.insert(1, looplist.pop(i))
+        
 
         if self.ques_no==5:
             self.ques_no=1
             buttonhome.disabled = False
             buttonnext.disabled = True
-            
-
-
-        
 
     def inputA(self, button):
         self.A="1"
@@ -125,7 +135,44 @@ class RapidFire(Screen):
     pass
 
 class Facts(Screen):
-    pass
+    global facts
+    global loopfact
+    global rf
+    
+    if len(facts)==0:
+        for i in range(len(loopfact)):
+            facts.insert(1, loopfact.pop(i))
+
+    rf=random.randint(0,len(facts)-1)
+    fact=StringProperty(f"Click on the button below to load a space fact.")
+    morefact=StringProperty("Click For Space Facts")
+    diduno=StringProperty("")
+    
+    loopfact.insert(0, facts.pop(rf))
+
+    
+
+    def show_more_facts(self, button):
+        global facts
+        global loopfact
+        global rf
+        
+        if len(facts)==0:
+            for i in range(len(loopfact)):
+                facts.insert(1, loopfact.pop(i))
+        
+        rf=random.randint(0,len(facts)-1)
+        self.fact=f"{facts[rf]}"
+        self.morefact="One More Fact"
+
+        self.diduno="Did you know?"
+
+        loopfact.insert(0, facts.pop(rf))
+
+        
+
+
+
 
 class SolarFacts(Screen):
     pass
