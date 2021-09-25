@@ -1,26 +1,17 @@
 import kivy
 from kivy.metrics import dp
 from kivy.app import App
-from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
-from kivy.uix.checkbox import CheckBox
-from kivy.uix.textinput import TextInput
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.tabbedpanel import TabbedPanel
 from kivy.lang import Builder
-from kivy.clock import Clock
 from kivy.core.window import Window
-from kivy.uix.scrollview import ScrollView
-from kivy.properties import ObjectProperty
-from kivy.properties import StringProperty
+from kivy.properties import ObjectProperty, StringProperty
 
 #window size
 wfac=3
 Window.size=(dp((40-wfac)*9), dp((40-wfac)*16))
 
-#requirements
+#other requirements
 import csv
 from os import extsep
 import random
@@ -50,20 +41,23 @@ class GameMode(Screen):
     pass
 
 class Quiz(Screen):
-    quiz_score = StringProperty("0")
     global ques
     global looplist
-    check=StringProperty("")
+    global r
     
+    #default vals
+    quiz_score = StringProperty("0")
+    check=StringProperty("")
+    ques_no=1
+
+    #variables    
     A=StringProperty("0")
     B=StringProperty("0")
     C=StringProperty("0")
     D=StringProperty("0")
     ans=StringProperty(f"{check}")
     nexttohome=StringProperty("Next")
-
-    ques_no=1
-    global r
+    
     r=random.randint(1,len(ques)-1)
     ans1,ans2,ans3,ans4=ques[r][2],ques[r][3],ques[r][4],ques[r][5]
     question=StringProperty(f"\nQuestion {int(ques_no)}:\n{ques[r][1]}")
@@ -79,9 +73,7 @@ class Quiz(Screen):
         for i in range(len(looplist)):
             ques.insert(1, looplist.pop(i))
 
-    def start_quiz_ques(self):
-        if self.ques_no==4:
-            self.nexttohome="Home"
+    def start_quiz_ques(self, buttonnext, buttonhome):
         
         #functions
         self.ques_no+=1
@@ -99,6 +91,13 @@ class Quiz(Screen):
         if len(ques)==1:
             for i in range(len(looplist)):
                 ques.insert(1, looplist.pop(i))
+
+        if self.ques_no==5:
+            self.ques_no=1
+            buttonhome.disabled = False
+            buttonnext.disabled = True
+            
+
 
         
 

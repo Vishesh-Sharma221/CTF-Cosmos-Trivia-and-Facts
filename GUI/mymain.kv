@@ -11,7 +11,7 @@
 
 
 WindowManager:
-    transition: SlideTransition()
+    transition: SwapTransition()
     Home:
     Setting:
     Info:
@@ -29,12 +29,25 @@ WindowManager:
     name: "home"
     
     canvas.before:
-        # Color:
-        #     rgba: (1, 1, 1, 1)
         Rectangle:
             pos: self.pos
             size: self.size
-            source: "images/NewHome.jpg"
+            source: "images/HOMEPAGE.png"
+    Label:
+        text: "CTF"
+        size: self.size
+        font_name: "fonts/righteous.ttf"
+        font_size: "30dp"
+        color: hex("#E7005E")
+        pos_hint: {"center_x":.5, "center_y":.9}
+    
+    Label:
+        text: "Cosmos Trivia and Facts"
+        size: self.size
+        font_name: "fonts/righteous.ttf"
+        font_size: "26dp"
+        color: hex("#E7005E")
+        pos_hint: {"center_x":.5, "center_y":.83}
 
     Button:
         text: "Play"
@@ -98,13 +111,21 @@ WindowManager:
         Rectangle:
             pos: self.pos
             size: self.size
-            source: "images/NewGameMode.jpg"
+            source: "images/GAMEMODE.jpg"
+
+    Label:
+        text: "Choose a Game Mode"
+        size: self.size
+        font_name: "fonts/righteous.ttf"
+        font_size: "30dp"
+        color: hex("#E7005E")
+        pos_hint: {"center_x":.5, "center_y":.9}
 
     Button:
         text: "Space Quiz"
         pos_hint: {"center_x":.5, "center_y":.67}
         size_hint: None, None
-        size: "150dp","75dp"
+        size: "175dp","75dp"
         background_color: .52, .52, .52, 1
         
         on_release:
@@ -114,7 +135,7 @@ WindowManager:
         text: "Rapid Fire"
         pos_hint: {"center_x":.5, "center_y":.54}
         size_hint: None, None
-        size: "150dp","75dp"
+        size: "175dp","75dp"
         background_color: .52, .52, .52, 1
         
         on_release:
@@ -124,7 +145,7 @@ WindowManager:
         text: "Space Facts"
         pos_hint: {"center_x":.5, "center_y":.41}
         size_hint: None, None
-        size: "150dp","75dp"
+        size: "175dp","75dp"
         background_color: .52, .52, .52, 1
         
         on_release:
@@ -134,7 +155,7 @@ WindowManager:
         text: "Planet Facts"
         pos_hint: {"center_x":.5, "center_y":.28}
         size_hint: None, None
-        size: "150dp","75dp"
+        size: "175dp","75dp"
         background_color: .52, .52, .52, 1
         
         on_release:
@@ -144,7 +165,7 @@ WindowManager:
         text: "Home"
         pos_hint: {"center_x":.5, "center_y":.15}
         size_hint: None, None
-        size: "150dp","75dp"
+        size: "175dp","75dp"
         background_color: .52, .52, .52, 1
         
         on_release:
@@ -160,18 +181,12 @@ WindowManager:
             pos: self.pos
             size: self.size
             
-
     GridLayout:
         cols: 1
-        
-        # GridLayout:
-        #     cols: 1
-        #     pos_hint: {'x': 0, 'y': 0}
-        #     size_hint: (.8, 1)
 
         GridLayout:
             cols: 1
-            size_hint: (.8, .25)
+            size_hint: (1, .25)
 
             WrappedLabel:
                 id: questionlabel
@@ -185,12 +200,13 @@ WindowManager:
         
         GridLayout:
             cols: 2
-            size_hint: (.8, .75)
+            size_hint: (1, .75)
             
             GridLayout:
                 cols: 1
-                size_hint: (.8, .75)
-                Button:
+                size_hint: (.8, 1)
+                
+                ToggleButton:
                     id: btnopt1
                     text: root.opt1
                     text_size: self.size
@@ -201,8 +217,9 @@ WindowManager:
                     on_release:
                         root.inputA(self)
                         root.check_quiz_ans()
-                        self.background_color = (0,1,0,1) if root.ans == "true" else (1,0,0,1)
-                Button:
+                        self.background_color = (0,0,1,1) if self.state == "down" else (.52, .52, .52, 1)
+                
+                ToggleButton:
                     id: btnopt2
                     text: root.opt2
                     text_size: self.size
@@ -213,8 +230,9 @@ WindowManager:
                     on_release:
                         root.inputB(self)
                         root.check_quiz_ans
-                        self.background_color = (0,1,0,1) if root.ans == "true" else (1,0,0,1)
-                Button:
+                        self.background_color = (0,0,1,1) if self.state == "down" else (.52, .52, .52, 1)
+                
+                ToggleButton:
                     id: btnopt3
                     text: root.opt3
                     text_size: self.size
@@ -225,8 +243,9 @@ WindowManager:
                     on_release:
                         root.inputC(self)
                         root.check_quiz_ans
-                        self.background_color = (0,1,0,1) if root.ans == "true" else (1,0,0,1)
-                Button:
+                        self.background_color = (0,0,1,1) if self.state == "down" else (.52, .52, .52, 1)
+                
+                ToggleButton:
                     id: btnopt4
                     text: root.opt4
                     text_size: self.size
@@ -237,7 +256,7 @@ WindowManager:
                     on_release:
                         root.inputD(self)
                         root.check_quiz_ans
-                        self.background_color = (0,1,0,1) if root.ans == "true" else (1,0,0,1)
+                        self.background_color = (0,0,1,1) if self.state == "down" else (.52, .52, .52, 1)
 
             GridLayout:
                 cols: 1
@@ -245,17 +264,43 @@ WindowManager:
                 size_hint: (.2, 1)
 
                 Button:
-                    text: root.nexttohome
-                    size_hint: (1, .2)
+                    id: btnquiznextques
+                    text: "Next"
+                    size_hint: 1, None
+                    height: 111
                     
                     on_release:
-                        root.start_quiz_ques()
-                        
+                        root.start_quiz_ques(self, btnquiztohome)
                         btnopt1.background_color = .52, .52, .52, 1
                         btnopt2.background_color = .52, .52, .52, 1
                         btnopt3.background_color = .52, .52, .52, 1
                         btnopt4.background_color = .52, .52, .52, 1
-                        # app.root.current = "Home" if root.ques_no == 4
+                        btnopt1.state = 'normal'
+                        btnopt2.state = 'normal'
+                        btnopt3.state = 'normal'
+                        btnopt4.state = 'normal'
+
+                Button:
+                    id: btnquizmic
+                    text: "Mic"
+                    size_hint: 1, None
+                    height: 111
+
+                Button:
+                    id: btnquizaudio
+                    text: "Audio"
+                    size_hint: 1, None
+                    height: 111
+
+                Button:
+                    id: btnquiztohome
+                    text: "Home"
+                    size_hint: 1, None
+                    height: 111
+                    disabled: True
+
+                    on_release:
+                        app.root.current = "home"
 
 <RapidFire>:
     name: "rapidfire"
