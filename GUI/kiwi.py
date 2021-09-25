@@ -66,7 +66,7 @@ class Quiz(Screen):
     global r
     r=random.randint(1,len(ques)-1)
     ans1,ans2,ans3,ans4=ques[r][2],ques[r][3],ques[r][4],ques[r][5]
-    question=StringProperty(f"\nQuestion {int(ques_no)}: {ques[r][1]}")
+    question=StringProperty(f"\nQuestion {int(ques_no)}:\n{ques[r][1]}")
     opt1=StringProperty(f"1.    {ques[r][2]}")
     opt2=StringProperty(f"2.    {ques[r][3]}")
     opt3=StringProperty(f"3.    {ques[r][4]}")
