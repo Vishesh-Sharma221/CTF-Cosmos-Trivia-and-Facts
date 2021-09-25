@@ -50,20 +50,23 @@ class GameMode(Screen):
     pass
 
 class Quiz(Screen):
-    quiz_score = StringProperty("0")
     global ques
     global looplist
-    check=StringProperty("")
+    global r
     
+    #default vals
+    quiz_score = StringProperty("0")
+    check=StringProperty("")
+    ques_no=1
+
+    #variables    
     A=StringProperty("0")
     B=StringProperty("0")
     C=StringProperty("0")
     D=StringProperty("0")
     ans=StringProperty(f"{check}")
     nexttohome=StringProperty("Next")
-
-    ques_no=1
-    global r
+    
     r=random.randint(1,len(ques)-1)
     ans1,ans2,ans3,ans4=ques[r][2],ques[r][3],ques[r][4],ques[r][5]
     question=StringProperty(f"\nQuestion {int(ques_no)}:\n{ques[r][1]}")

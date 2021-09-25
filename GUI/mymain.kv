@@ -163,15 +163,10 @@ WindowManager:
 
     GridLayout:
         cols: 1
-        
-        # GridLayout:
-        #     cols: 1
-        #     pos_hint: {'x': 0, 'y': 0}
-        #     size_hint: (.8, 1)
 
         GridLayout:
             cols: 1
-            size_hint: (.8, .25)
+            size_hint: (1, .25)
 
             WrappedLabel:
                 id: questionlabel
@@ -185,11 +180,11 @@ WindowManager:
         
         GridLayout:
             cols: 2
-            size_hint: (.8, .75)
+            size_hint: (1, .75)
             
             GridLayout:
                 cols: 1
-                size_hint: (.8, .75)
+                size_hint: (.8, 1)
                 Button:
                     id: btnopt1
                     text: root.opt1
@@ -246,7 +241,8 @@ WindowManager:
 
                 Button:
                     text: root.nexttohome
-                    size_hint: (1, .2)
+                    size_hint: 1, None
+                    height: 111
                     
                     on_release:
                         root.start_quiz_ques()
@@ -256,6 +252,25 @@ WindowManager:
                         btnopt3.background_color = .52, .52, .52, 1
                         btnopt4.background_color = .52, .52, .52, 1
                         # app.root.current = "Home" if root.ques_no == 4
+                
+                Button:
+                    text: "Mic"
+                    size_hint: 1, None
+                    height: 111
+
+                Button:
+                    text: "Audio"
+                    size_hint: 1, None
+                    height: 111
+
+                Button:
+                    text: "Home"
+                    size_hint: 1, None
+                    height: 111
+                    disabled: True
+
+                    on_release:
+                        app.root.current = "home"
 
 <RapidFire>:
     name: "rapidfire"
