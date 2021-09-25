@@ -1,425 +1,273 @@
-WindowManager:#:kivy !
+#:kivy 2.0.0
+#:import NoTransition kivy.uix.screenmanager.NoTransition
+#:import CardTransition kivy.uix.screenmanager.CardTransition
+#:import WipeTransition kivy.uix.screenmanager.WipeTransition
+#:import SlideTransition kivy.uix.screenmanager.SlideTransition
+#:import SwapTransition kivy.uix.screenmanager.SwapTransition
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+#:import FallOutTransition kivy.uix.screenmanager.FallOutTransition
+#:import RiseInTransition kivy.uix.screenmanager.RiseInTransition
+#:import hex kivy.utils.get_color_from_hex
+
+
+WindowManager:
+    transition: SlideTransition()
     Home:
+    Setting:
+    Info:
     GameMode:
-    QuizQues1:
-    QuizQues2:
-    QuizQues3:
-    QuizQues4:
-    QuizQues5:
+    Quiz:
     RapidFire:
     Facts:
     SolarFacts:
     Result:
     EndScreen:
 
+<ButImage@ButtonBehavior+AsyncImage>
+
 <Home>:
     name: "home"
     
-    GridLayout:
-        cols: 1
+    canvas.before:
+        # Color:
+        #     rgba: (1, 1, 1, 1)
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "images/NewHome.jpg"
+
+    Button:
+        text: "Play"
+        pos_hint: {"center_x":.5, "center_y":.6}
+        size_hint: None, None
+        size: "175dp","75dp"
+        background_color: .52, .52, .52, 1
         
-        Button:
-            text: "Game Modes"
-            pos_hint: {'x': 0, 'y': 0}
-            size_hint: (1, 1)
-            font_size: (root.width**2 + root.height**2)/14**4
+        on_release:
+            app.root.current = "gamemode"
             
-            on_release:
-                app.root.current = "gamemode"
-                root.manager.transition.direction = "left"
-        
-        # Button:
-            # text: "Settings"
-            # pos_hint: {'x':0, 'y':.5}
-            # size_hint: (1, .5)
+    
+    Button:
+        text: "Settings"
+        pos_hint: {"center_x":.5, "center_y":.45}
+        size_hint: None, None
+        size: "175dp","75dp"
+        background_color: .52, .52, .52, 1
+
+        on_release:
+            app.root.current = "setting"
+
+    Button:
+        text: "Info"
+        pos_hint: {"center_x":.5, "center_y":.3}
+        size_hint: None, None
+        size: "175dp","75dp"
+        background_color: .52, .52, .52, 1
+
+        on_release:
+            app.root.current = "info"
+    
+    Button:
+        text: "Exit"
+        pos_hint: {"center_x":.5, "center_y":.15}
+        size_hint: None, None
+        size: "175dp","75dp"
+        background_color: .52, .52, .52, 1
+
+        on_release:
+            app.stop()
+
+<Setting>:
+    name: "setting"
+
+<Info>:
+    name: "info"
+    ScrollView:
+        BoxLayout:
+            padding: 20, 160
+            size_hint: 1, None
+            height: self.minimum_height
+            WrappedLabel:
+                size: root.size
+                text: root.infos
 
 <GameMode>:
     name: "gamemode"
+
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "images/NewGameMode.jpg"
+
+    Button:
+        text: "Space Quiz"
+        pos_hint: {"center_x":.5, "center_y":.67}
+        size_hint: None, None
+        size: "150dp","75dp"
+        background_color: .52, .52, .52, 1
+        
+        on_release:
+            app.root.current = "quiz"
+
+    Button:
+        text: "Rapid Fire"
+        pos_hint: {"center_x":.5, "center_y":.54}
+        size_hint: None, None
+        size: "150dp","75dp"
+        background_color: .52, .52, .52, 1
+        
+        on_release:
+            app.root.current = "rapidfire"
+
+    Button:
+        text: "Space Facts"
+        pos_hint: {"center_x":.5, "center_y":.41}
+        size_hint: None, None
+        size: "150dp","75dp"
+        background_color: .52, .52, .52, 1
+        
+        on_release:
+            app.root.current = "facts"
+
+    Button:
+        text: "Planet Facts"
+        pos_hint: {"center_x":.5, "center_y":.28}
+        size_hint: None, None
+        size: "150dp","75dp"
+        background_color: .52, .52, .52, 1
+        
+        on_release:
+            app.root.current = "solarfacts"
+
+    Button:
+        text: "Home"
+        pos_hint: {"center_x":.5, "center_y":.15}
+        size_hint: None, None
+        size: "150dp","75dp"
+        background_color: .52, .52, .52, 1
+        
+        on_release:
+            app.root.current = "home"
+
+<Quiz>:
+    name: "quiz"
     
+    canvas.before:
+        Color:
+            rgba: hex("#181818")
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            
+
     GridLayout:
-        cols: 1    
+        cols: 1
         
-        Button:
-            text: "Space Quiz"
-            pos_hint: {'x': 0, 'y': .8}
-            size_hint: (1, .2)
-            font_size: (root.width**2 + root.height**2)/14**4
-            
-            on_release:
-                app.root.current = "quizques1"
-                root.manager.transition.direction = "left"
+        # GridLayout:
+        #     cols: 1
+        #     pos_hint: {'x': 0, 'y': 0}
+        #     size_hint: (.8, 1)
 
-        Button:
-            text: "Rapid Fire"
-            pos_hint: {'x': 0, 'y': .6}
-            size_hint: (1, .2)
-            font_size: (root.width**2 + root.height**2)/14**4
-            
-            on_release:
-                app.root.current = "rapidfire"
-                root.manager.transition.direction = "left"        
-
-        Button:
-            text: "Space Facts"
-            pos_hint: {'x': 0, 'y': .4}
-            size_hint: (1, .2)
-            font_size: (root.width**2 + root.height**2)/14**4
-            
-            on_release:
-                app.root.current = "facts"
-                root.manager.transition.direction = "left"
-
-        Button:
-            text: "Planet Facts"
-            pos_hint: {'x': 0, 'y': .2}
-            size_hint: (1, .2)
-            font_size: (root.width**2 + root.height**2)/14**4
-            
-            on_release:
-                app.root.current = "solarfacts"
-                root.manager.transition.direction = "left" 
-
-        Button:
-            text: "Home"
-            pos_hint: {'x': 0, 'y': 0}
-            size_hint: (1, .2)
-            font_size: (root.width**2 + root.height**2)/14**4
-            
-            on_release:
-                app.root.current = "home"
-                root.manager.transition.direction = "right"
-
-<QuizQues1>:
-    name: "quizques1"
-    GridLayout:
-        cols: 2
-        
         GridLayout:
             cols: 1
-            pos_hint: {'x': 0, 'y': 0}
-            size_hint: (.8, 1)
+            size_hint: (.8, .25)
 
-            GridLayout:
-                cols: 1
-                size_hint: (.8, .25)
-
-                WrappedLabel:
-                    id: questionlabel
-                    text: root.question
-                    # pos_hint: {'top':0.5,'right':0.5}
-                    halign: 'left'
-                    valign: 'middle'
-                    padding_x: 10
-                    text_size: self.size
+            WrappedLabel:
+                id: questionlabel
+                text: root.question
+                # pos_hint: {'top':0.5,'right':0.5}
+                halign: 'left'
+                valign: 'top'
+                padding_x: 10
+                text_size: self.size
+                font_size: 20
+        
+        GridLayout:
+            cols: 2
+            size_hint: (.8, .75)
             
             GridLayout:
                 cols: 1
                 size_hint: (.8, .75)
-                
                 Button:
+                    id: btnopt1
                     text: root.opt1
                     text_size: self.size
                     size_hint: (1, .25)
                     valign: 'middle'
                     padding_x: 10
+                    background_color: .52, .52, .52, 1
+                    on_release:
+                        root.inputA(self)
+                        root.check_quiz_ans()
+                        self.background_color = (0,1,0,1) if root.ans == "true" else (1,0,0,1)
                 Button:
+                    id: btnopt2
                     text: root.opt2
                     text_size: self.size
                     size_hint: (1, .25)
                     valign: 'middle'
                     padding_x: 10
+                    background_color: .52, .52, .52, 1
+                    on_release:
+                        root.inputB(self)
+                        root.check_quiz_ans
+                        self.background_color = (0,1,0,1) if root.ans == "true" else (1,0,0,1)
                 Button:
+                    id: btnopt3
                     text: root.opt3
                     text_size: self.size
                     size_hint: (1, .25)
                     valign: 'middle'
                     padding_x: 10
+                    background_color: .52, .52, .52, 1
+                    on_release:
+                        root.inputC(self)
+                        root.check_quiz_ans
+                        self.background_color = (0,1,0,1) if root.ans == "true" else (1,0,0,1)
                 Button:
+                    id: btnopt4
                     text: root.opt4
                     text_size: self.size
                     size_hint: (1, .25)
                     valign: 'middle'
                     padding_x: 10
-
-        GridLayout:
-            cols: 1
-            pos_hint: {'x': 1, 'y': 0}
-            size_hint: (.2, 1)
-
-            Button:
-                text: "Next Question"
-                size_hint: (1, .2)
-                
-                on_release:
-                    app.root.current = "quizques2"
-
-<QuizQues2>:
-    name: "quizques2"
-    GridLayout:
-        cols: 2
-        
-        GridLayout:
-            cols: 1
-            pos_hint: {'x': 0, 'y': 0}
-            size_hint: (.8, 1)
+                    background_color: .52, .52, .52, 1
+                    on_release:
+                        root.inputD(self)
+                        root.check_quiz_ans
+                        self.background_color = (0,1,0,1) if root.ans == "true" else (1,0,0,1)
 
             GridLayout:
                 cols: 1
-                size_hint: (.8, .25)
+                pos_hint: {'x': 1, 'y': 0}
+                size_hint: (.2, 1)
 
-                WrappedLabel:
-                    id: questionlabel
-                    text: root.question
-                    # pos_hint: {'top':0.5,'right':0.5}
-                    halign: 'left'
-                    valign: 'middle'
-                    padding_x: 10
-                    text_size: self.size
-            
-            GridLayout:
-                cols: 1
-                size_hint: (.8, .75)
-                
                 Button:
-                    text: root.opt1
-                    text_size: self.size
-                    size_hint: (1, .25)
-                    valign: 'middle'
-                    padding_x: 10
-                Button:
-                    text: root.opt2
-                    text_size: self.size
-                    size_hint: (1, .25)
-                    valign: 'middle'
-                    padding_x: 10
-                Button:
-                    text: root.opt3
-                    text_size: self.size
-                    size_hint: (1, .25)
-                    valign: 'middle'
-                    padding_x: 10
-                Button:
-                    text: root.opt4
-                    text_size: self.size
-                    size_hint: (1, .25)
-                    valign: 'middle'
-                    padding_x: 10
+                    text: root.nexttohome
+                    size_hint: (1, .2)
+                    
+                    on_release:
+                        root.start_quiz_ques()
+                        
+                        btnopt1.background_color = .52, .52, .52, 1
+                        btnopt2.background_color = .52, .52, .52, 1
+                        btnopt3.background_color = .52, .52, .52, 1
+                        btnopt4.background_color = .52, .52, .52, 1
+                        # app.root.current = "Home" if root.ques_no == 4
 
-        GridLayout:
-            cols: 1
-            pos_hint: {'x': 1, 'y': 0}
-            size_hint: (.2, 1)
-
-            Button:
-                text: "Next Question"
-                size_hint: (1, .2)
-                
-                on_release:
-                    app.root.current = "quizques3"
-
-<QuizQues3>:
-    name: "quizques3"
-    GridLayout:
-        cols: 2
-        
-        GridLayout:
-            cols: 1
-            pos_hint: {'x': 0, 'y': 0}
-            size_hint: (.8, 1)
-
-            GridLayout:
-                cols: 1
-                size_hint: (.8, .25)
-
-                WrappedLabel:
-                    id: questionlabel
-                    text: root.question
-                    # pos_hint: {'top':0.5,'right':0.5}
-                    halign: 'left'
-                    valign: 'middle'
-                    padding_x: 10
-                    text_size: self.size
-            
-            GridLayout:
-                cols: 1
-                size_hint: (.8, .75)
-                
-                Button:
-                    text: root.opt1
-                    text_size: self.size
-                    size_hint: (1, .25)
-                    valign: 'middle'
-                    padding_x: 10
-                Button:
-                    text: root.opt2
-                    text_size: self.size
-                    size_hint: (1, .25)
-                    valign: 'middle'
-                    padding_x: 10
-                Button:
-                    text: root.opt3
-                    text_size: self.size
-                    size_hint: (1, .25)
-                    valign: 'middle'
-                    padding_x: 10
-                Button:
-                    text: root.opt4
-                    text_size: self.size
-                    size_hint: (1, .25)
-                    valign: 'middle'
-                    padding_x: 10
-
-        GridLayout:
-            cols: 1
-            pos_hint: {'x': 1, 'y': 0}
-            size_hint: (.2, 1)
-
-            Button:
-                text: "Next Question"
-                size_hint: (1, .2)
-                
-                on_release:
-                    app.root.current = "quizques4"
-
-<QuizQues4>:
-    name: "quizques4"
-    GridLayout:
-        cols: 2
-        
-        GridLayout:
-            cols: 1
-            pos_hint: {'x': 0, 'y': 0}
-            size_hint: (.8, 1)
-
-            GridLayout:
-                cols: 1
-                size_hint: (.8, .25)
-
-                WrappedLabel:
-                    id: questionlabel
-                    text: root.question
-                    # pos_hint: {'top':0.5,'right':0.5}
-                    halign: 'left'
-                    valign: 'middle'
-                    padding_x: 10
-                    text_size: self.size
-            
-            GridLayout:
-                cols: 1
-                size_hint: (.8, .75)
-                
-                Button:
-                    text: root.opt1
-                    text_size: self.size
-                    size_hint: (1, .25)
-                    valign: 'middle'
-                    padding_x: 10
-                Button:
-                    text: root.opt2
-                    text_size: self.size
-                    size_hint: (1, .25)
-                    valign: 'middle'
-                    padding_x: 10
-                Button:
-                    text: root.opt3
-                    text_size: self.size
-                    size_hint: (1, .25)
-                    valign: 'middle'
-                    padding_x: 10
-                Button:
-                    text: root.opt4
-                    text_size: self.size
-                    size_hint: (1, .25)
-                    valign: 'middle'
-                    padding_x: 10
-
-        GridLayout:
-            cols: 1
-            pos_hint: {'x': 1, 'y': 0}
-            size_hint: (.2, 1)
-
-            Button:
-                text: "Next Question"
-                size_hint: (1, .2)
-                
-                on_release:
-                    app.root.current = "quizques5"
-
-<QuizQues5>:
-    name: "quizques5"
-    GridLayout:
-        cols: 2
-        
-        GridLayout:
-            cols: 1
-            pos_hint: {'x': 0, 'y': 0}
-            size_hint: (.8, 1)
-
-            GridLayout:
-                cols: 1
-                size_hint: (.8, .25)
-
-                WrappedLabel:
-                    id: questionlabel
-                    text: root.question
-                    # pos_hint: {'top':0.5,'right':0.5}
-                    halign: 'left'
-                    valign: 'middle'
-                    padding_x: 10
-                    text_size: self.size
-            
-            GridLayout:
-                cols: 1
-                size_hint: (.8, .75)
-                
-                Button:
-                    text: root.opt1
-                    text_size: self.size
-                    size_hint: (1, .25)
-                    valign: 'middle'
-                    padding_x: 10
-                Button:
-                    text: root.opt2
-                    text_size: self.size
-                    size_hint: (1, .25)
-                    valign: 'middle'
-                    padding_x: 10
-                Button:
-                    text: root.opt3
-                    text_size: self.size
-                    size_hint: (1, .25)
-                    valign: 'middle'
-                    padding_x: 10
-                Button:
-                    text: root.opt4
-                    text_size: self.size
-                    size_hint: (1, .25)
-                    valign: 'middle'
-                    padding_x: 10
-
-        GridLayout:
-            cols: 1
-            pos_hint: {'x': 1, 'y': 0}
-            size_hint: (.2, 1)
-
-            Button:
-                text: "Next Question"
-                size_hint: (1, .2)
-                
-                on_release:
-                    # app.root.current = "quizques2"
-
-<RapidFire@Screen>:
+<RapidFire>:
     name: "rapidfire"
 
-<Facts@Screen>:
+<Facts>:
     name: "facts"
 
-<SolarFacts@Screen>:
+<SolarFacts>:
     name: "solarfacts"
 
-<Result@Screen>:
+<Result>:
     name: "result"
 
-<EndScreen@Screen>:
+<EndScreen>:
     name: "endscreen"
