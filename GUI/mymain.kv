@@ -20,7 +20,6 @@ WindowManager:
     RapidFire:
     Facts:
     Result:
-    EndScreen:
 
 <ButImage@ButtonBehavior+AsyncImage>
 
@@ -92,6 +91,15 @@ WindowManager:
 <Setting>:
     name: "setting"
 
+    Button:
+        text: "Go Back"
+        size_hint: 1, None
+        height: 111
+        disabled: False
+
+        on_release:
+            app.root.current = "home"
+
 <Info>:
     name: "info"
     ScrollView:
@@ -102,6 +110,14 @@ WindowManager:
             WrappedLabel:
                 size: root.size
                 text: root.infos
+            Button:
+                text: "Go Back"
+                size_hint: 1, None
+                height: 111
+                disabled: False
+
+                on_release:
+                    app.root.current = "home"
 
 <GameMode>:
     name: "gamemode"
@@ -423,6 +439,3 @@ WindowManager:
 
 <Result>:
     name: "result"
-
-<EndScreen>:
-    name: "endscreen"

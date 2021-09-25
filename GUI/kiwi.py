@@ -256,9 +256,6 @@ class Facts(Screen):
 class Result(Screen):
     pass
 
-class EndScreen(Screen):
-    pass
-
 
 
 class WindowManager(ScreenManager):
