@@ -240,30 +240,33 @@ WindowManager:
                 size_hint: (.2, 1)
 
                 Button:
+                    id: btnquiznextques
                     text: root.nexttohome
                     size_hint: 1, None
                     height: 111
                     
                     on_release:
-                        root.start_quiz_ques()
-                        
+                        root.start_quiz_ques(self)
+                        btnquiztohome.disabled = False if root.ques_no>4 else True
                         btnopt1.background_color = .52, .52, .52, 1
                         btnopt2.background_color = .52, .52, .52, 1
                         btnopt3.background_color = .52, .52, .52, 1
                         btnopt4.background_color = .52, .52, .52, 1
-                        # app.root.current = "Home" if root.ques_no == 4
                 
                 Button:
+                    id: btnquizmic
                     text: "Mic"
                     size_hint: 1, None
                     height: 111
 
                 Button:
+                    id: btnquizaudio
                     text: "Audio"
                     size_hint: 1, None
                     height: 111
 
                 Button:
+                    id: btnquiztohome
                     text: "Home"
                     size_hint: 1, None
                     height: 111

@@ -82,7 +82,7 @@ class Quiz(Screen):
         for i in range(len(looplist)):
             ques.insert(1, looplist.pop(i))
 
-    def start_quiz_ques(self):
+    def start_quiz_ques(self, button):
         if self.ques_no==4:
             self.nexttohome="Home"
         
