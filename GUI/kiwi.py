@@ -132,7 +132,27 @@ class Quiz(Screen):
         self.ans=f"{check}"
 
 class RapidFire(Screen):
-    pass
+    #stt func to get input from the user's mic
+    def listen():  
+        rec = sr.Recognizer()
+
+        with sr.Microphone() as source:
+            rec.adjust_for_ambient_noise(source, duration=3)
+            print("Listening . . ")
+            audio = rec.listen(source)
+
+        data = " "
+
+        try:
+            data = rec.recognize_google(audio,language='en')
+            print("You said " + data)
+
+        except sr.UnknownValueError:
+            print("Sorry, could not understand that.")
+        except sr.RequestError as ex:
+            print("Request Error from Google Speech Recognition" + ex)
+
+        return data
 
 class Facts(Screen):
     global facts
@@ -169,14 +189,6 @@ class Facts(Screen):
 
         loopfact.insert(0, facts.pop(rf))
 
-        
-
-
-
-
-class SolarFacts(Screen):
-    pass
-
 class Result(Screen):
     pass
 
@@ -205,11 +217,13 @@ class CTFApp(App):
     def build(self):
         return kv
     
+    #tts func to make our program say something
     engine = pyttsx3.init('sapi5')
     voices = engine.getProperty('voices')
     engine.setProperty("voices", voices[0].id)
     engine.setProperty("rate", 178)
-    def talk(self,audio):  #tts func to make our program say something
+    
+    def talk(self,audio):
         self.engine.say(audio)
         self.engine.runAndWait()
 

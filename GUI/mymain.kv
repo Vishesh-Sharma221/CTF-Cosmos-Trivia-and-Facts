@@ -19,7 +19,6 @@ WindowManager:
     Quiz:
     RapidFire:
     Facts:
-    SolarFacts:
     Result:
     EndScreen:
 
@@ -123,7 +122,7 @@ WindowManager:
 
     Button:
         text: "Space Quiz"
-        pos_hint: {"center_x":.5, "center_y":.67}
+        pos_hint: {"center_x":.5, "center_y":.7}
         size_hint: None, None
         size: "175dp","75dp"
         background_color: .52, .52, .52, 1
@@ -133,7 +132,7 @@ WindowManager:
 
     Button:
         text: "Rapid Fire"
-        pos_hint: {"center_x":.5, "center_y":.54}
+        pos_hint: {"center_x":.5, "center_y":.55}
         size_hint: None, None
         size: "175dp","75dp"
         background_color: .52, .52, .52, 1
@@ -143,7 +142,7 @@ WindowManager:
 
     Button:
         text: "Space Facts"
-        pos_hint: {"center_x":.5, "center_y":.41}
+        pos_hint: {"center_x":.5, "center_y":.4}
         size_hint: None, None
         size: "175dp","75dp"
         background_color: .52, .52, .52, 1
@@ -152,17 +151,7 @@ WindowManager:
             app.root.current = "facts"
 
     Button:
-        text: "Planet Facts"
-        pos_hint: {"center_x":.5, "center_y":.28}
-        size_hint: None, None
-        size: "175dp","75dp"
-        background_color: .52, .52, .52, 1
-        
-        on_release:
-            app.root.current = "solarfacts"
-
-    Button:
-        text: "Home"
+        text: "Go Back"
         pos_hint: {"center_x":.5, "center_y":.15}
         size_hint: None, None
         size: "175dp","75dp"
@@ -281,12 +270,6 @@ WindowManager:
                         btnopt4.state = 'normal'
 
                 Button:
-                    id: btnquizmic
-                    text: "Mic"
-                    size_hint: 1, None
-                    height: 111
-
-                Button:
                     id: btnquizaudio
                     text: "Audio"
                     size_hint: 1, None
@@ -294,6 +277,7 @@ WindowManager:
                     
                     on_release:
                         app.talk(root.question)
+
                 Button:
                     id: btnquiztohome
                     text: "Home"
@@ -306,6 +290,8 @@ WindowManager:
 
 <RapidFire>:
     name: "rapidfire"
+    
+
 
 <Facts>:
     name: "facts"
@@ -368,11 +354,6 @@ WindowManager:
 
                 on_release:
                     app.root.current = "home"
-
-    
-
-<SolarFacts>:
-    name: "solarfacts"
 
 <Result>:
     name: "result"
