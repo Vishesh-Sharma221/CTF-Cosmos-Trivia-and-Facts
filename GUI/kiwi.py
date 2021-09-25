@@ -1,26 +1,17 @@
 import kivy
 from kivy.metrics import dp
 from kivy.app import App
-from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
-from kivy.uix.checkbox import CheckBox
-from kivy.uix.textinput import TextInput
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.tabbedpanel import TabbedPanel
 from kivy.lang import Builder
-from kivy.clock import Clock
 from kivy.core.window import Window
-from kivy.uix.scrollview import ScrollView
-from kivy.properties import ObjectProperty
-from kivy.properties import StringProperty
+from kivy.properties import ObjectProperty, StringProperty
 
 #window size
 wfac=3
 Window.size=(dp((40-wfac)*9), dp((40-wfac)*16))
 
-#requirements
+#other requirements
 import csv
 from os import extsep
 import random
@@ -82,9 +73,7 @@ class Quiz(Screen):
         for i in range(len(looplist)):
             ques.insert(1, looplist.pop(i))
 
-    def start_quiz_ques(self, button):
-        if self.ques_no==4:
-            self.nexttohome="Home"
+    def start_quiz_ques(self, buttonnext, buttonhome):
         
         #functions
         self.ques_no+=1
@@ -102,6 +91,13 @@ class Quiz(Screen):
         if len(ques)==1:
             for i in range(len(looplist)):
                 ques.insert(1, looplist.pop(i))
+
+        if self.ques_no==5:
+            self.ques_no=1
+            buttonhome.disabled = False
+            buttonnext.disabled = True
+            
+
 
         
 
