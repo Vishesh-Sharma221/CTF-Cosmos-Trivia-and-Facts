@@ -291,7 +291,9 @@ WindowManager:
                     text: "Audio"
                     size_hint: 1, None
                     height: 111
-
+                    
+                    on_release:
+                        app.talk(root.question)
                 Button:
                     id: btnquiztohome
                     text: "Home"
@@ -349,6 +351,10 @@ WindowManager:
                 text: "Audio"
                 size_hint: (.15,1)
                 pos_hint: {'right': 1, 'center_y':.5}
+
+                on_release:
+                    app.talk("DID YOU KNOW??")
+                    app.talk(root.fact)
         
         GridLayout:
             cols: 1

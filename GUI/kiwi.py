@@ -204,6 +204,14 @@ class CTFApp(App):
     icon="images/appicon.ico"
     def build(self):
         return kv
+    
+    engine = pyttsx3.init('sapi5')
+    voices = engine.getProperty('voices')
+    engine.setProperty("voices", voices[0].id)
+    engine.setProperty("rate", 178)
+    def talk(self,audio):  #tts func to make our program say something
+        self.engine.say(audio)
+        self.engine.runAndWait()
 
 if __name__ == "__main__":
     CTFApp().run()
