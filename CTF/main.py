@@ -62,13 +62,10 @@ class Quiz(Screen):
     ques_no=1
 
     #variables    
-    A=StringProperty("0")
-    B=StringProperty("0")
-    C=StringProperty("0")
-    D=StringProperty("0")
     ans=StringProperty("false")
     nexttohome=StringProperty("Next")
-    
+    checkquizbtnbool=StringProperty("True")
+
     r=random.randint(1,len(ques)-1)
     ans1,ans2,ans3,ans4=ques[r][2],ques[r][3],ques[r][4],ques[r][5]
     question=StringProperty(f"\nQuestion {int(ques_no)}:\n{ques[r][1]}")
@@ -112,22 +109,62 @@ class Quiz(Screen):
             buttonnext.disabled = True
 
     def inputA(self, button):
-        self.A="1"
-    def inputB(self, button):
-        self.A="2"
-    def inputC(self, button):
-        self.A="3"
-    def inputD(self, button):
-        self.A="4"
-    
-    def check_quiz_ans(self):
-        if (self.A=="1" and self.ans1==ques[r][6]) or (self.A=="2" and self.ans2==ques[r][6])\
-        or (self.A=="3" and self.ans3==ques[r][6]) or (self.A=="4" and self.ans4==ques[r][6]):
-            self.quiz_score = str(int(self.quiz_score) + 1)
+        global r
+        if self.ans1==self.answer:
             self.ans="true"
         else:
             self.ans="false"
         
+        self.ids.btnopt2.state='normal'
+        self.ids.btnopt3.state='normal'
+        self.ids.btnopt4.state='normal'
+        self.ids.btnopt2.background_color= (.52, .52, .52, 1)
+        self.ids.btnopt3.background_color= (.52, .52, .52, 1)
+        self.ids.btnopt4.background_color= (.52, .52, .52, 1)
+
+    
+    def inputB(self, button):
+        global r
+        if self.ans2==self.answer:
+            self.ans="true"
+        else:
+            self.ans="false"
+        
+        self.ids.btnopt1.state='normal'
+        self.ids.btnopt3.state='normal'
+        self.ids.btnopt4.state='normal'
+        self.ids.btnopt1.background_color= (.52, .52, .52, 1)
+        self.ids.btnopt3.background_color= (.52, .52, .52, 1)
+        self.ids.btnopt4.background_color= (.52, .52, .52, 1)
+
+    def inputC(self, button):
+        global r
+        if self.ans3==self.answer:
+            self.ans="true"
+        else:
+            self.ans="false"
+        
+        self.ids.btnopt1.state='normal'
+        self.ids.btnopt2.state='normal'
+        self.ids.btnopt4.state='normal'
+        self.ids.btnopt1.background_color= (.52, .52, .52, 1)
+        self.ids.btnopt2.background_color= (.52, .52, .52, 1)
+        self.ids.btnopt4.background_color= (.52, .52, .52, 1)
+            
+    def inputD(self, button):
+        global r
+        if self.ans4==self.answer:
+            self.ans="true"
+        else:
+            self.ans="false"
+        
+        self.ids.btnopt1.state='normal'
+        self.ids.btnopt2.state='normal'
+        self.ids.btnopt3.state='normal'
+        self.ids.btnopt1.background_color= (.52, .52, .52, 1)
+        self.ids.btnopt2.background_color= (.52, .52, .52, 1)
+        self.ids.btnopt3.background_color= (.52, .52, .52, 1)
+    
 
 class RapidFire(Screen):
     #stt func to get input from the user's mic
@@ -168,6 +205,7 @@ class RapidFire(Screen):
 
     #variables    
     A=StringProperty("0")
+    rapidcheck=StringProperty("")
 
     ans=StringProperty("false")
     nexttohome=StringProperty("Next")
@@ -199,6 +237,7 @@ class RapidFire(Screen):
         # removing the used ques for this quiz
         loopques.insert(0, ques.pop(r))
 
+        self.ids.inprapidans.text="Enter Your Answer Here"
         if self.ques_no==5:
             self.ques_no=1
             buttonhome.disabled = False
@@ -206,13 +245,15 @@ class RapidFire(Screen):
 
         
 
-    def check_rapid_ans(self, inpans):
+    def check_rapid_ans(self):
         self.A=self.ids.inprapidans.text
         if (self.A == self.answer) :#or (self.A in ques[r][6]):
             self.rapid_score = str(int(self.rapid_score) + 1)
             self.ans="true"
+            self.rapidcheck="Your Answer is Correct!!"
         else:
             self.ans="false"
+            self.rapidcheck=f"Your Answer is Wrong, The Correct Answer To This Ques is {self.answer}."
         print(self.A)
         print(self.ans)
         print(self.answer)
@@ -269,13 +310,13 @@ class WrappedLabel(Label):
             self.setter('text_size')(self, (self.width, None)),
             texture_size=lambda *x: self.setter('height')(self, self.texture_size[1]))
 
-kv = Builder.load_file("mymain.kv")
+kvfile = Builder.load_file("mymain.kv")
 
 class CTFApp(App):
     title="CTF - Cosmos Trivia and Facts"
     icon="images/appicon.ico"
     def build(self):
-        return kv
+        return kvfile
     
     #tts func to make our program say something
     engine = pyttsx3.init('sapi5')

@@ -221,8 +221,8 @@ WindowManager:
                     background_color: .52, .52, .52, 1
                     on_release:
                         root.inputA(self)
-                        root.check_quiz_ans()
                         self.background_color = (0,0,1,1) if self.state == "down" else (.52, .52, .52, 1)
+                        btnquizcheck.disabled = False if self.state == "down" else True
                 
                 ToggleButton:
                     id: btnopt2
@@ -234,8 +234,8 @@ WindowManager:
                     background_color: .52, .52, .52, 1
                     on_release:
                         root.inputB(self)
-                        root.check_quiz_ans
                         self.background_color = (0,0,1,1) if self.state == "down" else (.52, .52, .52, 1)
+                        btnquizcheck.disabled = False if self.state == "down" else True
                 
                 ToggleButton:
                     id: btnopt3
@@ -247,8 +247,8 @@ WindowManager:
                     background_color: .52, .52, .52, 1
                     on_release:
                         root.inputC(self)
-                        root.check_quiz_ans
                         self.background_color = (0,0,1,1) if self.state == "down" else (.52, .52, .52, 1)
+                        btnquizcheck.disabled = False if self.state == "down" else True
                 
                 ToggleButton:
                     id: btnopt4
@@ -260,18 +260,20 @@ WindowManager:
                     background_color: .52, .52, .52, 1
                     on_release:
                         root.inputD(self)
-                        root.check_quiz_ans
                         self.background_color = (0,0,1,1) if self.state == "down" else (.52, .52, .52, 1)
-                
+                        btnquizcheck.disabled = False if self.state == "down" else True
+
                 Label:
                     text: "Current Score:" + str(root.quiz_score)
                     size_hint: 1,.2
                     pos_hint: {'left':0}
 
                 Button:
+                    id: btnquizcheck
                     text: "Check"
                     size_hint: 1,.2
                     pos_hint: {'x':0, 'y':0}
+                    disabled: True
 
                     on_release:
                         root.check_quiz_ans()
@@ -356,10 +358,13 @@ WindowManager:
                     text: "Enter Your Answer Here"
                     size_hint: 1,.3
                     pos_hint: {'top':0.5,'right':0.5}
-                
+                WrappedLabel:
+                    id: rapidquesresult
+                    text: root.rapidcheck
+                    padding_x: 20
                 Label:
                     text: "Current Score:" + str(root.rapid_score)
-                    size_hint: 1,.3
+                    size_hint: 1,.1
                     pos_hint: {'left':0}
 
                 Button:
@@ -368,7 +373,7 @@ WindowManager:
                     pos_hint: {'x':0, 'y':0}
 
                     on_release:
-                        root.check_rapid_ans(inprapidans)
+                        root.check_rapid_ans()
                 
             GridLayout:
                 cols: 1
