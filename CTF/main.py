@@ -66,12 +66,13 @@ class Quiz(Screen):
     B=StringProperty("0")
     C=StringProperty("0")
     D=StringProperty("0")
-    ans=StringProperty(f"{check}")
+    ans=StringProperty("false")
     nexttohome=StringProperty("Next")
     
     r=random.randint(1,len(ques)-1)
     ans1,ans2,ans3,ans4=ques[r][2],ques[r][3],ques[r][4],ques[r][5]
     question=StringProperty(f"\nQuestion {int(ques_no)}:\n{ques[r][1]}")
+    answer=StringProperty(f"{ques[r][6]}")
     opt1=StringProperty(f"1.    {ques[r][2]}")
     opt2=StringProperty(f"2.    {ques[r][3]}")
     opt3=StringProperty(f"3.    {ques[r][4]}")
@@ -96,6 +97,7 @@ class Quiz(Screen):
         r=random.randint(1,len(ques)-1)
         self.ans1,self.ans2,self.ans3,self.ans4=ques[r][2],ques[r][3],ques[r][4],ques[r][5]
         self.question=f"\nQuestion {int(self.ques_no)}: {ques[r][1]}"
+        self.answer=ques[r][6]
         self.opt1=f"1.    {ques[r][2]}"
         self.opt2=f"2.    {ques[r][3]}"
         self.opt3=f"3.    {ques[r][4]}"
@@ -103,8 +105,6 @@ class Quiz(Screen):
         
         # removing the used ques for this quiz
         loopques.insert(0, ques.pop(r))
-
-        
 
         if self.ques_no==5:
             self.ques_no=1
@@ -119,17 +119,15 @@ class Quiz(Screen):
         self.A="3"
     def inputD(self, button):
         self.A="4"
+    
     def check_quiz_ans(self):
-        global quiz_score
-        global check
         if (self.A=="1" and self.ans1==ques[r][6]) or (self.A=="2" and self.ans2==ques[r][6])\
         or (self.A=="3" and self.ans3==ques[r][6]) or (self.A=="4" and self.ans4==ques[r][6]):
-            self.quiz_score += 1
-            check="true"
+            self.quiz_score = str(int(self.quiz_score) + 1)
+            self.ans="true"
         else:
-            check="false"
+            self.ans="false"
         
-        self.ans=f"{check}"
 
 class RapidFire(Screen):
     #stt func to get input from the user's mic
@@ -165,19 +163,19 @@ class RapidFire(Screen):
             ques.insert(1, loopques.pop(i))
 
     #default vals
-    quiz_score = StringProperty("0")
-    check=StringProperty("")
+    rapid_score = StringProperty("0")
     ques_no=1
 
     #variables    
     A=StringProperty("0")
 
-    ans=StringProperty(f"{check}")
+    ans=StringProperty("false")
     nexttohome=StringProperty("Next")
     
     r=random.randint(1,len(ques)-1)
     ans1,ans2,ans3,ans4=ques[r][2],ques[r][3],ques[r][4],ques[r][5]
     question=StringProperty(f"\nQuestion {int(ques_no)}:\n{ques[r][1]}")
+    answer=StringProperty(f"{ques[r][6]}")
 
     # removing the used ques for this quiz
     loopques.insert(0, ques.pop(r))
@@ -196,6 +194,7 @@ class RapidFire(Screen):
         r=random.randint(1,len(ques)-1)
         self.ans1,self.ans2,self.ans3,self.ans4=ques[r][2],ques[r][3],ques[r][4],ques[r][5]
         self.question=f"\nQuestion {int(self.ques_no)}: {ques[r][1]}"
+        self.answer=ques[r][6]
         
         # removing the used ques for this quiz
         loopques.insert(0, ques.pop(r))
@@ -205,18 +204,18 @@ class RapidFire(Screen):
             buttonhome.disabled = False
             buttonnext.disabled = True
 
-    
-    def check_rapid_ans(self):
-        global quiz_score
-        global check
-        if (self.A=="1" and self.ans1==ques[r][6]) or (self.A=="2" and self.ans2==ques[r][6])\
-        or (self.A=="3" and self.ans3==ques[r][6]) or (self.A=="4" and self.ans4==ques[r][6]):
-            self.quiz_score += 1
-            check="true"
-        else:
-            check="false"
         
-        self.ans=f"{check}"
+
+    def check_rapid_ans(self, inpans):
+        self.A=self.ids.inprapidans.text
+        if (self.A == self.answer) :#or (self.A in ques[r][6]):
+            self.rapid_score = str(int(self.rapid_score) + 1)
+            self.ans="true"
+        else:
+            self.ans="false"
+        print(self.A)
+        print(self.ans)
+        print(self.answer)
 
 class Facts(Screen):
     global facts
@@ -287,6 +286,8 @@ class CTFApp(App):
     def talk(self,audio):
         self.engine.say(audio)
         self.engine.runAndWait()
+
+    version="00.00.10"
 
 if __name__ == "__main__":
     CTFApp().run()
