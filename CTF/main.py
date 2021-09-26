@@ -64,7 +64,7 @@ class Quiz(Screen):
     #variables    
     ans=StringProperty("false")
     nexttohome=StringProperty("Next")
-    checkquizbtnbool=StringProperty("True")
+    quizcheck=StringProperty("")
 
     r=random.randint(1,len(ques)-1)
     ans1,ans2,ans3,ans4=ques[r][2],ques[r][3],ques[r][4],ques[r][5]
@@ -85,6 +85,12 @@ class Quiz(Screen):
         global loopques
         global r
         
+        self.ids.btnquizcheck.disabled=False
+        self.ids.btnopt1.disabled=False
+        self.ids.btnopt2.disabled=False
+        self.ids.btnopt3.disabled=False
+        self.ids.btnopt4.disabled=False
+
         if len(ques)==1:
             for i in range(len(loopques)):
                 ques.insert(1, loopques.pop(i))
@@ -164,6 +170,22 @@ class Quiz(Screen):
         self.ids.btnopt1.background_color= (.52, .52, .52, 1)
         self.ids.btnopt2.background_color= (.52, .52, .52, 1)
         self.ids.btnopt3.background_color= (.52, .52, .52, 1)
+
+    def check_quiz_ans(self):
+        if self.ans=="true":
+            self.quiz_score = str(int(self.quiz_score) + 1)
+            self.quizcheck="Your Answer is Correct!!"
+        else:
+            self.quizcheck=f"Your Answer is Wrong, The Correct Answer To This Ques is {self.answer}."
+        
+        self.ids.btnquizcheck.disabled=True
+        self.ids.btnopt1.disabled=True
+        self.ids.btnopt2.disabled=True
+        self.ids.btnopt3.disabled=True
+        self.ids.btnopt4.disabled=True
+
+    #when checked disable all opt and check button
+
     
 
 class RapidFire(Screen):

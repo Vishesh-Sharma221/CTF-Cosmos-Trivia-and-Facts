@@ -263,9 +263,15 @@ WindowManager:
                         self.background_color = (0,0,1,1) if self.state == "down" else (.52, .52, .52, 1)
                         btnquizcheck.disabled = False if self.state == "down" else True
 
+                WrappedLabel:
+                    id: quizquesresult
+                    text: root.quizcheck
+                    size_hint: 1,.2
+                    padding_x: 20
+
                 Label:
                     text: "Current Score:" + str(root.quiz_score)
-                    size_hint: 1,.2
+                    size_hint: 1,.1
                     pos_hint: {'left':0}
 
                 Button:
@@ -361,6 +367,7 @@ WindowManager:
                 WrappedLabel:
                     id: rapidquesresult
                     text: root.rapidcheck
+                    size_hint: 1,.3
                     padding_x: 20
                 Label:
                     text: "Current Score:" + str(root.rapid_score)
@@ -369,7 +376,7 @@ WindowManager:
 
                 Button:
                     text: "Check"
-                    size_hint: 1,.3
+                    size_hint: 1,.2
                     pos_hint: {'x':0, 'y':0}
 
                     on_release:
@@ -381,7 +388,7 @@ WindowManager:
                 size_hint: (.2, 1)
 
                 Button:
-                    id: btnquiznextques
+                    id: btnrapidnextques
                     text: "Next"
                     size_hint: 1, None
                     height: 111
@@ -390,7 +397,7 @@ WindowManager:
                         root.start_rapid_ques(self, btnrapidtohome)
 
                 Button:
-                    id: btnquizaudio
+                    id: btnrapidaudio
                     text: "Audio"
                     size_hint: 1, None
                     height: 111
@@ -399,7 +406,7 @@ WindowManager:
                         app.talk(root.question)
 
                 Button:
-                    id: btnquizaudio
+                    id: btnrapidaudio
                     text: "Mic"
                     size_hint: 1, None
                     height: 111
