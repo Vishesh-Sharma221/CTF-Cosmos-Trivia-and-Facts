@@ -215,7 +215,7 @@ WindowManager:
                     id: btnopt1
                     text: root.opt1
                     text_size: self.size
-                    size_hint: (1, .25)
+                    size_hint: (1, .15)
                     valign: 'middle'
                     padding_x: 10
                     background_color: .52, .52, .52, 1
@@ -228,7 +228,7 @@ WindowManager:
                     id: btnopt2
                     text: root.opt2
                     text_size: self.size
-                    size_hint: (1, .25)
+                    size_hint: (1, .15)
                     valign: 'middle'
                     padding_x: 10
                     background_color: .52, .52, .52, 1
@@ -241,7 +241,7 @@ WindowManager:
                     id: btnopt3
                     text: root.opt3
                     text_size: self.size
-                    size_hint: (1, .25)
+                    size_hint: (1, .15)
                     valign: 'middle'
                     padding_x: 10
                     background_color: .52, .52, .52, 1
@@ -254,7 +254,7 @@ WindowManager:
                     id: btnopt4
                     text: root.opt4
                     text_size: self.size
-                    size_hint: (1, .25)
+                    size_hint: (1, .15)
                     valign: 'middle'
                     padding_x: 10
                     background_color: .52, .52, .52, 1
@@ -262,6 +262,19 @@ WindowManager:
                         root.inputD(self)
                         root.check_quiz_ans
                         self.background_color = (0,0,1,1) if self.state == "down" else (.52, .52, .52, 1)
+                
+                Label:
+                    text: "Current Score:" + str(root.quiz_score)
+                    size_hint: 1,.2
+                    pos_hint: {'left':0}
+
+                Button:
+                    text: "Check"
+                    size_hint: 1,.2
+                    pos_hint: {'x':0, 'y':0}
+
+                    on_release:
+                        root.check_quiz_ans()
 
             GridLayout:
                 cols: 1
@@ -339,7 +352,23 @@ WindowManager:
                 size_hint: (.8, 1)
                 
                 TextInput:
+                    id: inprapidans
                     text: "Enter Your Answer Here"
+                    size_hint: 1,.3
+                    pos_hint: {'top':0.5,'right':0.5}
+                
+                Label:
+                    text: "Current Score:" + str(root.rapid_score)
+                    size_hint: 1,.3
+                    pos_hint: {'left':0}
+
+                Button:
+                    text: "Check"
+                    size_hint: 1,.3
+                    pos_hint: {'x':0, 'y':0}
+
+                    on_release:
+                        root.check_rapid_ans(inprapidans)
                 
             GridLayout:
                 cols: 1
@@ -363,6 +392,15 @@ WindowManager:
                     
                     on_release:
                         app.talk(root.question)
+
+                Button:
+                    id: btnquizaudio
+                    text: "Mic"
+                    size_hint: 1, None
+                    height: 111
+                    
+                    on_release:
+                        listen()
 
                 Button:
                     id: btnrapidtohome
