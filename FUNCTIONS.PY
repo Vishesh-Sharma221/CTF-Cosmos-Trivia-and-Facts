@@ -6,6 +6,7 @@ import random
 import pyttsx3
 import speech_recognition as sr
 import time
+from threading import Timer
 
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
@@ -14,7 +15,7 @@ engine.setProperty("rate", 178)
 
 # Files Needed To Be Read
 
-ques_file=open("questions.csv")
+ques_file=open("CTF/questions.csv")
 read_ques_file=csv.reader(ques_file)
 ques=[]         # 1-Q, 2-O1, 3-O2, 4-O3, 5-O4, 6-A
 for x in read_ques_file:
@@ -210,7 +211,6 @@ def rapid_fire():
         inp = listen().upper()
     else:
         inp=input("Do you want to start a Rapid Fire Questionnaire? (Yes/No): ").upper()
-
     if inp=="Y" or inp=="YES":
         for ques_no in range(1,6):      # Number Of Questions To Be Asked In Each Quiz
             r=random.randint(1,len(ques)-1)   # Random Questions From The List (Also, Set The Range)
@@ -221,17 +221,42 @@ def rapid_fire():
                 talk(quess)
             else:
                 pass
+            
             check_rapid_ans(answer="",r=r)  # Calling Function To Check The Answer
     else:
         home()  
 
 def check_rapid_ans(answer,r):
+    t = 10
     global rapid_fire_score
     if stt.lower() == "yes":
         print("Answer: ")
         answer = listen().upper()
     else:
-        answer = input("Answer: ").upper()
+        import msvcrt
+        import sys
+
+        class TimeoutExpired(Exception):
+            pass
+
+        def input_with_timeout(prompt, timeout, timer=time.monotonic):
+            sys.stdout.write(prompt)
+            sys.stdout.flush()
+            endtime = timer() + timeout
+            result = []
+            while timer() < endtime:
+                if msvcrt.kbhit():
+                    result.append(msvcrt.getwche()) 
+                    if result[-1] == '\r':
+                        return ''.join(result[:-1])
+                time.sleep(0.04) 
+            raise TimeoutExpired
+
+        try:
+            answer = input_with_timeout("You have only 10seconds to Answer! : ", 10)
+        except TimeoutExpired:
+            print('Sorry, times up')
+
 
     if str(ques[r][6]).upper() in answer:
         rapid_fire_score += 1
