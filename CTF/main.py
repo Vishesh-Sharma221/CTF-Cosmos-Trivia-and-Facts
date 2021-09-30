@@ -7,16 +7,21 @@ from kivy.lang import Builder
 from kivy.core.window import Window
 from kivy.properties import ObjectProperty, StringProperty
 
+#App Version
+Version="00.00.10"
+
 #window size
-wfac=3
-Window.size=(dp((40-wfac)*9), dp((40-wfac)*16))
+Wfac=3
+WindowWidth= (40-Wfac)*9
+WindowHeight= (40-Wfac)*19.5
+Window.size=(dp(WindowWidth), dp(WindowHeight))
 
 #other requirements
 import csv
 from os import extsep
 import random
 import pyttsx3
-import speech_recognition as sr
+# import speech_recognition as sr
 import time
 
 ques_file=open("CTF/questions.csv")
@@ -36,8 +41,8 @@ loopfact=[]
 class Home(Screen):
     pass
 
-class Setting(Screen):
-    pass
+# class Setting(Screen):
+#     pass
 
 class Info(Screen):
     file=open("CTF/info.txt")
@@ -47,7 +52,7 @@ class Info(Screen):
 class GameMode(Screen):
     pass
 
-class Quiz(Screen):
+class Quiz(Screen, object):
     global ques
     global loopques
     global r
@@ -57,7 +62,8 @@ class Quiz(Screen):
             ques.insert(1, loopques.pop(i))
 
     #default vals
-    quiz_score = StringProperty("0")
+    Quiz_Score = StringProperty("0")
+    SCORE=0
     check=StringProperty("")
     ques_no=1
 
@@ -65,16 +71,18 @@ class Quiz(Screen):
     ans=StringProperty("false")
     nexttohome=StringProperty("Next")
     quizcheck=StringProperty("")
-
+    
     r=random.randint(1,len(ques)-1)
     ans1,ans2,ans3,ans4=ques[r][2],ques[r][3],ques[r][4],ques[r][5]
-    question=StringProperty(f"\nQuestion {int(ques_no)}:\n{ques[r][1]}")
+    question_number=StringProperty(f"{int(ques_no)}")
+    question=StringProperty(f"Ques: {ques[r][1]}")
     answer=StringProperty(f"{ques[r][6]}")
     opt1=StringProperty(f"1.    {ques[r][2]}")
     opt2=StringProperty(f"2.    {ques[r][3]}")
     opt3=StringProperty(f"3.    {ques[r][4]}")
     opt4=StringProperty(f"4.    {ques[r][5]}")
-
+    talkquestion=f"Question {str(ques_no)}: {ques[r][1]}\nThe options are:\n first, {ques[r][2]}\n second, {ques[r][3]}\n third, {ques[r][4]}\n and fourth, {ques[r][5]}"
+    
     # removing the used ques for this quiz
     loopques.insert(0, ques.pop(r))
 
@@ -84,8 +92,8 @@ class Quiz(Screen):
         global ques
         global loopques
         global r
-        
-        self.ids.btnquizcheck.disabled=False
+
+        self.ids.btnquizcheck.disabled=True
         self.ids.btnopt1.disabled=False
         self.ids.btnopt2.disabled=False
         self.ids.btnopt3.disabled=False
@@ -99,23 +107,42 @@ class Quiz(Screen):
         self.ques_no+=1
         r=random.randint(1,len(ques)-1)
         self.ans1,self.ans2,self.ans3,self.ans4=ques[r][2],ques[r][3],ques[r][4],ques[r][5]
-        self.question=f"\nQuestion {int(self.ques_no)}: {ques[r][1]}"
+        self.question_number=f"{self.ques_no}"
+        self.question=f"Ques: {ques[r][1]}"
         self.answer=ques[r][6]
         self.opt1=f"1.    {ques[r][2]}"
         self.opt2=f"2.    {ques[r][3]}"
         self.opt3=f"3.    {ques[r][4]}"
         self.opt4=f"4.    {ques[r][5]}"
+        self.talkquestion=f"\nQuestion {str(self.ques_no)}: {ques[r][1]}\nThe options are:\n first, {ques[r][2]}\n second, {ques[r][3]}\n third, {ques[r][4]}\n and fourth, {ques[r][5]}"
+        self.quizcheck=""
         
         # removing the used ques for this quiz
         loopques.insert(0, ques.pop(r))
 
+        # if self.ques_no==1:
+        #     self.Quiz_Score="0"
         if self.ques_no==5:
-            self.ques_no=1
-            buttonhome.disabled = False
-            buttonnext.disabled = True
+            self.ques_no=0
+            buttonnext.bind(on_release=self.gotoresult)
+            # buttonnext.bind(on_state=self.resultbutton,on_release=self.gotoresult)
+        # if self.ques_no==4:
+        #     buttonnext.disabled = False
+        #     self.ids.imagenextquiz.source = "images/buttons/resultdark.png"
+        
+        self.ids.btnquiznextques.disabled=True
+    
+    # def resultbutton(self):
+    #     if self.ids.btnquiznextques.state == "down":
+    #         self.ids.imagenextquiz.source = "images/buttons/resultlight.png"
+    #     else:
+    #         self.ids.imagenextquiz.source = "images/buttons/resultdark.png"
+
+    def gotoresult(self, quiznextparent):
+        self.parent.current = "quizresult"
+        self.ids.btnquiznextques.unbind(on_release=self.gotoresult)
 
     def inputA(self, button):
-        global r
         if self.ans1==self.answer:
             self.ans="true"
         else:
@@ -124,13 +151,11 @@ class Quiz(Screen):
         self.ids.btnopt2.state='normal'
         self.ids.btnopt3.state='normal'
         self.ids.btnopt4.state='normal'
-        self.ids.btnopt2.background_color= (.52, .52, .52, 1)
-        self.ids.btnopt3.background_color= (.52, .52, .52, 1)
-        self.ids.btnopt4.background_color= (.52, .52, .52, 1)
-
+        self.ids.imageopt2.source="images/buttons/optiondark.png"
+        self.ids.imageopt3.source="images/buttons/optiondark.png"
+        self.ids.imageopt4.source="images/buttons/optiondark.png"
     
     def inputB(self, button):
-        global r
         if self.ans2==self.answer:
             self.ans="true"
         else:
@@ -139,12 +164,11 @@ class Quiz(Screen):
         self.ids.btnopt1.state='normal'
         self.ids.btnopt3.state='normal'
         self.ids.btnopt4.state='normal'
-        self.ids.btnopt1.background_color= (.52, .52, .52, 1)
-        self.ids.btnopt3.background_color= (.52, .52, .52, 1)
-        self.ids.btnopt4.background_color= (.52, .52, .52, 1)
+        self.ids.imageopt1.source="images/buttons/optiondark.png"
+        self.ids.imageopt3.source="images/buttons/optiondark.png"
+        self.ids.imageopt4.source="images/buttons/optiondark.png"
 
     def inputC(self, button):
-        global r
         if self.ans3==self.answer:
             self.ans="true"
         else:
@@ -153,12 +177,11 @@ class Quiz(Screen):
         self.ids.btnopt1.state='normal'
         self.ids.btnopt2.state='normal'
         self.ids.btnopt4.state='normal'
-        self.ids.btnopt1.background_color= (.52, .52, .52, 1)
-        self.ids.btnopt2.background_color= (.52, .52, .52, 1)
-        self.ids.btnopt4.background_color= (.52, .52, .52, 1)
+        self.ids.imageopt1.source="images/buttons/optiondark.png"
+        self.ids.imageopt2.source="images/buttons/optiondark.png"
+        self.ids.imageopt4.source="images/buttons/optiondark.png"
             
     def inputD(self, button):
-        global r
         if self.ans4==self.answer:
             self.ans="true"
         else:
@@ -167,13 +190,15 @@ class Quiz(Screen):
         self.ids.btnopt1.state='normal'
         self.ids.btnopt2.state='normal'
         self.ids.btnopt3.state='normal'
-        self.ids.btnopt1.background_color= (.52, .52, .52, 1)
-        self.ids.btnopt2.background_color= (.52, .52, .52, 1)
-        self.ids.btnopt3.background_color= (.52, .52, .52, 1)
+        self.ids.imageopt1.source="images/buttons/optiondark.png"
+        self.ids.imageopt2.source="images/buttons/optiondark.png"
+        self.ids.imageopt3.source="images/buttons/optiondark.png"
 
     def check_quiz_ans(self):
+
         if self.ans=="true":
-            self.quiz_score = str(int(self.quiz_score) + 1)
+            Quiz.SCORE += 1
+            self.Quiz_Score = str(int(self.Quiz_Score) + 1)
             self.quizcheck="Your Answer is Correct!!"
         else:
             self.quizcheck=f"Your Answer is Wrong, The Correct Answer To This Ques is {self.answer}."
@@ -184,34 +209,45 @@ class Quiz(Screen):
         self.ids.btnopt3.disabled=True
         self.ids.btnopt4.disabled=True
 
-    #when checked disable all opt and check button
+        self.ids.btnquiznextques.disabled=False
+
+    def exitquiz(self):
+        self.ids.btnquiznextques.disabled=True
+        
+        self.ids.btnquizcheck.disabled=False
+        self.ids.btnopt1.disabled=False
+        self.ids.btnopt2.disabled=False
+        self.ids.btnopt3.disabled=False
+        self.ids.btnopt4.disabled=False
+        self.quizcheck=""
 
     
 
-class RapidFire(Screen):
+
+    
+
+class RapidFire(Screen, object):
     #stt func to get input from the user's mic
-    def listen():  
-        rec = sr.Recognizer()
+    # def listen():
+    #     rec = sr.Recognizer()
 
-        with sr.Microphone() as source:
-            rec.adjust_for_ambient_noise(source, duration=3)
-            print("Listening . . ")
-            audio = rec.listen(source)
+    #     with sr.Microphone() as source:
+    #         rec.adjust_for_ambient_noise(source, duration=3)
+    #         print("Listening . . ")
+    #         audio = rec.listen(source)
 
-        data = " "
+    #     data = " "
 
-        try:
-            data = rec.recognize_google(audio,language='en')
-            print("You said " + data)
+    #     try:
+    #         data = rec.recognize_google(audio,language='en')
+    #         print("You said " + data)
 
-        except sr.UnknownValueError:
-            print("Sorry, could not understand that.")
-        except sr.RequestError as ex:
-            print("Request Error from Google Speech Recognition" + ex)
+    #     except sr.UnknownValueError:
+    #         print("Sorry, could not understand that.")
+    #     except sr.RequestError as ex:
+    #         print("Request Error from Google Speech Recognition" + ex)
 
-        return data
-
-
+    #     return data
 
     global ques
     global loopques
@@ -222,7 +258,8 @@ class RapidFire(Screen):
             ques.insert(1, loopques.pop(i))
 
     #default vals
-    rapid_score = StringProperty("0")
+    Rapid_Score = StringProperty("4")
+    SCORE=0
     ques_no=1
 
     #variables    
@@ -234,7 +271,8 @@ class RapidFire(Screen):
     
     r=random.randint(1,len(ques)-1)
     ans1,ans2,ans3,ans4=ques[r][2],ques[r][3],ques[r][4],ques[r][5]
-    question=StringProperty(f"\nQuestion {int(ques_no)}:\n{ques[r][1]}")
+    question_number=StringProperty(f"{int(ques_no)}")
+    question=StringProperty(f"Ques: {ques[r][1]}")
     answer=StringProperty(f"{ques[r][6]}")
 
     # removing the used ques for this quiz
@@ -253,32 +291,54 @@ class RapidFire(Screen):
         self.ques_no+=1
         r=random.randint(1,len(ques)-1)
         self.ans1,self.ans2,self.ans3,self.ans4=ques[r][2],ques[r][3],ques[r][4],ques[r][5]
-        self.question=f"\nQuestion {int(self.ques_no)}: {ques[r][1]}"
+        self.question_number=f"{self.ques_no}"
+        self.question=f"Ques: {ques[r][1]}"
         self.answer=ques[r][6]
         
         # removing the used ques for this quiz
         loopques.insert(0, ques.pop(r))
 
         self.ids.inprapidans.text="Enter Your Answer Here"
+        if self.ques_no==1:
+            # self.SCORE=0
+            self.Rapid_Score="0"
         if self.ques_no==5:
             self.ques_no=1
-            buttonhome.disabled = False
-            buttonnext.disabled = True
+            buttonnext.text="Result"  #change to Result button image here
+            buttonnext.bind(on_release=self.gotoresult)
 
-        
+        self.ids.btnrapidnextques.disabled=True
+        self.ids.btnrapidcheck.disabled=False
 
-    def check_rapid_ans(self):
+    def gotoresult(self, quiznextparent):
+        self.parent.current = "rapidresult"
+        self.ids.btnrapidnextques.text="Next"
+        self.ids.btnrapidnextques.unbind(on_release=self.gotoresult)
+
+    def check_rapid_ans(self, buttonnext):
         self.A=self.ids.inprapidans.text
         if (self.A == self.answer) :#or (self.A in ques[r][6]):
-            self.rapid_score = str(int(self.rapid_score) + 1)
+            # RapidFire.SCORE+=1
+            self.Rapid_Score = str(int(self.Rapid_Score) + 1)
             self.ans="true"
             self.rapidcheck="Your Answer is Correct!!"
         else:
             self.ans="false"
             self.rapidcheck=f"Your Answer is Wrong, The Correct Answer To This Ques is {self.answer}."
-        print(self.A)
-        print(self.ans)
-        print(self.answer)
+        
+        self.ids.btnrapidnextques.disabled=False
+        self.ids.btnrapidcheck.disabled=True
+        
+        # def __init__(self):
+        #     if RapidFire.ans == "true":
+        #         RapidFire.SCORE+=1
+
+    def exitrapid(self):
+        self.ids.btnrapidnextques.disabled=True
+        
+        self.ids.btnrapidcheck.disabled=False
+        self.rapidcheck=""
+        self.ids.inprapidans.text="Enter Your Answer Here"
 
 class Facts(Screen):
     global facts
@@ -315,10 +375,22 @@ class Facts(Screen):
 
         loopfact.insert(0, facts.pop(rf))
 
-class Result(Screen):
-    pass
+class QuizResult(Quiz, Screen):
+    # if __name__=="__main__":
+    #     Quiz.SCORE=int(str(Quiz.Quiz_Score))
+    
+    # quizclass=Quiz()
+    # print(quizclass.SCORE)
 
+    
+    finalquizscore=StringProperty(f"{Quiz.SCORE}")
 
+class RapidResult(RapidFire, Screen):
+    finalrapidscore=StringProperty(f"{RapidFire.SCORE}")
+    
+    # def result(self):
+    #     # self.finalrapidscore = RapidFire.SCORE
+    #     return RapidFire.SCORE
 
 class WindowManager(ScreenManager):
     pass
@@ -332,12 +404,19 @@ class WrappedLabel(Label):
             self.setter('text_size')(self, (self.width, None)),
             texture_size=lambda *x: self.setter('height')(self, self.texture_size[1]))
 
-kvfile = Builder.load_file("mymain.kv")
+
 
 class CTFApp(App):
     title="CTF - Cosmos Trivia and Facts"
     icon="images/appicon.ico"
+    
+    global WindowWidth
+    global WindowHeight
+    windowwidth= StringProperty(str(int(dp(WindowWidth))))
+    windowheight = StringProperty(str(int(dp(WindowHeight))))
+    
     def build(self):
+        kvfile = Builder.load_file("mymain.kv")
         return kvfile
     
     #tts func to make our program say something
@@ -350,7 +429,7 @@ class CTFApp(App):
         self.engine.say(audio)
         self.engine.runAndWait()
 
-    version="00.00.10"
+    appversion=StringProperty(f"{Version}")
 
 if __name__ == "__main__":
     CTFApp().run()
