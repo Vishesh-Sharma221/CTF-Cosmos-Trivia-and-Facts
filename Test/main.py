@@ -13,7 +13,8 @@ class MyApp(App):
                     size_hint_y=None,
                     height=200)
         l=Label(text="nice", 
-                font_size=150)
+                font_size=150,
+                font_name="righteous.ttf")
 
         f=FloatLayout()
         s=Scatter()
