@@ -28,20 +28,26 @@ class MyApp(App):
                 font_size=150,
                 pos=(200,10),
                 font_name="fonts/righteous.ttf")
-        file=open("C:\\Users\\yugam\\Documents\\Yugam4254\\ATL\\Test\\textfiles\\info.txt")
-        # file=open("\textfiles\info.txt")
-        lines=file.readlines()
-    
-        l2=Label(text=lines[3])
+        
         f=FloatLayout()
         s=Scatter(pos= (200,200))
-
-        t.bind(text=l2.setter("text"))
+        s.add_widget(canvaswidget())
+        
+        try:
+            file=open("C:\\Users\\yugam\\Documents\\Yugam4254\\ATL\\Test\\textfiles\\info.txt")
+            # file=open("\\textfiles\\info.txt")
+            lines=file.readlines()
+            l2=Label(text=lines[3],
+                    font_size=150,
+                    pos=(200,10),
+                    font_name="fonts/righteous.ttf")
+            s.add_widget(l2)
+            t.bind(text=l2.setter("text"))
+        except FileNotFoundError:
+            s.add_widget(l)
+            t.bind(text=l.setter("text"))
 
         f.add_widget(s)
-        s.add_widget(canvaswidget())
-        s.add_widget(l2)
-
         b.add_widget(t)
         b.add_widget(f)
 
