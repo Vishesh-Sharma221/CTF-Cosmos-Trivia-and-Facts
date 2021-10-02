@@ -24,7 +24,7 @@ class MyApp(App):
         t=TextInput(font_size=150, 
                     size_hint_y=None,
                     height=200)
-        l=Label(text="nice", 
+        l=Label(text="nice",
                 font_size=150,
                 pos=(200,10),
                 font_name="fonts/righteous.ttf")
@@ -34,9 +34,17 @@ class MyApp(App):
         s.add_widget(canvaswidget())
         
         try:
-            file=open("C:\\Users\\yugam\\Documents\\Yugam4254\\ATL\\Test\\textfiles\\info.txt")
-            # file=open("\\textfiles\\info.txt")
+            infocontent='''Developers:
+
+    -> Vishesh Sharma
+    -> Yugam Sehgal
+    -> Anshuman Khatri'''
+            file=open("info.txt","w+")
+            file.write(infocontent)
+            file.close()
+            file=open("info.txt")
             lines=file.readlines()
+            print(lines)
             l2=Label(text=lines[3],
                     font_size=150,
                     pos=(200,10),
