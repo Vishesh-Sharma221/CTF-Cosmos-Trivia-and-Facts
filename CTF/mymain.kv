@@ -40,27 +40,17 @@ WindowManager:
                     pos: self.parent.pos
                     size: self.parent.size
                     source: "images/screens/MainScreen.png"
-
-            Label:
-                text: "CTF"
-                size_hint: 1, .2
-                font_name: "fonts/righteous.ttf"
-                font_size: "30dp"
-                color: hex("#E7005E")
-                pos_hint: {"center_x":.5, "top": .95}
             
             Label:
-                text: "Cosmos Trivia and Facts"
+                markup: True
+                text: '\n'.join(("               [size=70][font=fonts/russoone.ttf][b]CTF[/b][/font][/size]","[size=40][i][b]Cosmos Trivia[/b][/i][/size]","          [size=40][i]and [b]Facts[/i][/b][/size]"))
                 size_hint: 1, .2
-                font_name: "fonts/righteous.ttf"
-                font_size: "26dp"
                 color: hex("#E7005E")
-                pos_hint: {"center_x":.5, "top": .9}
+                pos_hint: {"center_x":.5, "top": .95}
 
             Button:
                 markup: True
-                text: "Play"
-                font_name: "fonts/righteous.ttf"
+                text: "[i][font=fonts/righteous.ttf][u]Pla[/u]y[/font][/i]"
                 font_size: 50
                 color: hex("#5dfc00")
                 pos_hint: {"center_x":.5, "center_y": .5}
@@ -347,16 +337,15 @@ WindowManager:
                     source: "images/screens/GameModeScreen.png"
 
             Label:
-                text: "Choose a Game Mode"
+                markup: True
+                text: '\n'.join(("              [font=fonts/russoone.ttf][size=40][i][b]Choose[/b][/i][/size][/font]","[font=fonts/russoone.ttf][size=40][i][b]a Game Mode[/b][/i][/size][/font]"))
                 size_hint: 1, .2
-                font_name: "fonts/righteous.ttf"
-                font_size: "30dp"
                 color: hex("#E7005E")
-                pos_hint: {"center_x":.5, "top":.9}
+                pos_hint: {"center_x":.5, "top":.95}
 
             Button:
                 text: "Space Quiz"
-                pos_hint: {"center_x":.5, "top":.7}
+                pos_hint: {"center_x":.5, "top":.68}
                 size_hint: None, None
                 size: "175dp","75dp"
                 background_color: 0,0,0,0
@@ -377,7 +366,7 @@ WindowManager:
 
             Button:
                 text: "Rapid Fire"
-                pos_hint: {"center_x":.5, "top":.55}
+                pos_hint: {"center_x":.5, "top":.53}
                 size_hint: None, None
                 size: "175dp","75dp"
                 background_color: 0,0,0,0
@@ -398,7 +387,7 @@ WindowManager:
 
             Button:
                 text: "Space Facts"
-                pos_hint: {"center_x":.5, "top":.4}
+                pos_hint: {"center_x":.5, "top":.38}
                 size_hint: None, None
                 size: "175dp","75dp"
                 background_color: 0,0,0,0
@@ -473,7 +462,7 @@ WindowManager:
                     pos_hint: {"center_x": .5, "top": .967}
                 
                 Label:
-                    text: "Question " + root.question_number + " of 5              " + "Current Score: " + str(root.Quiz_Score)
+                    text: "Question " + root.question_number + " of 5              Current Score: " + str(root.Quiz_Score)
                     size_hint: 1,.1
                     pos_hint: {"center_x": .5, "top": .85}
                     
@@ -754,7 +743,7 @@ WindowManager:
                     pos_hint: {"center_x": .5, "top": .967}
 
                 Label:
-                    text: "Question " + root.question_number + " of 5              " + "Current Score: " + str(root.Rapid_Score)
+                    text: "Question " + root.question_number + " of 5              Current Score: " + str(root.Rapid_Score)
                     size_hint: 1,.1
                     pos_hint: {"center_x": .5, "top": .85}
 

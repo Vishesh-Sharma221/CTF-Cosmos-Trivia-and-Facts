@@ -8,7 +8,7 @@ from kivy.core.window import Window
 from kivy.properties import ObjectProperty, StringProperty
 
 #App Version
-Version="00.00.10"
+__version__="00.00.10"
 
 #window size
 Wfac=3
@@ -24,7 +24,82 @@ import pyttsx3
 # import speech_recognition as sr
 import time
 
-ques_file=open("CTF/questions.csv")
+info_content='''Developers:
+
+    -> Vishesh Sharma
+    -> Yugam Sehgal
+    -> Anshuman Khatri'''
+
+ques_content='''Q NO.,Question,Option 1,Option 2,Option 3,Option 4,Answer
+1,Which is the smallest planet within our solar system?,Mercury,Uranus,Mars,Venus,Mercury
+2,Which is the second smallest planet within our solar system?,Neptune,Mercury,Venus,Mars,Mars
+3,The moon called Titan orbits which planet?,Saturn,Jupiter,Venus,Mars,Saturn
+4,Which is the brightest planet in the night's sky?,Neptune,Mercury,Jupiter,Venus,Venus
+5,Which is the largest planet within our solar system?,Uranus,Saturn,Jupiter,Neptune,Jupiter
+6,Uranus has only been visited by what spacecraft?,Curiosity,The Voyager 2,Sputnik 1,The Voyager 1,The Voyager 2
+7,Which is the only planet not named after Greek gods or goddesses?,Neptune,Earth,Saturn,Jupiter,Earth
+8,There have been more missions to this planet versus any other planet. What planet is it?,Mercury,Venus,Mars,Jupiter,Mars
+9,Which planet has the most moons?,Saturn,Jupiter,Uranus,Neptune,Saturn
+10,Which planet has the fastest rotation?,Neptune,Mercury,Jupiter,Venus,Jupiter
+11,How long is a single Earth year on Jupiter?,12,8,2,15,12
+12,What phenomena keeps the planets in steady orbit around the sun?,Spaghettification,Solar winds,Vacuum of space,Gravity,Gravity
+13,Which is the largest star within our solar system?,Sun,Moon,Sirius,Polaris,Sun
+14,How many stars are in the Milky Way?,More than 2 million,More than 20 million,More than 10 billion,More than 100 billion,More than 100 billion
+15,How old is the sun? (roughly),4 Billion,4.6 Billion,6 Billion,6.2 Billion,4.6 Billion
+16,How long does it take the sun rays to reach Earth? (minutes),10,8,12,15,8
+17,How long does a solar eclipse last? (minutes),10,6.5,7.5,5,7.5
+18,Where is the Asteroid Belt located?,Between Mars and Jupiter,Between Venus and Mercury,Between Uranus and Neptune,Between Saturn and Jupiter,Between Mars and Jupiter
+19,What color is Mars's sunset?,Red,Pink,Blue,White,Blue
+20,Name the spacecraft that carried the first astronauts to the moon,Apollo 11,The Voyager 2,Sputnik 1,The Voyager 1,Apollo 11
+21,How much of the universe is composed of dark matter?,0.10%,5%,27%,55%,27%
+22,How many moons are currently in our solar system?,95,125,181,2,181
+23,What has an incredibly strong gravitational pull that light can't even escape?,Sun,Stars,Black Hole,Nebula,Black Hole
+24,Who was the first person to step on moon?,Buzz Aldrin,Neil Armstrong,Michael Collins,Rick Astley,Neil Armstrong
+25,How old is the universe (in billion years)?,20.5,10.4,16.2,13.8,13.8
+26,How is the distance between the sun and Earth measured?,Kilometres,Light Years,Miles,Astronomical Units,Astronomical Units
+27,What protects Earth from meteoroids and radiation from the sun?,Magnetic Field,Clouds,Atmosphere,Orbit,Atmosphere
+28,How many of solar system's planets can be seen without a telescope?,2,5,4,3,5
+29,Which planet is closest in size to Earth?,Mercury,Venus,Mars,Neptune,Venus
+30,Which is the oldest planet in our solar system?,Saturn,Mars,Jupiter,Uranus,Jupiter'''
+
+fact_content='''Uranus is tilted on its side
+Jupiter's moon Io has towering volcanic eruptions
+Mars has the biggest volcano (that we know of)
+Mars also has the longest valley
+Venus has super-powerful winds
+There is water ice everywhere
+Spacecraft have visited every planet
+There could be life in the solar system, somewhere
+Mercury is still shrinking
+There are mountains on Pluto
+Footprints on the moon will stay for millions of years
+Some planets have no surface to land on
+Pieces of the same metal will permanently merge in space
+There are interstellar objects passing through our solar system
+Saturn would float in water
+Jupiter has at least 79 moons
+The hottest planet in our solar system is 450° C
+Halley's comet passes through Earth's vicinity every 75 years
+Neutron stars can spin  600 times per second
+1 day on Venus is longer than 1 earthly year
+In 3.75 billion years the Milky Way and Andromeda galaxies will collide
+Largest known asteroid is 965 km wide
+The Sun's mass takes up 99.86% of the solar system
+A volcano on mars is 3 times the size of Mt.Everest
+It would take 9.5 years to walk to moon
+Temperature of outer space is close to absolute zero
+Around 6000 satellites are currently orbiting our Earth
+There are more stars in the Universe than grains of sands on Earth
+Sunset on Mars appears blue
+The hottest planet in our solar system is 450° C
+Humanity have found around 60 potentially habitable exoplanets as of 2021
+The nearest habitable planet is estimated to be 12 light years away'''
+
+# Ques File
+ques_file=open("questions.csv","w+")
+ques_file.write(ques_content)
+ques_file.close()
+ques_file=open("questions.csv")
 read_ques_file=csv.reader(ques_file)
 ques=[]         # 1-Q, 2-O1, 3-O2, 4-O3, 5-O4, 6-A
 for x in read_ques_file:
@@ -32,11 +107,23 @@ for x in read_ques_file:
 r=random.randint(0,len(ques)-1)
 loopques=[]
 
-fact_file=open("CTF/facts.txt")
+# Fact File
+fact_file=open("facts.txt","w+")
+fact_file.write(fact_content)
+fact_file.close()
+
+fact_file=open("facts.txt")
 facts=fact_file.readlines()
 rf=random.randint(1,len(facts)-1)
 loopfact=[]
 
+# Info File
+infofile=open("info.txt","w+")
+infofile.write(info_content)
+infofile.close()
+
+infofile=open("info.txt")
+info=infofile.read()
 
 class Home(Screen):
     pass
@@ -45,8 +132,6 @@ class Home(Screen):
 #     pass
 
 class Info(Screen):
-    file=open("CTF/info.txt")
-    info=file.read()
     infos = StringProperty(f"{info}")
 
 class GameMode(Screen):
@@ -221,10 +306,9 @@ class Quiz(Screen, object):
         self.ids.btnopt4.disabled=False
         self.quizcheck=""
 
-    
-
-
-    
+        self.ques_no=1
+        self.Quiz_Score = "0"
+        self.question_number=f"{self.ques_no}"
 
 class RapidFire(Screen, object):
     #stt func to get input from the user's mic
@@ -340,6 +424,10 @@ class RapidFire(Screen, object):
         self.rapidcheck=""
         self.ids.inprapidans.text="Enter Your Answer Here"
 
+        self.ques_no=1
+        self.Rapid_Score = "0"
+        self.question_number = f"{int(self.ques_no)}"
+
 class Facts(Screen):
     global facts
     global loopfact
@@ -407,8 +495,7 @@ class WrappedLabel(Label):
 
 
 class CTFApp(App):
-    title="CTF - Cosmos Trivia and Facts"
-    icon="images/appicon.ico"
+    
     
     global WindowWidth
     global WindowHeight
@@ -417,6 +504,8 @@ class CTFApp(App):
     
     def build(self):
         kvfile = Builder.load_file("mymain.kv")
+        self.title="CTF - Cosmos Trivia and Facts"
+        self.icon="images/appicon.ico"
         return kvfile
     
     #tts func to make our program say something
@@ -429,7 +518,7 @@ class CTFApp(App):
         self.engine.say(audio)
         self.engine.runAndWait()
 
-    appversion=StringProperty(f"{Version}")
+    appversion=StringProperty(f"{__version__}")
 
 if __name__ == "__main__":
     CTFApp().run()
