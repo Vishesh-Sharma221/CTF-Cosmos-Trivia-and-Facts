@@ -1,5 +1,5 @@
 Developers:
 
-    -> Vishesh Sh   arma
+    -> Vishesh Sharma
     -> Yugam Sehgal
     -> Anshuman Khatri
