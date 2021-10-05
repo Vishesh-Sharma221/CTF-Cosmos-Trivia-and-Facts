@@ -13,8 +13,8 @@ __version__="00.00.10"
 #window size
 Wfac=3
 WindowWidth= (40-Wfac)*9
-WindowHeight= None
-Window.size=dp(WindowWidth), None
+WindowHeight= (40-Wfac)*16
+Window.size=(dp(WindowWidth), dp(WindowHeight))
 
 #other requirements
 import csv
@@ -26,7 +26,7 @@ import time
 
 info_content='''Developers:
 
-    -> Vishesh Sh   arma
+    -> Vishesh Sharma
     -> Yugam Sehgal
     -> Anshuman Khatri'''
 
@@ -495,7 +495,6 @@ class WrappedLabel(Label):
 
 
 class CTFApp(App):
-    
     
     global WindowWidth
     global WindowHeight
