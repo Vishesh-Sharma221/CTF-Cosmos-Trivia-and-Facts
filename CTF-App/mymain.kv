@@ -27,23 +27,24 @@ WindowManager:
 
     GridLayout:
         cols: 1
-        size_hint: None, 1
-        width: int(app.windowwidth)
+        size_hint: 1, 1
         pos_hint: {"center_x": .5, "center_y": .5}
-    
+        
+        canvas.before:
+            Rectangle:
+                pos: self.parent.pos
+                size: self.parent.size
+                source: "images/screens/MainScreen.png"
+        
         FloatLayout:
             size: self.size
             pos: self.pos
 
-            canvas.before:
-                Rectangle:
-                    pos: self.parent.pos
-                    size: self.parent.size
-                    source: "images/screens/MainScreen.png"
+            
              
             Label:
                 markup: True
-                text: '\n'.join(("               [size=70][font=fonts/russoone.ttf][b]CTF[/b][/font][/size]","[size=40][i][b]Cosmos Trivia[/b][/i][/size]","          [size=40][i]and [b]Facts[/i][/b][/size]"))
+                text: '\n'.join(("               [size=150][font=fonts/russoone.ttf][b]CTF[/b][/font][/size]","[size=90][i][b]Cosmos Trivia[/b][/i][/size]","          [size=80][i]and[/size] [b][size=90]Facts[/i][/b][/size]"))
                 size_hint: 1, .2
                 color: hex("#E7005E")
                 pos_hint: {"center_x":.5, "top": .95}
@@ -51,7 +52,7 @@ WindowManager:
             Button:
                 markup: True
                 text: "[i][font=fonts/righteous.ttf][u]Pla[/u]y[/font][/i]"
-                font_size: 50
+                font_size: 125
                 color: hex("#5dfc00")
                 pos_hint: {"center_x":.5, "center_y": .5}
                 size_hint: None, None
@@ -179,8 +180,7 @@ WindowManager:
 
     GridLayout:
         cols: 1
-        size_hint: None, 1
-        width: int(app.windowwidth)
+        size_hint: 1, 1
                 
         GridLayout:
             cols: 1
@@ -206,6 +206,15 @@ WindowManager:
                             
                             FloatLayout:
                                 size_hint: 1,.8
+                                pos_hint: {"top":1}
+                                
+                                WrappedLabel:
+                                    size: self.parent.size
+                                    text: root.aboutctfapp
+                                    font_size: 60
+                                    font_name: "fonts/ubuntu.ttf"
+                                    pos_hint: {"center_x":.5,"top":1}
+                                    padding_x: 10
                                 
                             FloatLayout:
                                 pos_hint: {"right":1, "top":.2}
@@ -244,6 +253,13 @@ WindowManager:
                             
                             FloatLayout:
                                 size_hint: 1,.8
+                                WrappedLabel:
+                                    size: self.parent.size
+                                    text: root.howtoplayctfapp
+                                    pos_hint: {"center_x":.5,"top":1}
+                                    padding_x: 20
+                                    font_size: 60
+                                    font_name: "fonts/ubuntu.ttf"
 
                             FloatLayout:
                                 pos_hint: {"right":1, "top":.2}
@@ -283,11 +299,14 @@ WindowManager:
                             
                             FloatLayout:
                                 size_hint: 1,.8
+                                
                                 WrappedLabel:
                                     size: self.parent.size
                                     text: root.infos
-                                    pos_hint: {"center_x":.5,"center_y":.5}
+                                    pos_hint: {"center_x":.5,"top":1}
                                     padding_x: 20
+                                    font_size: 60
+                                    font_name: "fonts/ubuntu.ttf"
 
                             FloatLayout:
                                 pos_hint: {"right":1, "top":.2}
@@ -322,23 +341,23 @@ WindowManager:
     
     GridLayout:
         cols: 1
-        size_hint: None, 1
-        width: int(app.windowwidth)
+        size_hint: 1, 1
         pos_hint: {"center_x": .5, "center_y": .5}
-    
+        
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: "images/screens/GameModeScreen.png"
+
         FloatLayout:
             size: self.size
             pos: self.pos
 
-            canvas.before:
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
-                    source: "images/screens/GameModeScreen.png"
-
+            
             Label:
                 markup: True
-                text: '\n'.join(("              [font=fonts/russoone.ttf][size=40][i][b]Choose[/b][/i][/size][/font]","[font=fonts/russoone.ttf][size=40][i][b]a Game Mode[/b][/i][/size][/font]"))
+                text: '\n'.join(("              [font=fonts/russoone.ttf][size=90][i][b]Choose[/b][/i][/size][/font]","[font=fonts/russoone.ttf][size=90][i][b]a Game Mode[/b][/i][/size][/font]"))
                 size_hint: 1, .2
                 color: hex("#E7005E")
                 pos_hint: {"center_x":.5, "top":.95}
@@ -438,8 +457,7 @@ WindowManager:
     
     GridLayout:
         cols: 1
-        size_hint: None, 1
-        width: int(app.windowwidth)
+        size_hint: 1, 1
         pos_hint: {"center_x": .5, "center_y": .5}
 
         canvas.before:
@@ -487,7 +505,7 @@ WindowManager:
                         imagequizspeaker.opacity = .7 if self.state == "down" else 1
 
                     on_release:
-                        app.talk(root.talkquestion)
+                        # app.talk(root.talkquestion)
                         imagequizspeaker.opacity = 1
                     
                     Image:
@@ -719,8 +737,7 @@ WindowManager:
     
     GridLayout:
         cols: 1
-        size_hint: None, 1
-        width: int(app.windowwidth)
+        size_hint: 1, 1
         pos_hint: {"center_x": .5, "center_y": .5}
 
         canvas.before:
@@ -768,7 +785,7 @@ WindowManager:
                         imagerapidspeaker.opacity = .7 if self.state == "down" else 1
                     
                     on_release:
-                        app.talk(root.question)
+                        # app.talk(root.question)
                         imagerapidspeaker.opacity = 1
                     
                     Image:
@@ -905,8 +922,7 @@ WindowManager:
     
     GridLayout:
         cols: 1
-        size_hint: None, 1
-        width: int(app.windowwidth)
+        size_hint: 1, 1
         pos_hint: {"center_x": .5, "center_y": .5}
 
         canvas.before:
@@ -953,8 +969,8 @@ WindowManager:
                         imagefactspeaker.opacity = .7 if self.state == "down" else 1
                     
                     on_release:
-                        app.talk("DID YOU KNOW??")
-                        app.talk(root.fact)
+                        # app.talk("DID YOU KNOW??")
+                        # app.talk(root.fact)
                         imagefactspeaker.opacity = 1
                     
                     Image:
@@ -1015,8 +1031,7 @@ WindowManager:
     
     GridLayout:
         cols: 1
-        size_hint: None, 1
-        width: int(app.windowwidth)
+        size_hint: 1, 1
         pos_hint: {"center_x": .5, "center_y": .5}
 
         canvas.before:
@@ -1101,8 +1116,7 @@ WindowManager:
 
     GridLayout:
         cols: 1
-        size_hint: None, 1
-        width: int(app.windowwidth)
+        size_hint: 1, 1
         pos_hint: {"center_x": .5, "center_y": .5}
 
         canvas.before:
