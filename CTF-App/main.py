@@ -13,8 +13,8 @@ __version__="00.00.10"
 #window size
 Wfac=3
 WindowWidth= (40-Wfac)*9
-WindowHeight= (40-Wfac)*16
-Window.size=(dp(WindowWidth), dp(WindowHeight))
+WindowHeight= None
+Window.size=dp(WindowWidth), None
 
 #other requirements
 import csv
@@ -26,7 +26,7 @@ import time
 
 info_content='''Developers:
 
-    -> Vishesh Sharma
+    -> Vishesh Sh   arma
     -> Yugam Sehgal
     -> Anshuman Khatri'''
 
@@ -509,7 +509,7 @@ class CTFApp(App):
         return kvfile
     
     #tts func to make our program say something
-    engine = pyttsx3.init('sapi5')
+    engine = pyttsx3.init()
     voices = engine.getProperty('voices')
     engine.setProperty("voices", voices[0].id)
     engine.setProperty("rate", 178)
