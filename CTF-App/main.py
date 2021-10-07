@@ -10,15 +10,15 @@ from kivy.properties import ObjectProperty, StringProperty
 #App Version
 __version__="00.00.10"
 
-#window size
-# Wfac=3
-# WindowWidth= (40-Wfac)*9
-# WindowHeight= (40-Wfac)*16
-# Window.size=(dp(WindowWidth), dp(WindowHeight))
+# window size
+Wfac=-8
+WindowWidth= (40-Wfac)*9
+WindowHeight= (40-Wfac)*19.5
+Window.size=(dp(WindowWidth), dp(WindowHeight))
 
 #other requirements
 import csv
-from os import extsep
+# from os import extsep
 import random
 import pyttsx3
 # import speech_recognition as sr
@@ -184,7 +184,7 @@ class Quiz(Screen, object):
     r=random.randint(1,len(ques)-1)
     ans1,ans2,ans3,ans4=ques[r][2],ques[r][3],ques[r][4],ques[r][5]
     question_number=StringProperty(f"{int(ques_no)}")
-    question=StringProperty(f"Ques: {ques[r][1]}")
+    question=StringProperty(f"{ques[r][1]}")
     answer=StringProperty(f"{ques[r][6]}")
     opt1=StringProperty(f"1.    {ques[r][2]}")
     opt2=StringProperty(f"2.    {ques[r][3]}")
@@ -217,7 +217,7 @@ class Quiz(Screen, object):
         r=random.randint(1,len(ques)-1)
         self.ans1,self.ans2,self.ans3,self.ans4=ques[r][2],ques[r][3],ques[r][4],ques[r][5]
         self.question_number=f"{self.ques_no}"
-        self.question=f"Ques: {ques[r][1]}"
+        self.question=f"{ques[r][1]}"
         self.answer=ques[r][6]
         self.opt1=f"1.    {ques[r][2]}"
         self.opt2=f"2.    {ques[r][3]}"
@@ -335,28 +335,6 @@ class Quiz(Screen, object):
         self.question_number=f"{self.ques_no}"
 
 class RapidFire(Screen, object):
-    #stt func to get input from the user's mic
-    # def listen():
-    #     rec = sr.Recognizer()
-
-    #     with sr.Microphone() as source:
-    #         rec.adjust_for_ambient_noise(source, duration=3)
-    #         print("Listening . . ")
-    #         audio = rec.listen(source)
-
-    #     data = " "
-
-    #     try:
-    #         data = rec.recognize_google(audio,language='en')
-    #         print("You said " + data)
-
-    #     except sr.UnknownValueError:
-    #         print("Sorry, could not understand that.")
-    #     except sr.RequestError as ex:
-    #         print("Request Error from Google Speech Recognition" + ex)
-
-    #     return data
-
     global ques
     global loopques
     global r
@@ -366,31 +344,43 @@ class RapidFire(Screen, object):
             ques.insert(1, loopques.pop(i))
 
     #default vals
-    Rapid_Score = StringProperty("4")
+    Quiz_Score = StringProperty("0")
     SCORE=0
+    check=StringProperty("")
     ques_no=1
 
     #variables    
-    A=StringProperty("0")
-    rapidcheck=StringProperty("")
-
     ans=StringProperty("false")
     nexttohome=StringProperty("Next")
+    quizcheck=StringProperty("")
     
     r=random.randint(1,len(ques)-1)
     ans1,ans2,ans3,ans4=ques[r][2],ques[r][3],ques[r][4],ques[r][5]
     question_number=StringProperty(f"{int(ques_no)}")
-    question=StringProperty(f"Ques: {ques[r][1]}")
+    question=StringProperty(f"{ques[r][1]}")
     answer=StringProperty(f"{ques[r][6]}")
-
+    opt1=StringProperty(f"1.    {ques[r][2]}")
+    opt2=StringProperty(f"2.    {ques[r][3]}")
+    opt3=StringProperty(f"3.    {ques[r][4]}")
+    opt4=StringProperty(f"4.    {ques[r][5]}")
+    talkquestion=f"Question {str(ques_no)}: {ques[r][1]}\nThe options are:\n first, {ques[r][2]}\n second, {ques[r][3]}\n third, {ques[r][4]}\n and fourth, {ques[r][5]}"
+    
     # removing the used ques for this quiz
     loopques.insert(0, ques.pop(r))
 
-    def start_rapid_ques(self, buttonnext, buttonhome):
+    
+
+    def start_quiz_ques(self, buttonnext, buttonhome):
         global ques
         global loopques
         global r
-        
+
+        self.ids.btnquizcheck.disabled=True
+        self.ids.btnopt1.disabled=False
+        self.ids.btnopt2.disabled=False
+        self.ids.btnopt3.disabled=False
+        self.ids.btnopt4.disabled=False
+
         if len(ques)==1:
             for i in range(len(loopques)):
                 ques.insert(1, loopques.pop(i))
@@ -400,57 +390,147 @@ class RapidFire(Screen, object):
         r=random.randint(1,len(ques)-1)
         self.ans1,self.ans2,self.ans3,self.ans4=ques[r][2],ques[r][3],ques[r][4],ques[r][5]
         self.question_number=f"{self.ques_no}"
-        self.question=f"Ques: {ques[r][1]}"
+        self.question=f"{ques[r][1]}"
         self.answer=ques[r][6]
+        self.opt1=f"1.    {ques[r][2]}"
+        self.opt2=f"2.    {ques[r][3]}"
+        self.opt3=f"3.    {ques[r][4]}"
+        self.opt4=f"4.    {ques[r][5]}"
+        self.talkquestion=f"\nQuestion {str(self.ques_no)}: {ques[r][1]}\nThe options are:\n first, {ques[r][2]}\n second, {ques[r][3]}\n third, {ques[r][4]}\n and fourth, {ques[r][5]}"
+        self.quizcheck=""
         
         # removing the used ques for this quiz
         loopques.insert(0, ques.pop(r))
 
-        self.ids.inprapidans.text="Enter Your Answer Here"
-        if self.ques_no==1:
-            # self.SCORE=0
-            self.Rapid_Score="0"
+        # if self.ques_no==1:
+        #     self.Quiz_Score="0"
         if self.ques_no==5:
-            self.ques_no=1
-            buttonnext.text="Result"  #change to Result button image here
+            self.ques_no=0
             buttonnext.bind(on_release=self.gotoresult)
-
-        self.ids.btnrapidnextques.disabled=True
-        self.ids.btnrapidcheck.disabled=False
+            # buttonnext.bind(on_state=self.resultbutton,on_release=self.gotoresult)
+        # if self.ques_no==4:
+        #     buttonnext.disabled = False
+        #     self.ids.imagenextquiz.source = "images/buttons/resultdark.png"
+        
+        self.ids.btnquiznextques.disabled=True
+    
+    # def resultbutton(self):
+    #     if self.ids.btnquiznextques.state == "down":
+    #         self.ids.imagenextquiz.source = "images/buttons/resultlight.png"
+    #     else:
+    #         self.ids.imagenextquiz.source = "images/buttons/resultdark.png"
 
     def gotoresult(self, quiznextparent):
-        self.parent.current = "rapidresult"
-        self.ids.btnrapidnextques.text="Next"
-        self.ids.btnrapidnextques.unbind(on_release=self.gotoresult)
+        self.parent.current = "quizresult"
+        self.ids.btnquiznextques.unbind(on_release=self.gotoresult)
 
-    def check_rapid_ans(self, buttonnext):
-        self.A=self.ids.inprapidans.text
-        if (self.A == self.answer) :#or (self.A in ques[r][6]):
-            # RapidFire.SCORE+=1
-            self.Rapid_Score = str(int(self.Rapid_Score) + 1)
+    def inputA(self, button):
+        if self.ans1==self.answer:
             self.ans="true"
-            self.rapidcheck="Your Answer is Correct!!"
         else:
             self.ans="false"
-            self.rapidcheck=f"Your Answer is Wrong, The Correct Answer To This Ques is {self.answer}."
         
-        self.ids.btnrapidnextques.disabled=False
-        self.ids.btnrapidcheck.disabled=True
+        self.ids.btnopt2.state='normal'
+        self.ids.btnopt3.state='normal'
+        self.ids.btnopt4.state='normal'
+        self.ids.imageopt2.source="images/buttons/optiondark.png"
+        self.ids.imageopt3.source="images/buttons/optiondark.png"
+        self.ids.imageopt4.source="images/buttons/optiondark.png"
+    
+    def inputB(self, button):
+        if self.ans2==self.answer:
+            self.ans="true"
+        else:
+            self.ans="false"
         
-        # def __init__(self):
-        #     if RapidFire.ans == "true":
-        #         RapidFire.SCORE+=1
+        self.ids.btnopt1.state='normal'
+        self.ids.btnopt3.state='normal'
+        self.ids.btnopt4.state='normal'
+        self.ids.imageopt1.source="images/buttons/optiondark.png"
+        self.ids.imageopt3.source="images/buttons/optiondark.png"
+        self.ids.imageopt4.source="images/buttons/optiondark.png"
 
-    def exitrapid(self):
-        self.ids.btnrapidnextques.disabled=True
+    def inputC(self, button):
+        if self.ans3==self.answer:
+            self.ans="true"
+        else:
+            self.ans="false"
         
-        self.ids.btnrapidcheck.disabled=False
-        self.rapidcheck=""
-        self.ids.inprapidans.text="Enter Your Answer Here"
+        self.ids.btnopt1.state='normal'
+        self.ids.btnopt2.state='normal'
+        self.ids.btnopt4.state='normal'
+        self.ids.imageopt1.source="images/buttons/optiondark.png"
+        self.ids.imageopt2.source="images/buttons/optiondark.png"
+        self.ids.imageopt4.source="images/buttons/optiondark.png"
+            
+    def inputD(self, button):
+        if self.ans4==self.answer:
+            self.ans="true"
+        else:
+            self.ans="false"
+        
+        self.ids.btnopt1.state='normal'
+        self.ids.btnopt2.state='normal'
+        self.ids.btnopt3.state='normal'
+        self.ids.imageopt1.source="images/buttons/optiondark.png"
+        self.ids.imageopt2.source="images/buttons/optiondark.png"
+        self.ids.imageopt3.source="images/buttons/optiondark.png"
+
+    def check_quiz_ans(self):
+
+        if self.ans=="true":
+            Quiz.SCORE += 1
+            self.Quiz_Score = str(int(self.Quiz_Score) + 1)
+            self.quizcheck="Your Answer is Correct!!"
+        else:
+            self.quizcheck=f"Your Answer is Wrong, The Correct Answer To This Ques is {self.answer}."
+        
+        self.ids.btnquizcheck.disabled=True
+        self.ids.btnopt1.disabled=True
+        self.ids.btnopt2.disabled=True
+        self.ids.btnopt3.disabled=True
+        self.ids.btnopt4.disabled=True
+
+        self.ids.btnquiznextques.disabled=False
+
+    def exitquiz(self):
+        self.ids.btnquiznextques.disabled=True
+        
+        self.ids.btnquizcheck.disabled=False
+        self.ids.btnopt1.disabled=False
+        self.ids.btnopt2.disabled=False
+        self.ids.btnopt3.disabled=False
+        self.ids.btnopt4.disabled=False
+        self.quizcheck=""
 
         self.ques_no=1
-        self.Rapid_Score = "0"
-        self.question_number = f"{int(self.ques_no)}"
+        self.Quiz_Score = "0"
+        self.question_number=f"{self.ques_no}"
+
+
+        # import msvcrt
+        # import sys
+
+        # # class TimeoutExpired(Exception):
+        # #     pass
+
+        # def input_with_timeout(prompt, timeout, timer=time.monotonic):
+        #     sys.stdout.write(prompt)
+        #     sys.stdout.flush()
+        #     endtime = timer() + timeout
+        #     result = []
+        #     while timer() < endtime:
+        #         if msvcrt.kbhit():
+        #             result.append(msvcrt.getwche()) 
+        #             if result[-1] == '\r':
+        #                 return ''.join(result[:-1])
+        #         time.sleep(0.04) 
+        #     # raise TimeoutExpired
+
+        # try:
+        #     answer = input_with_timeout("You have only 10seconds to Answer! : ", 10)
+        # except:#TimeoutExpired:
+        #     print('Sorry, times up')
 
 class Facts(Screen):
     global facts
@@ -519,11 +599,9 @@ class WrappedLabel(Label):
 
 
 class CTFApp(App):
-    
-    # global WindowWidth
-    # global WindowHeight
-    # windowwidth= StringProperty(str(int(dp(WindowWidth))))
-    # windowheight = StringProperty(str(int(dp(WindowHeight))))
+
+    windowwidth= StringProperty(str(int(dp(WindowWidth))))
+    windowheight = StringProperty(str(int(dp(WindowHeight))))
     
     def build(self):
         kvfile = Builder.load_file("mymain.kv")

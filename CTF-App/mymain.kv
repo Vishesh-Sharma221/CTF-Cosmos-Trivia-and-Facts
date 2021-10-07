@@ -27,24 +27,25 @@ WindowManager:
 
     GridLayout:
         cols: 1
-        size_hint: 1, 1
+        # size_hint: 1, 1
+        size_hint: None, 1
+        width: app.windowwidth
         pos_hint: {"center_x": .5, "center_y": .5}
         
         canvas.before:
             Rectangle:
-                pos: self.parent.pos
-                size: self.parent.size
+                pos: self.pos
+                size: self.size
                 source: "images/screens/MainScreen.png"
         
         FloatLayout:
             size: self.size
             pos: self.pos
-
-            
-             
+  
             Label:
                 markup: True
-                text: '\n'.join(("               [size=150][font=fonts/russoone.ttf][b]CTF[/b][/font][/size]","[size=90][i][b]Cosmos Trivia[/b][/i][/size]","          [size=80][i]and[/size] [b][size=90]Facts[/i][/b][/size]"))
+                text: '\n'.join(("               [font=fonts/russoone.ttf][b]CTF[/b][/font]","[i][b]Cosmos Trivia[/b][/i]","          [size=80][i]and[/size] [b]Facts[/i][/b]"))
+                font_size: "50dp"
                 size_hint: 1, .2
                 color: hex("#E7005E")
                 pos_hint: {"center_x":.5, "top": .95}
@@ -52,7 +53,7 @@ WindowManager:
             Button:
                 markup: True
                 text: "[i][font=fonts/righteous.ttf][u]Pla[/u]y[/font][/i]"
-                font_size: 125
+                font_size: "60sp"
                 color: hex("#5dfc00")
                 pos_hint: {"center_x":.5, "center_y": .5}
                 size_hint: None, None
@@ -180,168 +181,170 @@ WindowManager:
 
     GridLayout:
         cols: 1
-        size_hint: 1, 1
-                
-        GridLayout:
-            cols: 1
+        # size_hint: 1, 1
+        size_hint: None, 1
+        width: app.windowwidth
+        pos_hint: {"center_x": .5, "center_y": .5}
             
-            FloatLayout:
-                orientation: "vertical"
-                size_hint: 1,1
+        FloatLayout:
+            orientation: "vertical"
+            # size_hint: 1,1
 
-                TabbedPanel:
-                    size: self.size
-                    pos: self.pos
-                    do_default_tab: False
-                    tab_width: self.parent.width/3.04
-                    tab_pos: "top_mid"
-                    background_image: "images/screens/InfoCTF.png"
+            TabbedPanel:
+                size: self.parent.size
+                pos: self.parent.pos
+                do_default_tab: False
+                tab_width: self.parent.width/3.04
+                tab_pos: "top_mid"
+                background_image: "images/screens/InfoCTF.png"
 
-                    TabbedPanelItem:
-                        text: "About"
+                TabbedPanelItem:
+                    text: "About"
 
-                        BoxLayout:
-                            orientation: "vertical"
-                            size_hint: 1,1
+                    BoxLayout:
+                        orientation: "vertical"
+                        size_hint: 1,1
+                        
+                        FloatLayout:
+                            size_hint: 1,.8
+                            pos_hint: {"top":1}
                             
-                            FloatLayout:
-                                size_hint: 1,.8
-                                pos_hint: {"top":1}
-                                
-                                WrappedLabel:
+                            WrappedLabel:
+                                size: self.parent.size
+                                text: root.aboutctfapp
+                                font_size: "25sp"
+                                font_name: "fonts/ubuntu.ttf"
+                                pos_hint: {"center_x":.5,"top":1}
+                                padding_x: 20   
+                            
+                        FloatLayout:
+                            pos_hint: {"right":1, "top":.2}
+                            size_hint: None,.2
+                            width: self.height
+
+                            Button:
+                                size_hint: None, None
+                                pos_hint: {"center_x":.55, "center_y": .45}
+                                size_hint: None, None
+                                size: "60dp","60dp"
+                                background_color: 0,0,0,0
+
+                                on_state:
+                                    imageinfotohometab1.opacity = .7 if self.state == "down" else 1
+
+                                on_release:
+                                    app.root.current = "home"
+                                    imageinfotohometab1.opacity = 1
+                                    
+                                Image:
+                                    id: imageinfotohometab1
+                                    source: "images/buttons/homebutton.png"
+                                    center_x: self.parent.center_x
+                                    center_y: self.parent.center_y
                                     size: self.parent.size
-                                    text: root.aboutctfapp
-                                    font_size: 60
-                                    font_name: "fonts/ubuntu.ttf"
-                                    pos_hint: {"center_x":.5,"top":1}
-                                    padding_x: 10
-                                
-                            FloatLayout:
-                                pos_hint: {"right":1, "top":.2}
-                                size_hint: None,.2
-                                width: self.height
+                                    opacity: 0.5 if self.parent.disabled == True else 1
 
-                                Button:
-                                    size_hint: None, None
-                                    pos_hint: {"center_x":.55, "center_y": .45}
-                                    size_hint: None, None
-                                    size: "60dp","60dp"
-                                    background_color: 0,0,0,0
+                
+                TabbedPanelItem:
+                    text: "How To Play?"
 
-                                    on_state:
-                                        imageinfotohometab1.opacity = .7 if self.state == "down" else 1
+                    BoxLayout:
+                        orientation: "vertical"
+                        size_hint: 1,1
+                        
+                        FloatLayout:
+                            size_hint: 1,.8
+                            WrappedLabel:
+                                size: self.parent.size
+                                text: root.howtoplayctfapp
+                                pos_hint: {"center_x":.5,"top":1}
+                                padding_x: 20
+                                font_size: "30sp"
+                                font_name: "fonts/ubuntu.ttf"
 
-                                    on_release:
-                                        app.root.current = "home"
-                                        imageinfotohometab1.opacity = 1
-                                        
-                                    Image:
-                                        id: imageinfotohometab1
-                                        source: "images/buttons/homebutton.png"
-                                        center_x: self.parent.center_x
-                                        center_y: self.parent.center_y
-                                        size: self.parent.size
-                                        opacity: 0.5 if self.parent.disabled == True else 1
+                        FloatLayout:
+                            pos_hint: {"right":1, "top":.2}
+                            size_hint: None,.2
+                            width: self.height
 
-                    
-                    TabbedPanelItem:
-                        text: "How To Play?"
+                            Button:
+                                size_hint: None, None
+                                pos_hint: {"center_x":.55, "center_y": .45}
+                                size_hint: None, None
+                                size: "60dp","60dp"
+                                background_color: 0,0,0,0
 
-                        BoxLayout:
-                            orientation: "vertical"
-                            size_hint: 1,1
-                            
-                            FloatLayout:
-                                size_hint: 1,.8
-                                WrappedLabel:
+                                on_state:
+                                    imageinfotohometab2.opacity = .7 if self.state == "down" else 1
+
+                                on_release:
+                                    app.root.current = "home"
+                                    imageinfotohometab2.opacity = 1
+
+                                Image:
+                                    id: imageinfotohometab2
+                                    source: "images/buttons/homebutton.png"
+                                    center_x: self.parent.center_x
+                                    center_y: self.parent.center_y
                                     size: self.parent.size
-                                    text: root.howtoplayctfapp
-                                    pos_hint: {"center_x":.5,"top":1}
-                                    padding_x: 20
-                                    font_size: 60
-                                    font_name: "fonts/ubuntu.ttf"
+                                    opacity: 0.5 if self.parent.disabled == True else 1
 
-                            FloatLayout:
-                                pos_hint: {"right":1, "top":.2}
-                                size_hint: None,.2
-                                width: self.height
+                        
+                
+                TabbedPanelItem:
+                    text: "Developers"
 
-                                Button:
-                                    size_hint: None, None
-                                    pos_hint: {"center_x":.55, "center_y": .45}
-                                    size_hint: None, None
-                                    size: "60dp","60dp"
-                                    background_color: 0,0,0,0
-
-                                    on_state:
-                                        imageinfotohometab2.opacity = .7 if self.state == "down" else 1
-
-                                    on_release:
-                                        app.root.current = "home"
-                                        imageinfotohometab2.opacity = 1
-
-                                    Image:
-                                        id: imageinfotohometab2
-                                        source: "images/buttons/homebutton.png"
-                                        center_x: self.parent.center_x
-                                        center_y: self.parent.center_y
-                                        size: self.parent.size
-                                        opacity: 0.5 if self.parent.disabled == True else 1
-
+                    BoxLayout:
+                        orientation: "vertical"
+                        size_hint: 1,1
+                        
+                        FloatLayout:
+                            size_hint: 1,.8
                             
-                    
-                    TabbedPanelItem:
-                        text: "Developers"
+                            WrappedLabel:
+                                size: self.parent.size
+                                text: root.infos
+                                pos_hint: {"center_x":.5,"top":1}
+                                padding_x: 20
+                                font_size: "30sp"
+                                font_name: "fonts/ubuntu.ttf"
 
-                        BoxLayout:
-                            orientation: "vertical"
-                            size_hint: 1,1
-                            
-                            FloatLayout:
-                                size_hint: 1,.8
-                                
-                                WrappedLabel:
+                        FloatLayout:
+                            pos_hint: {"right":1, "top":.2}
+                            size_hint: None,.2
+                            width: self.height
+
+                            Button:
+                                size_hint: None, None
+                                pos_hint: {"center_x":.55, "center_y": .45}
+                                size_hint: None, None
+                                size: "60dp","60dp"
+                                background_color: 0,0,0,0
+
+                                on_state:
+                                    imageinfotohometab3.opacity = .7 if self.state == "down" else 1
+
+                                on_release:
+                                    app.root.current = "home"
+                                    imageinfotohometab3.opacity = 1
+
+                                Image:
+                                    id: imageinfotohometab3
+                                    source: "images/buttons/homebutton.png"
+                                    center_x: self.parent.center_x
+                                    center_y: self.parent.center_y
                                     size: self.parent.size
-                                    text: root.infos
-                                    pos_hint: {"center_x":.5,"top":1}
-                                    padding_x: 20
-                                    font_size: 60
-                                    font_name: "fonts/ubuntu.ttf"
-
-                            FloatLayout:
-                                pos_hint: {"right":1, "top":.2}
-                                size_hint: None,.2
-                                width: self.height
-
-                                Button:
-                                    size_hint: None, None
-                                    pos_hint: {"center_x":.55, "center_y": .45}
-                                    size_hint: None, None
-                                    size: "60dp","60dp"
-                                    background_color: 0,0,0,0
-
-                                    on_state:
-                                        imageinfotohometab3.opacity = .7 if self.state == "down" else 1
-
-                                    on_release:
-                                        app.root.current = "home"
-                                        imageinfotohometab3.opacity = 1
-
-                                    Image:
-                                        id: imageinfotohometab3
-                                        source: "images/buttons/homebutton.png"
-                                        center_x: self.parent.center_x
-                                        center_y: self.parent.center_y
-                                        size: self.parent.size
-                                        opacity: 0.5 if self.parent.disabled == True else 1
+                                    opacity: 0.5 if self.parent.disabled == True else 1
 
 
 <GameMode>:
     name: "gamemode"
-    
+
     GridLayout:
         cols: 1
-        size_hint: 1, 1
+        # size_hint: 1, 1
+        size_hint: None, 1
+        width: app.windowwidth
         pos_hint: {"center_x": .5, "center_y": .5}
         
         canvas.before:
@@ -357,13 +360,14 @@ WindowManager:
             
             Label:
                 markup: True
-                text: '\n'.join(("              [font=fonts/russoone.ttf][size=90][i][b]Choose[/b][/i][/size][/font]","[font=fonts/russoone.ttf][size=90][i][b]a Game Mode[/b][/i][/size][/font]"))
+                text:
+                    '\n'.join(("      [font=fonts/russoone.ttf][b][i]Choose[/i][/b][/font]","[font=fonts/russoone.ttf][i][b]a Game Mode[/b][/i][/font]"))
+                font_size: "40sp"
                 size_hint: 1, .2
                 color: hex("#E7005E")
                 pos_hint: {"center_x":.5, "top":.95}
 
             Button:
-                text: "Space Quiz"
                 pos_hint: {"center_x":.5, "top":.68}
                 size_hint: None, None
                 size: "175dp","75dp"
@@ -384,7 +388,6 @@ WindowManager:
                     opacity: 0.5 if self.parent.disabled == True else 1
 
             Button:
-                text: "Rapid Fire"
                 pos_hint: {"center_x":.5, "top":.53}
                 size_hint: None, None
                 size: "175dp","75dp"
@@ -457,14 +460,16 @@ WindowManager:
 
     GridLayout:
         cols: 1
-        size_hint: 1, 1
+        # size_hint: 1, 1
+        size_hint: None, 1
+        width: app.windowwidth
         pos_hint: {"center_x": .5, "center_y": .5}
 
         canvas.before:
             Rectangle:
                 pos: self.pos
                 size: self.size
-                source: "images/screens/QuizCTF.png"
+                source: "images/screens/Quiz_Rapid_CTF.png"
                 
         GridLayout:
             cols: 1
@@ -474,19 +479,22 @@ WindowManager:
                 size_hint: 1,.99
                 
                 Label:
-                    text: "Space Quiz"
+                    text: "Space Trivia"
                     font_size: "40dp"
                     size_hint: 1, .1
                     pos_hint: {"center_x": .5, "top": .967}
                 
                 Label:
-                    text: "Question " + root.question_number + " of 5              Current Score: " + str(root.Quiz_Score)
+                    text: "Question: " + root.question_number + "/5                               Score: " + str(root.Quiz_Score)
+                    font_size: "20sp"
                     size_hint: 1,.1
-                    pos_hint: {"center_x": .5, "top": .85}
+                    pos_hint: {"center_x": .5, "top": .85885}
                     
                 WrappedLabel:
                     id: quizquestionlabel
                     text: root.question
+                    font_name: "fonts/ubuntu.ttf"
+                    font_size: "20sp"
                     halign: 'left'
                     valign: 'top'
                     padding_x: 10
@@ -537,6 +545,8 @@ WindowManager:
                         center_y: self.parent.center_y
                         size: self.parent.size
                         opacity: 0.5 if self.parent.disabled == True else 1
+                        allow_stretch: True
+                        keep_ratio: False
                     
                 Label:
                     text: root.opt1
@@ -567,6 +577,8 @@ WindowManager:
                         center_y: self.parent.center_y
                         size: self.parent.size
                         opacity: 0.5 if self.parent.disabled == True else 1
+                        allow_stretch: True
+                        keep_ratio: False
                     
                 Label:
                     text: root.opt2
@@ -597,6 +609,8 @@ WindowManager:
                         center_y: self.parent.center_y
                         size: self.parent.size
                         opacity: 0.5 if self.parent.disabled == True else 1
+                        allow_stretch: True
+                        keep_ratio: False
                     
                 Label:
                     text: root.opt3
@@ -627,6 +641,8 @@ WindowManager:
                         center_y: self.parent.center_y
                         size: self.parent.size
                         opacity: 0.5 if self.parent.disabled == True else 1
+                        allow_stretch: True
+                        keep_ratio: False
                     
                 Label:
                     text: root.opt4
@@ -665,6 +681,8 @@ WindowManager:
                         center_y: self.parent.center_y
                         size: self.parent.size
                         opacity: 0.5 if self.parent.disabled == True else 1
+                        allow_stretch: True
+                        keep_ratio: False
 
             GridLayout:
                 cols:2
@@ -737,14 +755,16 @@ WindowManager:
     
     GridLayout:
         cols: 1
-        size_hint: 1, 1
+        # size_hint: 1, 1
+        size_hint: None, 1
+        width: app.windowwidth
         pos_hint: {"center_x": .5, "center_y": .5}
 
         canvas.before:
             Rectangle:
                 pos: self.pos
                 size: self.size
-                source: "images/screens/RapidFireCTF.png"
+                source: "images/screens/Quiz_Rapid_CTF.png"
                 
         GridLayout:
             cols: 1
@@ -752,21 +772,24 @@ WindowManager:
             FloatLayout:
                 orientation: "vertical"
                 size_hint: 1,.99
-
+                
                 Label:
                     text: "Rapid Fire"
                     font_size: "40dp"
                     size_hint: 1, .1
                     pos_hint: {"center_x": .5, "top": .967}
-
+                
                 Label:
-                    text: "Question " + root.question_number + " of 5              Current Score: " + str(root.Rapid_Score)
+                    text: "Question: " + root.question_number + "/5                               Score: " + str(root.Quiz_Score)
+                    font_size: "20sp"
                     size_hint: 1,.1
-                    pos_hint: {"center_x": .5, "top": .85}
-
+                    pos_hint: {"center_x": .5, "top": .85885}
+                    
                 WrappedLabel:
-                    id: rapidquestionlabel
+                    id: quizquestionlabel
                     text: root.question
+                    font_name: "fonts/ubuntu.ttf"
+                    font_size: "20sp"
                     halign: 'left'
                     valign: 'top'
                     padding_x: 10
@@ -774,93 +797,187 @@ WindowManager:
                     pos_hint: {"center_x":.5, "top":.75}
 
                 Button:
-                    id: btnrapidaudio
+                    id: btnquizaudio
                     pos_hint: {"center_x":.9, "top":.64}
                     size_hint: None, None
                     width: "25dp"
                     height: "25dp"
                     background_color: 0,0,0,0
-                    
+
                     on_state:
-                        imagerapidspeaker.opacity = .7 if self.state == "down" else 1
-                    
+                        imagequizspeaker.opacity = .7 if self.state == "down" else 1
+
                     on_release:
-                        # app.talk(root.question)
-                        imagerapidspeaker.opacity = 1
+                        # app.talk(root.talkquestion)
+                        imagequizspeaker.opacity = 1
                     
                     Image:
-                        id: imagerapidspeaker
+                        id: imagequizspeaker
                         source: "images/buttons/speakericon.png"
                         center_x: self.parent.center_x
                         center_y: self.parent.center_y
                         size: self.parent.size
                         opacity: 0.5 if self.parent.disabled == True else 1
-                
-                TextInput:
-                    id: inprapidans
-                    text: "Enter Your Answer Here"
-                    background_color: hex("#505050")
-                    size_hint: .918,.322
-                    pos_hint: {"center_x":.5, "center_y":.418}
 
-                # Button:
-                #     id: btnrapidmic
-                #     pos_hint: {"center_x":.9, "top":.565}
-                #     size_hint: None, None
-                #     width: "25dp"
-                #     height: "25dp"
-                #     background_color: 0,0,0,0
-
-                #     on_state:
-                #         imagerapidmic.opacity = .7 if self.state == "down" else 1
+                ToggleButton:
+                    id: btnopt1
+                    pos_hint: {"center_x":.5, "top":.5785}
+                    size_hint: .92, .0723
+                    background_color: 0,0,0,0
                     
-                #     on_release:
-                #         imagerapidmic.opacity = 1
+                    on_state:
+                        imageopt1.source = "images/buttons/optionlight.png" if self.state == "down" else "images/buttons/optiondark.png"
 
-                #     #     listen()
-
-                #     Image:
-                #         id: imagerapidmic
-                #         source: "images/buttons/micicon.png"
-                #         center_x: self.parent.center_x
-                #         center_y: self.parent.center_y
-                #         size: self.parent.size
-                #         opacity: 0.5 if self.parent.disabled == True else 1
+                    on_release:
+                        root.inputA(self)
+                        imageopt1.source = "images/buttons/optionselect.png" if self.state == "down" else "images/buttons/optiondark.png"
+                        btnquizcheck.disabled = False if self.state == "down" else True
+                    
+                    Image:
+                        id: imageopt1
+                        source: "images/buttons/optiondark.png"
+                        center_x: self.parent.center_x
+                        center_y: self.parent.center_y
+                        size: self.parent.size
+                        opacity: 0.5 if self.parent.disabled == True else 1
+                        allow_stretch: True
+                        keep_ratio: False
+                    
+                Label:
+                    text: root.opt1
+                    text_size: self.size
+                    size_hint: .92, .0723
+                    pos_hint: {"center_x":.5, "top":.5785}
+                    valign: 'middle'
+                    padding_x: 10
                 
+                ToggleButton:
+                    id: btnopt2
+                    pos_hint: {"center_x":.5, "top":.4955}
+                    size_hint: .92, .0723
+                    background_color: 0,0,0,0
+
+                    on_state:
+                        imageopt2.source = "images/buttons/optionlight.png" if self.state == "down" else "images/buttons/optiondark.png"
+
+                    on_release:
+                        root.inputB(self)
+                        imageopt2.source = "images/buttons/optionselect.png" if self.state == "down" else "images/buttons/optiondark.png"
+                        btnquizcheck.disabled = False if self.state == "down" else True
+                        
+                    Image:
+                        id: imageopt2
+                        source: "images/buttons/optiondark.png"
+                        center_x: self.parent.center_x
+                        center_y: self.parent.center_y
+                        size: self.parent.size
+                        opacity: 0.5 if self.parent.disabled == True else 1
+                        allow_stretch: True
+                        keep_ratio: False
+                    
+                Label:
+                    text: root.opt2
+                    text_size: self.size
+                    size_hint: .92, .0723
+                    pos_hint: {"center_x":.5, "top":.4955}
+                    valign: 'middle'
+                    padding_x: 10
+
+                ToggleButton:
+                    id: btnopt3
+                    pos_hint: {"center_x":.5, "top":.4122}
+                    size_hint: .92, .0723
+                    background_color: 0,0,0,0
+
+                    on_state:
+                        imageopt3.source = "images/buttons/optionlight.png" if self.state == "down" else "images/buttons/optiondark.png"
+
+                    on_release:
+                        root.inputC(self)
+                        imageopt3.source = "images/buttons/optionselect.png" if self.state == "down" else "images/buttons/optiondark.png"
+                        btnquizcheck.disabled = False if self.state == "down" else True
+                        
+                    Image:
+                        id: imageopt3
+                        source: "images/buttons/optiondark.png"
+                        center_x: self.parent.center_x
+                        center_y: self.parent.center_y
+                        size: self.parent.size
+                        opacity: 0.5 if self.parent.disabled == True else 1
+                        allow_stretch: True
+                        keep_ratio: False
+                    
+                Label:
+                    text: root.opt3
+                    text_size: self.size
+                    size_hint: .92, .0723
+                    pos_hint: {"center_x":.5, "top":.4122}
+                    valign: 'middle'
+                    padding_x: 10
+                
+                ToggleButton:
+                    id: btnopt4
+                    pos_hint: {"center_x":.5, "top":.3299}
+                    size_hint: .92, .0723
+                    background_color: 0,0,0,0
+
+                    on_state:
+                        imageopt4.source = "images/buttons/optionlight.png" if self.state == "down" else "images/buttons/optiondark.png"
+
+                    on_release:
+                        root.inputD(self)
+                        imageopt4.source = "images/buttons/optionselect.png" if self.state == "down" else "images/buttons/optiondark.png"
+                        btnquizcheck.disabled = False if self.state == "down" else True
+                        
+                    Image:
+                        id: imageopt4
+                        source: "images/buttons/optiondark.png"
+                        center_x: self.parent.center_x
+                        center_y: self.parent.center_y
+                        size: self.parent.size
+                        opacity: 0.5 if self.parent.disabled == True else 1
+                        allow_stretch: True
+                        keep_ratio: False
+                    
+                Label:
+                    text: root.opt4
+                    text_size: self.size
+                    size_hint: .92, .0723
+                    pos_hint: {"center_x":.5, "top":.3299}
+                    valign: 'middle'
+                    padding_x: 10
+
                 WrappedLabel:
-                    id: rapidquescheck
-                    text: root.rapidcheck
+                    id: quizquescheck
+                    text: root.quizcheck
                     text_size: self.size
                     size_hint: .92, .1
                     padding_x: 20
                     pos_hint: {"center_x":.5, "top":.2235}
 
                 Button:
-                    id: btnrapidcheck
+                    id: btnquizcheck
                     pos_hint: {"center_x":.5, "top": .0835}
                     size_hint: .92, .0723
                     background_color: 0,0,0,0
-                    disabled: False     #enable it everywhere
+                    disabled: True
 
                     on_state:
-                        imagerapidcheck.source = "images/buttons/checkanslight.png" if self.state == "down" else "images/buttons/checkansdark.png"
+                        imagequizcheck.source = "images/buttons/checkanslight.png" if self.state == "down" else "images/buttons/checkansdark.png"
 
                     on_release:
-                        root.check_rapid_ans(btnrapidnextques)
-                        imagerapidcheck.source = "images/buttons/checkansdark.png"
+                        root.check_quiz_ans()
+                        imagequizcheck.source = "images/buttons/checkansdark.png"
 
                     Image:
-                        id: imagerapidcheck
+                        id: imagequizcheck
                         source: "images/buttons/checkansdark.png"
                         center_x: self.parent.center_x
                         center_y: self.parent.center_y
                         size: self.parent.size
                         opacity: 0.5 if self.parent.disabled == True else 1
-                    
-                # Label:
-                #     id: finalrapidscore
-                #     text: "This is visible, well :("
-                #     font_size: 0
+                        allow_stretch: True
+                        keep_ratio: False
 
             GridLayout:
                 cols:2
@@ -869,7 +986,7 @@ WindowManager:
                 
                 FloatLayout:
                     Button:
-                        id: btnrapidtohome
+                        id: btnquiztohome
                         size_hint: None, None
                         size: "150.5dp", "45dp"
                         background_color: 0,0,0,0
@@ -877,23 +994,28 @@ WindowManager:
                         disabled: False
 
                         on_state:
-                            imagerapidtohome.source = "images/buttons/quitlight.png" if self.state == "down" else "images/buttons/quitdark.png"
+                            imagequiztohome.source = "images/buttons/quitlight.png" if self.state == "down" else "images/buttons/quitdark.png"
                         
                         on_release:
                             app.root.current = "home"
-                            root.exitrapid()
-                            imagerapidtohome.source = "images/buttons/quitdark.png"
+                            root.exitquiz()
+                            imageopt1.source = "images/buttons/optiondark.png"
+                            imageopt2.source = "images/buttons/optiondark.png"
+                            imageopt3.source = "images/buttons/optiondark.png"
+                            imageopt4.source = "images/buttons/optiondark.png"
+                            imagequiztohome.source = "images/buttons/quitdark.png"
 
                         Image:
-                            id: imagerapidtohome
+                            id: imagequiztohome
                             source: "images/buttons/quitdark.png"
                             center_x: self.parent.center_x
                             center_y: self.parent.center_y
                             size: self.parent.size
                             opacity: 0.5 if self.parent.disabled == True else 1
+                
                 FloatLayout:
                     Button:
-                        id: btnrapidnextques
+                        id: btnquiznextques
                         size_hint: None, None
                         size: "150.5dp", "45dp"
                         background_color: 0,0,0,0
@@ -901,137 +1023,36 @@ WindowManager:
                         disabled: True #disable it
 
                         on_state:
-                            imagenextrapid.source = "images/buttons/nextqueslight.png" if self.state == "down" else "images/buttons/nextquesdark.png"
+                            imagenextquiz.source = "images/buttons/nextqueslight.png" if self.state == "down" else "images/buttons/nextquesdark.png"
                         
                         on_release:
-                            root.start_rapid_ques(self, btnrapidtohome)
-                            imagenextrapid.source = "images/buttons/nextquesdark.png"
-
+                            root.start_quiz_ques(self, btnquiztohome)
+                            imageopt1.source = "images/buttons/optiondark.png"
+                            imageopt2.source = "images/buttons/optiondark.png"
+                            imageopt3.source = "images/buttons/optiondark.png"
+                            imageopt4.source = "images/buttons/optiondark.png"
+                            # imagenextquiz.source = "images/buttons/nextquesdark.png"
+                            btnopt1.state = 'normal'
+                            btnopt2.state = 'normal'
+                            btnopt3.state = 'normal'
+                            btnopt4.state = 'normal'
+                        
                         Image:
-                            id: imagenextrapid
+                            id: imagenextquiz
                             source: "images/buttons/nextquesdark.png"
                             center_x: self.parent.center_x
                             center_y: self.parent.center_y
                             size: self.parent.size
                             opacity: 0.5 if self.parent.disabled == True else 1
-                
-                
-
-<Facts>:
-    name: "facts"
-    
-    GridLayout:
-        cols: 1
-        size_hint: 1, 1
-        pos_hint: {"center_x": .5, "center_y": .5}
-
-        canvas.before:
-            Rectangle:
-                pos: self.pos
-                size: self.size
-                source: "images/screens/FactsCTF.png"
-                
-        GridLayout:
-            cols: 1
-            
-            FloatLayout:
-                orientation: "vertical"
-                size_hint: 1,.99
-
-                Label:
-                    text: root.diduno
-                    halign: 'left'
-                    valign: 'top'
-                    padding_x: 10
-                    font_size: 30
-                    pos_hint: {'center_x': .5, 'center_y':.75}
-                    size_hint: 1, .4
-
-                WrappedLabel:
-                    id: factlabel
-                    text: root.fact
-                    halign: 'left'
-                    valign: 'top'
-                    padding_x: 20
-                    font_size: 20
-                    pos_hint: {'center_x': .5, 'center_y':.6}
-                    size_hint: 1, .6
-                
-                Button:
-                    id: btnfactaudio
-                    pos_hint: {"center_x":.9, "top":.683}
-                    size_hint: None, None
-                    width: "25dp"
-                    height: "25dp"
-                    background_color: 0,0,0,0
-
-                    on_state:
-                        imagefactspeaker.opacity = .7 if self.state == "down" else 1
-                    
-                    on_release:
-                        # app.talk("DID YOU KNOW??")
-                        # app.talk(root.fact)
-                        imagefactspeaker.opacity = 1
-                    
-                    Image:
-                        id: imagefactspeaker
-                        source: "images/buttons/speakericon.png"
-                        center_x: self.parent.center_x
-                        center_y: self.parent.center_y
-                        size: self.parent.size
-                        opacity: 0.5 if self.parent.disabled == True else 1
-
-                Button:
-                    id: btnmorefact
-                    size_hint: .92, .0723
-                    background_color: 0,0,0,0
-                    pos_hint: {"center_x": .497, "y": 0}
-
-                    on_state:
-                        imagemorefacts.source = "images/buttons/loadfactlight.png" if self.state == "down" else "images/buttons/loadfactdark.png"
-                    
-                    on_release:
-                        root.show_more_facts(self)
-                        imagemorefacts.source = "images/buttons/onemorefactdark.png"
-
-                    Image:
-                        id: imagemorefacts
-                        source: "images/buttons/loadfactdark.png"
-                        center_x: self.parent.center_x
-                        center_y: self.parent.center_y
-                        size: self.parent.size
-                        opacity: 0.5 if self.parent.disabled == True else 1
-            
-            FloatLayout:
-                size_hint: 1,.1476
-                    
-                Button:
-                    id: btnfacttohome
-                    size_hint: .92, .49
-                    background_color: 0,0,0,0
-                    pos_hint: {"center_x": .497, "center_y": .702}
-
-                    on_state:
-                        imagefacttohome.source = "images/buttons/exitlight.png" if self.state == "down" else "images/buttons/exitdark.png"
-
-                    on_release:
-                        app.root.current = "home"
-                        imagefacttohome.source = "images/buttons/exitdark.png"
-
-                    Image:
-                        id: imagefacttohome
-                        source: "images/buttons/exitdark.png"
-                        center_x: self.parent.center_x
-                        center_y: self.parent.center_y
-                        size: self.parent.size
-                        opacity: 0.5 if self.parent.disabled == True else 1
 
 <QuizResult>:
     name: "quizresult"
     
     GridLayout:
         cols: 1
-        size_hint: 1, 1
+        # size_hint: 1, 1
+        size_hint: None, 1
+        width: app.windowwidth
         pos_hint: {"center_x": .5, "center_y": .5}
 
         canvas.before:
@@ -1049,7 +1070,7 @@ WindowManager:
 
                 Label:
                     text:
-                        '\n'.join(("Space Quiz", "   Result"))
+                        '\n'.join(("Space Trivia", "   Result"))
                     font_size: "20dp"
                     size_hint: 1, .1
                     pos_hint: {"center_x": .5, "top": .977}
@@ -1116,7 +1137,9 @@ WindowManager:
 
     GridLayout:
         cols: 1
-        size_hint: 1, 1
+        # size_hint: 1, 1
+        size_hint: None, 1
+        width: app.windowwidth
         pos_hint: {"center_x": .5, "center_y": .5}
 
         canvas.before:
