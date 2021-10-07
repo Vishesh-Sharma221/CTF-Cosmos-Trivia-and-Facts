@@ -1045,6 +1045,115 @@ WindowManager:
                             size: self.parent.size
                             opacity: 0.5 if self.parent.disabled == True else 1
 
+<Facts>:
+    name: "facts"
+
+    GridLayout:
+        cols: 1
+        size_hint: 1, 1
+        pos_hint: {"center_x": .5, "center_y": .5}
+
+        canvas.before:
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: "images/screens/FactsCTF.png"
+
+        GridLayout:
+            cols: 1
+
+            FloatLayout:
+                orientation: "vertical"
+                size_hint: 1,.99
+
+                Label:
+                    text: root.diduno
+                    halign: 'left'
+                    valign: 'top'
+                    padding_x: 10
+                    font_size: 30
+                    pos_hint: {'center_x': .5, 'center_y':.75}
+                    size_hint: 1, .4
+
+                WrappedLabel:
+                    id: factlabel
+                    text: root.fact
+                    halign: 'left'
+                    valign: 'top'
+                    padding_x: 20
+                    font_size: 20
+                    pos_hint: {'center_x': .5, 'center_y':.6}
+                    size_hint: 1, .6
+
+                Button:
+                    id: btnfactaudio
+                    pos_hint: {"center_x":.9, "top":.683}
+                    size_hint: None, None
+                    width: "25dp"
+                    height: "25dp"
+                    background_color: 0,0,0,0
+
+                    on_state:
+                        imagefactspeaker.opacity = .7 if self.state == "down" else 1
+
+                    on_release:
+                        # app.talk("DID YOU KNOW??")
+                        # app.talk(root.fact)
+                        imagefactspeaker.opacity = 1
+
+                    Image:
+                        id: imagefactspeaker
+                        source: "images/buttons/speakericon.png"
+                        center_x: self.parent.center_x
+                        center_y: self.parent.center_y
+                        size: self.parent.size
+                        opacity: 0.5 if self.parent.disabled == True else 1
+
+                Button:
+                    id: btnmorefact
+                    size_hint: .92, .0723
+                    background_color: 0,0,0,0
+                    pos_hint: {"center_x": .497, "y": 0}
+
+                    on_state:
+                        imagemorefacts.source = "images/buttons/loadfactlight.png" if self.state == "down" else "images/buttons/loadfactdark.png"
+
+                    on_release:
+                        root.show_more_facts(self)
+                        imagemorefacts.source = "images/buttons/onemorefactdark.png"
+
+                    Image:
+                        id: imagemorefacts
+                        source: "images/buttons/loadfactdark.png"
+                        center_x: self.parent.center_x
+                        center_y: self.parent.center_y
+                        size: self.parent.size
+                        opacity: 0.5 if self.parent.disabled == True else 1
+
+            FloatLayout:
+                size_hint: 1,.1476
+
+                Button:
+                    id: btnfacttohome
+                    size_hint: .92, .49
+                    background_color: 0,0,0,0
+                    pos_hint: {"center_x": .497, "center_y": .702}
+
+                    on_state:
+                        imagefacttohome.source = "images/buttons/exitlight.png" if self.state == "down" else "images/buttons/exitdark.png"
+
+                    on_release:
+                        app.root.current = "home"
+                        imagefacttohome.source = "images/buttons/exitdark.png"
+
+                    Image:
+                        id: imagefacttohome
+                        source: "images/buttons/exitdark.png"
+                        center_x: self.parent.center_x
+                        center_y: self.parent.center_y
+                        size: self.parent.size
+                        opacity: 0.5 if self.parent.disabled == True else 1
+
 <QuizResult>:
     name: "quizresult"
     
