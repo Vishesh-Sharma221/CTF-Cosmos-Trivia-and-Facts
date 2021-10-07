@@ -233,7 +233,7 @@ def check_rapid_ans(answer,r):
         print("Answer: ")
         answer = listen().upper()
     else:
-        import msvcrt
+        import getch
         import sys
 
         # class TimeoutExpired(Exception):
@@ -245,8 +245,8 @@ def check_rapid_ans(answer,r):
             endtime = timer() + timeout
             result = []
             while timer() < endtime:
-                if msvcrt.kbhit():
-                    result.append(msvcrt.getwche()) 
+                if getch.kbhit():
+                    result.append(getch.getwche()) 
                     if result[-1] == '\r':
                         return ''.join(result[:-1])
                 time.sleep(0.04) 
