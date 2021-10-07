@@ -1,0 +1,4 @@
+Three modes:
+    1.) Space Quiz
+    2.) Rapid Fire based on quiz questions.
+    3.) Facts about space.

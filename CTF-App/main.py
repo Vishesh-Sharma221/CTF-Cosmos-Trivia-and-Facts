@@ -11,10 +11,10 @@ from kivy.properties import ObjectProperty, StringProperty
 __version__="00.00.10"
 
 #window size
-Wfac=3
-WindowWidth= (40-Wfac)*9
-WindowHeight= (40-Wfac)*16
-Window.size=(dp(WindowWidth), dp(WindowHeight))
+# Wfac=3
+# WindowWidth= (40-Wfac)*9
+# WindowHeight= (40-Wfac)*16
+# Window.size=(dp(WindowWidth), dp(WindowHeight))
 
 #other requirements
 import csv
@@ -24,7 +24,16 @@ import pyttsx3
 # import speech_recognition as sr
 import time
 
-info_content='''Developers:
+about_content='''This interactive application has been developed as a project for the ATL Space Challenge 2021 which ranges from quizzes, rapid fire rounds to interesting space and planets facts.
+The theme of this project is “Explore Space” and the subtopic is “App Development – Create an App to raise awareness about space and the outer world.”
+We have made this application as user - friendly as possible, so there’s no need for the user to have formal knowledge, in order to explore it to its fullest.'''
+
+howtoplay_content='''Three modes:
+    1.) Space Quiz
+    2.) Rapid Fire based on quiz questions.
+    3.) Facts about space.'''
+
+info_content='''This application has been developed with the teamwork of three students (Team VAY) of class 12th from Science stream in Banasthali Public School, session 2021-22; namely:
 
     -> Vishesh Sharma
     -> Yugam Sehgal
@@ -95,6 +104,19 @@ The hottest planet in our solar system is 450° C
 Humanity have found around 60 potentially habitable exoplanets as of 2021
 The nearest habitable planet is estimated to be 12 light years away'''
 
+about_file=open("aboutctf.txt","w+")
+about_file.write(about_content)
+about_file.close()
+about_file=open("aboutctf.txt")
+about=about_file.read()
+
+howtoplay_file=open("aboutctf.txt","w+")
+howtoplay_file.write(howtoplay_content)
+howtoplay_file.close()
+howtoplay_file=open("aboutctf.txt")
+howtoplay=howtoplay_file.read()
+
+
 # Ques File
 ques_file=open("questions.csv","w+")
 ques_file.write(ques_content)
@@ -133,6 +155,8 @@ class Home(Screen):
 
 class Info(Screen):
     infos = StringProperty(f"{info}")
+    aboutctfapp=StringProperty(f"{about}")
+    howtoplayctfapp=StringProperty(f"{howtoplay}")
 
 class GameMode(Screen):
     pass
@@ -496,11 +520,10 @@ class WrappedLabel(Label):
 
 class CTFApp(App):
     
-    
-    global WindowWidth
-    global WindowHeight
-    windowwidth= StringProperty(str(int(dp(WindowWidth))))
-    windowheight = StringProperty(str(int(dp(WindowHeight))))
+    # global WindowWidth
+    # global WindowHeight
+    # windowwidth= StringProperty(str(int(dp(WindowWidth))))
+    # windowheight = StringProperty(str(int(dp(WindowHeight))))
     
     def build(self):
         kvfile = Builder.load_file("mymain.kv")
@@ -508,15 +531,15 @@ class CTFApp(App):
         self.icon="images/appicon.ico"
         return kvfile
     
-    #tts func to make our program say something
-    engine = pyttsx3.init('sapi5')
-    voices = engine.getProperty('voices')
-    engine.setProperty("voices", voices[0].id)
-    engine.setProperty("rate", 178)
+    # #tts func to make our program say something
+    # engine = pyttsx3.init()
+    # voices = engine.getProperty('voices')
+    # engine.setProperty("voices", voices[0].id)
+    # engine.setProperty("rate", 178)
     
-    def talk(self,audio):
-        self.engine.say(audio)
-        self.engine.runAndWait()
+    # def talk(self,audio):
+    #     self.engine.say(audio)
+    #     self.engine.runAndWait()
 
     appversion=StringProperty(f"{__version__}")
 

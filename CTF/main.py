@@ -1,4 +1,5 @@
 import kivy
+from kivy.uicvxx.screenmanager import ScreenManager, Screen
 from kivy.metrics import dp
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, Screen
@@ -478,7 +479,7 @@ class RapidResult(RapidFire, Screen):
     
     # def result(self):
     #     # self.finalrapidscore = RapidFire.SCORE
-    #     return RapidFire.SCORE
+        # return RapidFire.SCORE
 
 class WindowManager(ScreenManager):
     pass
