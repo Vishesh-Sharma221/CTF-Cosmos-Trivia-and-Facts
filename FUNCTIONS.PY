@@ -15,7 +15,7 @@ engine.setProperty("rate", 178)
 
 # Files Needed To Be Read
 
-ques_file=open("CTF/questions.csv")
+ques_file=open("questions.csv")
 read_ques_file=csv.reader(ques_file)
 ques=[]         # 1-Q, 2-O1, 3-O2, 4-O3, 5-O4, 6-A
 for x in read_ques_file:
@@ -236,8 +236,8 @@ def check_rapid_ans(answer,r):
         import msvcrt
         import sys
 
-        class TimeoutExpired(Exception):
-            pass
+        # class TimeoutExpired(Exception):
+        #     pass
 
         def input_with_timeout(prompt, timeout, timer=time.monotonic):
             sys.stdout.write(prompt)
@@ -250,11 +250,11 @@ def check_rapid_ans(answer,r):
                     if result[-1] == '\r':
                         return ''.join(result[:-1])
                 time.sleep(0.04) 
-            raise TimeoutExpired
+            # raise TimeoutExpired
 
         try:
             answer = input_with_timeout("You have only 10seconds to Answer! : ", 10)
-        except TimeoutExpired:
+        except:# TimeoutExpired:
             print('Sorry, times up')
 
 
