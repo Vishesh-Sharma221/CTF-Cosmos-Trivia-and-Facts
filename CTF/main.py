@@ -1,4 +1,8 @@
 import kivy
+<<<<<<< HEAD
+=======
+from kivy.uix.screenmanager import ScreenManager, Screen
+>>>>>>> d00dff6582d1a9a745cadf076c32cd97852b1a37
 from kivy.metrics import dp
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, Screen

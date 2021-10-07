@@ -8,14 +8,14 @@ import speech_recognition as sr
 import time
 from threading import Timer
 
-engine = pyttsx3.init('sapi5')
+engine = pyttsx3.init()
 voices = engine.getProperty('voices')
 engine.setProperty("voices", voices[0].id)
 engine.setProperty("rate", 178)
 
 # Files Needed To Be Read
 
-ques_file=open("CTF/questions.csv")
+ques_file=open("questions.csv")
 read_ques_file=csv.reader(ques_file)
 ques=[]         # 1-Q, 2-O1, 3-O2, 4-O3, 5-O4, 6-A
 for x in read_ques_file:
@@ -233,11 +233,11 @@ def check_rapid_ans(answer,r):
         print("Answer: ")
         answer = listen().upper()
     else:
-        import msvcrt
+        import getch
         import sys
 
-        class TimeoutExpired(Exception):
-            pass
+        # class TimeoutExpired(Exception):
+        #     pass
 
         def input_with_timeout(prompt, timeout, timer=time.monotonic):
             sys.stdout.write(prompt)
@@ -245,16 +245,16 @@ def check_rapid_ans(answer,r):
             endtime = timer() + timeout
             result = []
             while timer() < endtime:
-                if msvcrt.kbhit():
-                    result.append(msvcrt.getwche()) 
+                if getch.kbhit():
+                    result.append(getch.getwche()) 
                     if result[-1] == '\r':
                         return ''.join(result[:-1])
                 time.sleep(0.04) 
-            raise TimeoutExpired
+            # raise TimeoutExpired
 
         try:
             answer = input_with_timeout("You have only 10seconds to Answer! : ", 10)
-        except TimeoutExpired:
+        except:# TimeoutExpired:
             print('Sorry, times up')
 
 

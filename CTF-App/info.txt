@@ -1,4 +1,4 @@
-Developers:
+This application has been developed with the teamwork of three students (Team VAY) of class 12th from Science stream in Banasthali Public School, session 2021-22; namely:
 
     -> Vishesh Sharma
     -> Yugam Sehgal

@@ -31,4 +31,3 @@ NASA's first mission to demonstrate a planetary defense system is called DART.
 The full form of NASA's defense system DART is "Double Asteroid Redirection Test".
 The oldest known exoplanet in the universe is PSR B12620-26 b with an age of 13  billion years.
 Space X launched the first privately funded liquid-propellant rocket to reach the orbit, namely Falcon 1.
-
