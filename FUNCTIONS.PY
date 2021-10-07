@@ -233,29 +233,15 @@ def check_rapid_ans(answer,r):
         print("Answer: ")
         answer = listen().upper()
     else:
-        import getch
-        import sys
+        from pytimedinput import timedInput
+    
+        userText, timedOut = timedInput("Answer: ",10)
 
-        # class TimeoutExpired(Exception):
-        #     pass
-
-        def input_with_timeout(prompt, timeout, timer=time.monotonic):
-            sys.stdout.write(prompt)
-            sys.stdout.flush()
-            endtime = timer() + timeout
-            result = []
-            while timer() < endtime:
-                if getch.kbhit():
-                    result.append(getch.getwche()) 
-                    if result[-1] == '\r':
-                        return ''.join(result[:-1])
-                time.sleep(0.04) 
-            # raise TimeoutExpired
-
-        try:
-            answer = input_with_timeout("You have only 10seconds to Answer! : ", 10)
-        except:# TimeoutExpired:
-            print('Sorry, times up')
+        if(timedOut):
+            print("Time up!")
+            answer = userText
+        else:
+            answer = userText
 
 
     if str(ques[r][6]).upper() in answer:
