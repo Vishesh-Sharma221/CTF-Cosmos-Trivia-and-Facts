@@ -1,8 +1,8 @@
 Uranus is tilted on its side.
 Mars has the biggest volcano (that we know of).
-Mars also has the longest valley.
+Mars also has the longest valley namely Valles Marineris.
 Venus has super-powerful winds.
-There is water ice everywhere.
+There is water ice everywhere in space.
 Spacecraft have visited every planet.
 There could be life in the solar system, somewhere.
 Mercury is still shrinking.
@@ -24,6 +24,11 @@ It would take 9.5 years to walk to Moon.
 Temperature of outer space is close to absolute zero.
 Around 6000 satellites are currently orbiting our Earth.
 Sunset on Mars appears Blue.
-The hottest planet aka Venus in our solar system is 450° C.
+The hottest planet aka Venus in our solar system is 450° C hot.
 Humanity have found around 60 potentially habitable exoplanets as of 2021.
 The nearest habitable planet is estimated to be 12 light years away.
+NASA's first mission to demonstrate a planetary defense system is called DART.
+The full form of NASA's defense system DART is "Double Asteroid Redirection Test".
+The oldest known exoplanet in the universe is PSR B12620-26 b with an age of 13  billion years.
+Space X launched the first privately funded liquid-propellant rocket to reach the orbit, namely Falcon 1.
+
