@@ -509,7 +509,7 @@ class CTFApp(App):
         return kvfile
     
     #tts func to make our program say something
-    engine = pyttsx3.init('sapi5')
+    engine = pyttsx3.init()
     voices = engine.getProperty('voices')
     engine.setProperty("voices", voices[0].id)
     engine.setProperty("rate", 178)
