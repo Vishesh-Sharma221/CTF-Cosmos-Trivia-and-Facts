@@ -1,26 +1,14 @@
-import kivy
-from kivy.app import App
-from kivy.lang import Builder
-from kivy.uix.widget import Widget
-
-class TestClass(Widget):
-    #all functions goes in this class
-    pass
-
-class TestApp(App):
-    def build(self):
-        return(Builder.load_file("my.kv"))
-
 import random 
 import speech_recognition as sr
 import pyttsx3
+import datetime
+import csv
 import time
 
-def welcome():
-    print("welcome\n")
+print("welcome\n")
 
-    stt = input("stt? : ")
-    tts = input("tts? : ")
+stt = input("stt? : ")
+tts = input("tts? : ")
 
 engine = pyttsx3.init()
 voices = engine.getProperty('voices')
@@ -52,20 +40,15 @@ def listen():  #stt func to get input from the user's mic
 
     return data
 
-def use_stt():
-    if "yes" in stt.lower():
-        print("\n now say say smtg: ")
-        stt_response = listen()
-        time.sleep(1)
+if "yes" in stt.lower():
+    print("\n now say say smtg: ")
+    stt_response = listen()
 
+time.sleep(1)
 
 # print(f"\n u said {stt_response} .")
 
-def use_tts():
-    if "yes" in tts.lower():
-        tts_sample_text = input("here: ")
+if "yes" in tts.lower():
+    tts_sample_text = input("here: ")
 
-        talk(tts_sample_text) 
-
-if __name__=="__main__":
-    TestApp().run()
+    talk(tts_sample_text) 

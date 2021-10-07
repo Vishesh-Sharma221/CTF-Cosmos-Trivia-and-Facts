@@ -1,5 +1,5 @@
 import kivy
-from kivy.uicvxx.screenmanager import ScreenManager, Screen
+from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.metrics import dp
 from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, Screen
