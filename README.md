@@ -25,7 +25,7 @@ The modules used in this project are listed below:
 - `DateTime`
 - `random`
 - `pyttsx3`
--  `Speech Recognition`
+- `Speech Recognition`
 - `csv`
 - `time`
 - `timedInput`
