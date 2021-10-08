@@ -5,10 +5,11 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.label import Label
 from kivy.lang import Builder
 from kivy.core.window import Window
+from kivy.clock import Clock
 from kivy.properties import ObjectProperty, StringProperty
 
 #App Version
-__version__="00.00.10"
+__version__="00.04.01"
 
 # window size
 Wfac=-8
@@ -104,48 +105,68 @@ The hottest planet in our solar system is 450° C
 Humanity have found around 60 potentially habitable exoplanets as of 2021
 The nearest habitable planet is estimated to be 12 light years away'''
 
-about_file=open("aboutctf.txt","w+")
-about_file.write(about_content)
-about_file.close()
-about_file=open("aboutctf.txt")
-about=about_file.read()
 
-howtoplay_file=open("aboutctf.txt","w+")
-howtoplay_file.write(howtoplay_content)
-howtoplay_file.close()
-howtoplay_file=open("aboutctf.txt")
-howtoplay=howtoplay_file.read()
+try:
+    about_file=open("aboutctf.txt")
+    about=about_file.read()
+except FileNotFoundError:
+    about_file=open("aboutctf.txt","w+")
+    about_file.write(about_content)
+    about_file.close()
+    about_file=open("aboutctf.txt")
+    about=about_file.read()
 
+try:
+    howtoplay_file=open("howtoplayctf.txt")
+    howtoplay=howtoplay_file.read()
+except FileNotFoundError:
+    howtoplay_file=open("howtoplayctf.txt","w+")
+    howtoplay_file.write(howtoplay_content)
+    howtoplay_file.close()
+    howtoplay_file=open("howtoplayctf.txt")
+    howtoplay=howtoplay_file.read()
 
-# Ques File
-ques_file=open("questions.csv","w+")
-ques_file.write(ques_content)
-ques_file.close()
-ques_file=open("questions.csv")
-read_ques_file=csv.reader(ques_file)
+try:
+    ques_file=open("questions.csv")
+    read_ques_file=csv.reader(ques_file)
+except FileNotFoundError:    
+    ques_file=open("questions.csv","w+")
+    ques_file.write(ques_content)
+    ques_file.close()
+    ques_file=open("questions.csv")
+    read_ques_file=csv.reader(ques_file)
+
+try:
+    fact_file=open("facts.csv")
+    read_facts_file=csv.reader(fact_file)
+except FileNotFoundError:
+    fact_file=open("facts.txt","w+")
+    fact_file.write(fact_content)
+    fact_file.close()
+    fact_file=open("facts.txt")
+    read_facts_file=csv.reader(fact_file)
+
+try:
+    info_file=open("info.txt")
+    info=info_file.read()
+except FileNotFoundError:
+    info_file=open("info.txt","w+")
+    info_file.write(info_content)
+    info_file.close()
+    info_file=open("info.txt")
+    info=info_file.read()
+
 ques=[]         # 1-Q, 2-O1, 3-O2, 4-O3, 5-O4, 6-A
 for x in read_ques_file:
     ques.append(x)
 r=random.randint(0,len(ques)-1)
 loopques=[]
 
-# Fact File
-fact_file=open("facts.txt","w+")
-fact_file.write(fact_content)
-fact_file.close()
-
-fact_file=open("facts.txt")
-facts=fact_file.readlines()
+facts=[]
+for fact in read_facts_file:
+    facts.append(fact)
 rf=random.randint(1,len(facts)-1)
 loopfact=[]
-
-# Info File
-infofile=open("info.txt","w+")
-infofile.write(info_content)
-infofile.close()
-
-infofile=open("info.txt")
-info=infofile.read()
 
 class Home(Screen):
     pass
@@ -197,12 +218,12 @@ class Quiz(Screen, object):
 
     
 
-    def start_quiz_ques(self, buttonnext, buttonhome):
+    def start_quiz_ques(self):#, buttonnext, buttonhome):
         global ques
         global loopques
         global r
 
-        self.ids.btnquizcheck.disabled=True
+        # self.ids.btnquizcheck.disabled=True
         self.ids.btnopt1.disabled=False
         self.ids.btnopt2.disabled=False
         self.ids.btnopt3.disabled=False
@@ -233,10 +254,10 @@ class Quiz(Screen, object):
         #     self.Quiz_Score="0"
         if self.ques_no==5:
             self.ques_no=0
-            buttonnext.bind(on_release=self.gotoresult)
-            # buttonnext.bind(on_state=self.resultbutton,on_release=self.gotoresult)
+            self.ids.btnquiznextques.bind(on_release=self.gotoresult)
+            # self.ids..bind(on_state=self.resultbutton,on_release=self.gotoresult)
         # if self.ques_no==4:
-        #     buttonnext.disabled = False
+        #     self.ids..disabled = False
         #     self.ids.imagenextquiz.source = "images/buttons/resultdark.png"
         
         self.ids.btnquiznextques.disabled=True
@@ -310,9 +331,9 @@ class Quiz(Screen, object):
             self.Quiz_Score = str(int(self.Quiz_Score) + 1)
             self.quizcheck="Your Answer is Correct!!"
         else:
-            self.quizcheck=f"Your Answer is Wrong, The Correct Answer To This Ques is {self.answer}."
+            self.quizcheck=f"Your answer is wrong!\nCorrect answer: {self.answer}."
         
-        self.ids.btnquizcheck.disabled=True
+        # self.ids.btnquizcheck.disabled=True
         self.ids.btnopt1.disabled=True
         self.ids.btnopt2.disabled=True
         self.ids.btnopt3.disabled=True
@@ -323,7 +344,7 @@ class Quiz(Screen, object):
     def exitquiz(self):
         self.ids.btnquiznextques.disabled=True
         
-        self.ids.btnquizcheck.disabled=False
+        # self.ids.btnquizcheck.disabled=False
         self.ids.btnopt1.disabled=False
         self.ids.btnopt2.disabled=False
         self.ids.btnopt3.disabled=False
@@ -368,14 +389,54 @@ class RapidFire(Screen, object):
     # removing the used ques for this quiz
     loopques.insert(0, ques.pop(r))
 
-    
+    # def rapidtimerquestions(self):
+    #     from threading import Thread
 
-    def start_quiz_ques(self, buttonnext, buttonhome):
+    #     if __name__ == '__main__':
+    #         Thread(target = self.rapidtimer).start()
+    #         Thread(target = self.start_quiz_ques).start()
+
+    # def rapidtimer(self):
+    #     # from pytimedinput import timedInput
+    #     # userText, timedOut = timedInput("    Answer: ",4)
+
+    #     # if(timedOut):
+    #     #     self.ans="false"
+    #     #     # userText=self.ans
+    #     #     self.check_quiz_ans()
+    #     # else:
+    #     #     self.answerdsfs = userText
+
+    #     from threading import Thread
+
+    #     time.sleep(5)
+    #     self.check_quiz_ans()
+    
+    def timerforrapid(self):
+        Clock.schedule_interval(self.start_quiz_ques, 5)
+
+    def start_quiz_ques(self):
+        self.timerforrapid()
+
+        # from threading import Thread
+
+        # if __name__ == '__main__':
+        #     self.thread1 = Thread(target = self.rapidtimer)#.start()
+        #     self.thread2 = Thread(target = self.start_quiz_ques, args=(self.ids.btnquiznextques, self.ids.btnquiztohome))#.start()
+
+        #     self.thread1.start()
+        #     self.thread2.start()
+
+        #     self.thread1.join()
+        #     self.thread2.join()
+
+        # # self.rapidtimer()
+
         global ques
         global loopques
         global r
 
-        self.ids.btnquizcheck.disabled=True
+        # self.ids.btnquizcheck.disabled=True
         self.ids.btnopt1.disabled=False
         self.ids.btnopt2.disabled=False
         self.ids.btnopt3.disabled=False
@@ -406,10 +467,10 @@ class RapidFire(Screen, object):
         #     self.Quiz_Score="0"
         if self.ques_no==5:
             self.ques_no=0
-            buttonnext.bind(on_release=self.gotoresult)
-            # buttonnext.bind(on_state=self.resultbutton,on_release=self.gotoresult)
+            self.ids.btnquiznextques.bind(on_release=self.gotoresult)
+            # self.ids.btnquiznextques.bind(on_state=self.resultbutton,on_release=self.gotoresult)
         # if self.ques_no==4:
-        #     buttonnext.disabled = False
+        #     self.ids.btnquiznextques.disabled = False
         #     self.ids.imagenextquiz.source = "images/buttons/resultdark.png"
         
         self.ids.btnquiznextques.disabled=True
@@ -483,9 +544,9 @@ class RapidFire(Screen, object):
             self.Quiz_Score = str(int(self.Quiz_Score) + 1)
             self.quizcheck="Your Answer is Correct!!"
         else:
-            self.quizcheck=f"Your Answer is Wrong, The Correct Answer To This Ques is {self.answer}."
+            self.quizcheck=f"Your answer is wrong!\nCorrect answer: {self.answer}."
         
-        self.ids.btnquizcheck.disabled=True
+        # self.ids.btnquizcheck.disabled=True
         self.ids.btnopt1.disabled=True
         self.ids.btnopt2.disabled=True
         self.ids.btnopt3.disabled=True
@@ -496,7 +557,7 @@ class RapidFire(Screen, object):
     def exitquiz(self):
         self.ids.btnquiznextques.disabled=True
         
-        self.ids.btnquizcheck.disabled=False
+        # self.ids.btnquizcheck.disabled=False
         self.ids.btnopt1.disabled=False
         self.ids.btnopt2.disabled=False
         self.ids.btnopt3.disabled=False
@@ -506,7 +567,6 @@ class RapidFire(Screen, object):
         self.ques_no=1
         self.Quiz_Score = "0"
         self.question_number=f"{self.ques_no}"
-
 
         # import msvcrt
         # import sys
@@ -541,14 +601,36 @@ class Facts(Screen):
         for i in range(len(loopfact)):
             facts.insert(1, loopfact.pop(i))
 
-    rf=random.randint(0,len(facts)-1)
+    rf=random.randint(1,len(facts)-1)
     fact=StringProperty(f"Click on the button below to load a space fact.")
-    morefact=StringProperty("Click For Space Facts")
+    # morefact=StringProperty("Click For Space Facts")
     diduno=StringProperty("")
     
-    loopfact.insert(0, facts.pop(rf))
+    loopfact.insert(1, facts.pop(rf))
 
-    
+    optionchose=0
+
+    def ChooseOption(self):
+        if self.ids.chooseplanets.text=="Random Space Facts":
+            self.optionchose=0
+        if self.ids.chooseplanets.text=="Sun":
+            self.optionchose=1
+        if self.ids.chooseplanets.text=="Mercury":
+            self.optionchose=2
+        if self.ids.chooseplanets.text=="Venus":
+            self.optionchose=3
+        if self.ids.chooseplanets.text=="Earth":
+            self.optionchose=4
+        if self.ids.chooseplanets.text=="Mars":
+            self.optionchose=5
+        if self.ids.chooseplanets.text=="Jupiter":
+            self.optionchose=6
+        if self.ids.chooseplanets.text=="Saturn":
+            self.optionchose=7
+        if self.ids.chooseplanets.text=="Uranus":
+            self.optionchose=8
+        if self.ids.chooseplanets.text=="Neptune":
+            self.optionchose=9
 
     def show_more_facts(self, button):
         global facts
@@ -559,13 +641,24 @@ class Facts(Screen):
             for i in range(len(loopfact)):
                 facts.insert(1, loopfact.pop(i))
         
-        rf=random.randint(0,len(facts)-1)
-        self.fact=f"{facts[rf]}"
-        self.morefact="One More Fact"
+        rf=random.randint(1,len(facts)-1)
+        self.fact=f"{facts[rf][self.optionchose]}"
+        # self.morefact="One More Fact"
 
         self.diduno="Did you know?"
 
-        loopfact.insert(0, facts.pop(rf))
+        loopfact.insert(1, facts.pop(rf))
+
+    def buttonmorefacts(self, button):
+        if self.ids.imagemorefacts.source=="images/buttons/loadfactdark.png":
+            self.ids.imagemorefacts.source="images/buttons/loadfactlight.png"# if button.state == "down" else "images/buttons/loadfactdark.png"
+        
+        if self.ids.imagemorefacts.source=="images/buttons/loadfactlight.png":
+            self.ids.imagemorefacts.source="images/buttons/loadfactdark.png"
+
+    #this color animation is not yet fixed
+        
+
 
 class QuizResult(Quiz, Screen):
     # if __name__=="__main__":
@@ -609,15 +702,15 @@ class CTFApp(App):
         self.icon="images/appicon.ico"
         return kvfile
     
-    # #tts func to make our program say something
-    # engine = pyttsx3.init()
-    # voices = engine.getProperty('voices')
-    # engine.setProperty("voices", voices[0].id)
-    # engine.setProperty("rate", 178)
+    #tts func to make our program say something
+    engine = pyttsx3.init()
+    voices = engine.getProperty('voices')
+    engine.setProperty("voices", voices[0].id)
+    engine.setProperty("rate", 178)
     
-    # def talk(self,audio):
-    #     self.engine.say(audio)
-    #     self.engine.runAndWait()
+    def talk(self,audio):
+        self.engine.say(audio)
+        self.engine.runAndWait()
 
     appversion=StringProperty(f"{__version__}")
 

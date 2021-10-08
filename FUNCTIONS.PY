@@ -234,13 +234,7 @@ def check_rapid_ans(answer,r):
         answer = listen().upper()
     else:
         from pytimedinput import timedInput
-        from threading import Thread
-        def timer():
-            for i in range(10):
-                print(i+1," ...")
-                time.sleep(1)
 
-        Thread(target = timer).start()
         userText, timedOut = timedInput("    Answer: ",10)
 
         if(timedOut):

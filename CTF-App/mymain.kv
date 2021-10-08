@@ -22,14 +22,15 @@ WindowManager:
     QuizResult:
     RapidResult:
 
+#homescreen
 <Home>:
     name: "home"
 
     GridLayout:
         cols: 1
-        # size_hint: 1, 1
-        size_hint: None, 1
-        width: app.windowwidth
+        size_hint: 1, 1
+        # size_hint: None, 1
+        # width: app.windowwidth
         pos_hint: {"center_x": .5, "center_y": .5}
         
         canvas.before:
@@ -41,26 +42,43 @@ WindowManager:
         FloatLayout:
             size: self.size
             pos: self.pos
-  
-            Label:
-                markup: True
-                text: '\n'.join(("               [font=fonts/russoone.ttf][b]CTF[/b][/font]","[i][b]Cosmos Trivia[/b][/i]","          [size=80][i]and[/size] [b]Facts[/i][/b]"))
-                font_size: "50dp"
-                size_hint: 1, .2
-                color: hex("#E7005E")
-                pos_hint: {"center_x":.5, "top": .95}
+
+            # Label:
+            #     # markup: True
+            #     # text: '\n'.join(("               [font=fonts/russoone.ttf][b]CTF[/b][/font]","[i][b]Cosmos Trivia[/b][/i]","          [size=80][i]and[/size] [b]Facts[/i][/b]"))
+            #     # font_size: "50sp"
+            #     size_hint: 1, .2
+            #     # size: self.texture_size
+            #     color: hex("#E7005E")
+            #     pos_hint: {"center_x":.5, "top": .95}
+
+
+            Image:
+                source: "images/CTFLogo.png"
+                keep_ratio: True
+                pos_hint: {'center_x':.5, 'center_y': .8}
+                size_hint: self.height, None
+                height: "300dp"
+                # width: self.height
 
             Button:
                 markup: True
-                text: "[i][font=fonts/righteous.ttf][u]Pla[/u]y[/font][/i]"
+                text: "[i][font=fonts/righteous.ttf][u]PLAY[/u][/font][/i]"
                 font_size: "60sp"
                 color: hex("#5dfc00")
-                pos_hint: {"center_x":.5, "center_y": .5}
+                pos_hint: {"center_x":.5, "center_y": .45}
                 size_hint: None, None
-                size: 200,100
+                size: "200dp", "100dp"
                 # size_hint: None, None
                 # size: "175dp","75dp"
                 background_color: 0,0,0,0
+
+                canvas.before:
+                    Color:
+                        rgba: hex("#5dfc00")
+                    Line:
+                        width: 2
+                        rectangle: self.x, self.y, self.width, dp(85)
 
                 on_state:
                     self.opacity = .7 if self.state == "down" else 1
@@ -137,6 +155,7 @@ WindowManager:
                     size: self.parent.size
                     opacity: 0.5 if self.parent.disabled == True else 1
 
+#settingscreen
 # <Setting>:
 #     name: "setting"
 
@@ -176,14 +195,15 @@ WindowManager:
 #                     size: self.parent.size
 #                     opacity: 0.5 if self.parent.disabled == True else 1
 
+#infoscreen
 <Info>:
     name: "info"
 
     GridLayout:
         cols: 1
-        # size_hint: 1, 1
-        size_hint: None, 1
-        width: app.windowwidth
+        size_hint: 1, 1
+        # size_hint: None, 1
+        # width: app.windowwidth
         pos_hint: {"center_x": .5, "center_y": .5}
             
         FloatLayout:
@@ -212,10 +232,11 @@ WindowManager:
                             WrappedLabel:
                                 size: self.parent.size
                                 text: root.aboutctfapp
-                                font_size: "25sp"
+                                halign: "justify"
+                                font_size: "22sp"
                                 font_name: "fonts/ubuntu.ttf"
                                 pos_hint: {"center_x":.5,"top":1}
-                                padding_x: 20   
+                                padding_x: "25dp"   
                             
                         FloatLayout:
                             pos_hint: {"right":1, "top":.2}
@@ -257,9 +278,10 @@ WindowManager:
                             WrappedLabel:
                                 size: self.parent.size
                                 text: root.howtoplayctfapp
+                                halign: "justify"
                                 pos_hint: {"center_x":.5,"top":1}
-                                padding_x: 20
-                                font_size: "30sp"
+                                padding_x: "25dp"
+                                font_size: "22sp"
                                 font_name: "fonts/ubuntu.ttf"
 
                         FloatLayout:
@@ -304,9 +326,10 @@ WindowManager:
                             WrappedLabel:
                                 size: self.parent.size
                                 text: root.infos
+                                halign: "justify"
                                 pos_hint: {"center_x":.5,"top":1}
-                                padding_x: 20
-                                font_size: "30sp"
+                                padding_x: "25dp"
+                                font_size: "22sp"
                                 font_name: "fonts/ubuntu.ttf"
 
                         FloatLayout:
@@ -336,15 +359,15 @@ WindowManager:
                                     size: self.parent.size
                                     opacity: 0.5 if self.parent.disabled == True else 1
 
-
+#gamemodescreen
 <GameMode>:
     name: "gamemode"
 
     GridLayout:
         cols: 1
-        # size_hint: 1, 1
-        size_hint: None, 1
-        width: app.windowwidth
+        size_hint: 1, 1
+        # size_hint: None, 1
+        # width: app.windowwidth
         pos_hint: {"center_x": .5, "center_y": .5}
         
         canvas.before:
@@ -352,43 +375,57 @@ WindowManager:
                 pos: self.pos
                 size: self.size
                 source: "images/screens/GameModeScreen.png"
+            
+            Color:
+                rgba: hex("#434343")
+            Line:
+                points: (0, self.parent.height/2.25, self.parent.width, self.parent.height/2.25)
+                width: 5
+                
 
         FloatLayout:
             size: self.size
             pos: self.pos
-
             
             Label:
                 markup: True
                 text:
-                    '\n'.join(("      [font=fonts/russoone.ttf][b][i]Choose[/i][/b][/font]","[font=fonts/russoone.ttf][i][b]a Game Mode[/b][/i][/font]"))
+                    '\n'.join(("                 [font=fonts/russoone.ttf][b][i]Choose[/i][/b][/font]","[font=fonts/russoone.ttf][i][b]         a Game Mode[/b][/i][/font]"," "," "," "," "," "," "," "," "," "," ","[size=30][font=fonts/russoone.ttf][i][b] Some Interesting Facts[/b][/i][/font][/size]","[size=30][font=fonts/russoone.ttf][i][b]           About Space[/b][/i][/font][/size]"))
                 font_size: "40sp"
                 size_hint: 1, .2
                 color: hex("#E7005E")
-                pos_hint: {"center_x":.5, "top":.95}
+                pos_hint: {"center_x":.5, "top":.675}
+            
+            Label:
+                text: "More..."
+                font_size: "40sp"
+                font_name: "fonts/russoone.ttf"
+                color: hex("#E7005E")
+                size_hint: 1, .5
+                pos_hint: {'center_x': .5, 'top': 38}
 
             Button:
-                pos_hint: {"center_x":.5, "top":.68}
+                pos_hint: {"center_x":.5, "top":.72}
                 size_hint: None, None
                 size: "175dp","75dp"
                 background_color: 0,0,0,0
 
                 on_state:
-                    imagemodestoquiz.source = "images/buttons/spacequizlight.png" if self.state == "down" else "images/buttons/spacequizdark.png"
+                    imagemodestoquiz.source = "images/buttons/trivialight.png" if self.state == "down" else "images/buttons/triviadark.png"
                 
                 on_release:
                     app.root.current = "quiz"
 
                 Image:
                     id: imagemodestoquiz
-                    source: "images/buttons/spacequizdark.png"
+                    source: "images/buttons/triviadark.png"
                     center_x: self.parent.center_x
                     center_y: self.parent.center_y
                     size: self.parent.size
                     opacity: 0.5 if self.parent.disabled == True else 1
 
             Button:
-                pos_hint: {"center_x":.5, "top":.53}
+                pos_hint: {"center_x":.5, "top":.6}
                 size_hint: None, None
                 size: "175dp","75dp"
                 background_color: 0,0,0,0
@@ -406,10 +443,10 @@ WindowManager:
                     center_y: self.parent.center_y
                     size: self.parent.size
                     opacity: 0.5 if self.parent.disabled == True else 1
-
+            
             Button:
                 text: "Space Facts"
-                pos_hint: {"center_x":.5, "top":.38}
+                pos_hint: {"center_x":.5, "top":.28}
                 size_hint: None, None
                 size: "175dp","75dp"
                 background_color: 0,0,0,0
@@ -455,14 +492,15 @@ WindowManager:
                         size: self.parent.size
                         opacity: 0.5 if self.parent.disabled == True else 1
 
+#quizscreen
 <Quiz>:
     name: "quiz"
 
     GridLayout:
         cols: 1
-        # size_hint: 1, 1
-        size_hint: None, 1
-        width: app.windowwidth
+        size_hint: 1, 1
+        # size_hint: None, 1
+        # width: app.windowwidth
         pos_hint: {"center_x": .5, "center_y": .5}
 
         canvas.before:
@@ -480,7 +518,7 @@ WindowManager:
                 
                 Label:
                     text: "Space Trivia"
-                    font_size: "40dp"
+                    font_size: "40sp"
                     size_hint: 1, .1
                     pos_hint: {"center_x": .5, "top": .967}
                 
@@ -499,7 +537,7 @@ WindowManager:
                     valign: 'top'
                     padding_x: 10
                     size_hint: .92, .1
-                    pos_hint: {"center_x":.5, "top":.75}
+                    pos_hint: {"center_x":.5, "top":.73}
 
                 Button:
                     id: btnquizaudio
@@ -513,7 +551,7 @@ WindowManager:
                         imagequizspeaker.opacity = .7 if self.state == "down" else 1
 
                     on_release:
-                        # app.talk(root.talkquestion)
+                        app.talk(root.talkquestion)
                         imagequizspeaker.opacity = 1
                     
                     Image:
@@ -655,10 +693,12 @@ WindowManager:
                 WrappedLabel:
                     id: quizquescheck
                     text: root.quizcheck
-                    text_size: self.size
-                    size_hint: .92, .1
-                    padding_x: 20
-                    pos_hint: {"center_x":.5, "top":.2235}
+                    font_name: 
+                    font_size: "25sp"
+                    halign: "center"
+                    size_hint: 1, .1
+                    padding_x: "25dp"
+                    pos_hint: {"center_x":.5, "top":.215}
 
                 Button:
                     id: btnquizcheck
@@ -731,7 +771,7 @@ WindowManager:
                             imagenextquiz.source = "images/buttons/nextqueslight.png" if self.state == "down" else "images/buttons/nextquesdark.png"
                         
                         on_release:
-                            root.start_quiz_ques(self, btnquiztohome)
+                            root.start_quiz_ques()#self, btnquiztohome)
                             imageopt1.source = "images/buttons/optiondark.png"
                             imageopt2.source = "images/buttons/optiondark.png"
                             imageopt3.source = "images/buttons/optiondark.png"
@@ -750,14 +790,15 @@ WindowManager:
                             size: self.parent.size
                             opacity: 0.5 if self.parent.disabled == True else 1
 
+#rapidfirescreen
 <RapidFire>:
     name: "rapidfire"
     
     GridLayout:
         cols: 1
-        # size_hint: 1, 1
-        size_hint: None, 1
-        width: app.windowwidth
+        size_hint: 1, 1
+        # size_hint: None, 1
+        # width: app.windowwidth
         pos_hint: {"center_x": .5, "center_y": .5}
 
         canvas.before:
@@ -775,7 +816,7 @@ WindowManager:
                 
                 Label:
                     text: "Rapid Fire"
-                    font_size: "40dp"
+                    font_size: "40sp"
                     size_hint: 1, .1
                     pos_hint: {"center_x": .5, "top": .967}
                 
@@ -794,7 +835,7 @@ WindowManager:
                     valign: 'top'
                     padding_x: 10
                     size_hint: .92, .1
-                    pos_hint: {"center_x":.5, "top":.75}
+                    pos_hint: {"center_x":.5, "top":.73}
 
                 Button:
                     id: btnquizaudio
@@ -808,7 +849,7 @@ WindowManager:
                         imagequizspeaker.opacity = .7 if self.state == "down" else 1
 
                     on_release:
-                        # app.talk(root.talkquestion)
+                        app.talk(root.talkquestion)
                         imagequizspeaker.opacity = 1
                     
                     Image:
@@ -830,8 +871,13 @@ WindowManager:
 
                     on_release:
                         root.inputA(self)
+                        root.check_quiz_ans()
+                        btnopt1.disabled=True
+                        btnopt2.disabled=True
+                        btnopt3.disabled=True
+                        btnopt4.disabled=True
                         imageopt1.source = "images/buttons/optionselect.png" if self.state == "down" else "images/buttons/optiondark.png"
-                        btnquizcheck.disabled = False if self.state == "down" else True
+                        # btnquizcheck.disabled = False if self.state == "down" else True
                     
                     Image:
                         id: imageopt1
@@ -862,8 +908,13 @@ WindowManager:
 
                     on_release:
                         root.inputB(self)
+                        root.check_quiz_ans()
+                        btnopt1.disabled=True
+                        btnopt2.disabled=True
+                        btnopt3.disabled=True
+                        btnopt4.disabled=True
                         imageopt2.source = "images/buttons/optionselect.png" if self.state == "down" else "images/buttons/optiondark.png"
-                        btnquizcheck.disabled = False if self.state == "down" else True
+                        # btnquizcheck.disabled = False if self.state == "down" else True
                         
                     Image:
                         id: imageopt2
@@ -894,8 +945,13 @@ WindowManager:
 
                     on_release:
                         root.inputC(self)
+                        root.check_quiz_ans()
+                        btnopt1.disabled=True
+                        btnopt2.disabled=True
+                        btnopt3.disabled=True
+                        btnopt4.disabled=True
                         imageopt3.source = "images/buttons/optionselect.png" if self.state == "down" else "images/buttons/optiondark.png"
-                        btnquizcheck.disabled = False if self.state == "down" else True
+                        # btnquizcheck.disabled = False if self.state == "down" else True
                         
                     Image:
                         id: imageopt3
@@ -926,8 +982,13 @@ WindowManager:
 
                     on_release:
                         root.inputD(self)
+                        root.check_quiz_ans()
+                        btnopt1.disabled=True
+                        btnopt2.disabled=True
+                        btnopt3.disabled=True
+                        btnopt4.disabled=True
                         imageopt4.source = "images/buttons/optionselect.png" if self.state == "down" else "images/buttons/optiondark.png"
-                        btnquizcheck.disabled = False if self.state == "down" else True
+                        # btnquizcheck.disabled = False if self.state == "down" else True
                         
                     Image:
                         id: imageopt4
@@ -950,34 +1011,36 @@ WindowManager:
                 WrappedLabel:
                     id: quizquescheck
                     text: root.quizcheck
-                    text_size: self.size
-                    size_hint: .92, .1
-                    padding_x: 20
-                    pos_hint: {"center_x":.5, "top":.2235}
+                    font_name: 
+                    font_size: "25sp"
+                    halign: "center"
+                    size_hint: 1, .1
+                    padding_x: "25dp"
+                    pos_hint: {"center_x":.5, "top":.215}
 
-                Button:
-                    id: btnquizcheck
-                    pos_hint: {"center_x":.5, "top": .0835}
-                    size_hint: .92, .0723
-                    background_color: 0,0,0,0
-                    disabled: True
+                # Button:
+                #     id: btnquizcheck
+                #     pos_hint: {"center_x":.5, "top": .0835}
+                #     size_hint: .92, .0723
+                #     background_color: 0,0,0,0
+                #     disabled: True
 
-                    on_state:
-                        imagequizcheck.source = "images/buttons/checkanslight.png" if self.state == "down" else "images/buttons/checkansdark.png"
+                #     on_state:
+                #         imagequizcheck.source = "images/buttons/checkanslight.png" if self.state == "down" else "images/buttons/checkansdark.png"
 
-                    on_release:
-                        root.check_quiz_ans()
-                        imagequizcheck.source = "images/buttons/checkansdark.png"
+                #     on_release:
+                #         root.check_quiz_ans()
+                #         imagequizcheck.source = "images/buttons/checkansdark.png"
 
-                    Image:
-                        id: imagequizcheck
-                        source: "images/buttons/checkansdark.png"
-                        center_x: self.parent.center_x
-                        center_y: self.parent.center_y
-                        size: self.parent.size
-                        opacity: 0.5 if self.parent.disabled == True else 1
-                        allow_stretch: True
-                        keep_ratio: False
+                #     Image:
+                #         id: imagequizcheck
+                #         source: "images/buttons/checkansdark.png"
+                #         center_x: self.parent.center_x
+                #         center_y: self.parent.center_y
+                #         size: self.parent.size
+                #         opacity: 0.5 if self.parent.disabled == True else 1
+                #         allow_stretch: True
+                #         keep_ratio: False
 
             GridLayout:
                 cols:2
@@ -1026,7 +1089,8 @@ WindowManager:
                             imagenextquiz.source = "images/buttons/nextqueslight.png" if self.state == "down" else "images/buttons/nextquesdark.png"
                         
                         on_release:
-                            root.start_quiz_ques(self, btnquiztohome)
+                            root.start_quiz_ques()
+                            # root.rapidtimer()
                             imageopt1.source = "images/buttons/optiondark.png"
                             imageopt2.source = "images/buttons/optiondark.png"
                             imageopt3.source = "images/buttons/optiondark.png"
@@ -1044,7 +1108,7 @@ WindowManager:
                             center_y: self.parent.center_y
                             size: self.parent.size
                             opacity: 0.5 if self.parent.disabled == True else 1
-
+#factscreen
 <Facts>:
     name: "facts"
 
@@ -1063,31 +1127,48 @@ WindowManager:
             cols: 1
 
             FloatLayout:
-                orientation: "vertical"
-                size_hint: 1,.99
+                size_hint: 1,1
+
+                Label:
+                    text: "Space Facts"
+                    font_size: "40sp"
+                    size_hint: 1, .1
+                    pos_hint: {"center_x": .5, "top": .98}
+
+                Spinner:
+                    id: chooseplanets
+                    size_hint: .92,  .0625
+                    text: 'Random Space Facts'
+                    font_size: "20sp"
+                    pos_hint: {'center_x': .5, 'center_y': .82}
+                    values:
+                        ('Random Space Facts','Sun', 'Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune')
+                    on_text: root.ChooseOption()
 
                 Label:
                     text: root.diduno
-                    halign: 'left'
+                    halign: 'center'
                     valign: 'top'
                     padding_x: 10
-                    font_size: 30
-                    pos_hint: {'center_x': .5, 'center_y':.75}
-                    size_hint: 1, .4
+                    font_size: "30sp"
+                    pos_hint: {'center_x': .5, 'center_y':.755}
+                    size_hint: 1, .1
+                    color: hex("#00bac7")
 
                 WrappedLabel:
                     id: factlabel
                     text: root.fact
-                    halign: 'left'
-                    valign: 'top'
-                    padding_x: 20
-                    font_size: 20
-                    pos_hint: {'center_x': .5, 'center_y':.6}
+                    font_name: "fonts/ubuntu.ttf"
+                    halign: 'justify'
+                    valign: 'center'
+                    padding_x: "27.5dp"
+                    font_size: "25sp"
+                    pos_hint: {'center_x': .5, 'center_y':.67}
                     size_hint: 1, .6
 
                 Button:
                     id: btnfactaudio
-                    pos_hint: {"center_x":.9, "top":.683}
+                    pos_hint: {"center_x":.9, "top":.765}
                     size_hint: None, None
                     width: "25dp"
                     height: "25dp"
@@ -1097,8 +1178,8 @@ WindowManager:
                         imagefactspeaker.opacity = .7 if self.state == "down" else 1
 
                     on_release:
-                        # app.talk("DID YOU KNOW??")
-                        # app.talk(root.fact)
+                        app.talk("DID YOU KNOW??")
+                        app.talk(root.fact)
                         imagefactspeaker.opacity = 1
 
                     Image:
@@ -1111,12 +1192,13 @@ WindowManager:
 
                 Button:
                     id: btnmorefact
-                    size_hint: .92, .0723
-                    background_color: 0,0,0,0
-                    pos_hint: {"center_x": .497, "y": 0}
+                    size_hint: .92, .065
+                    background_color: 0,0,0,1
+                    pos_hint: {"center_x": .5, "y": .125}
 
                     on_state:
-                        imagemorefacts.source = "images/buttons/loadfactlight.png" if self.state == "down" else "images/buttons/loadfactdark.png"
+                        root.buttonmorefacts(self)
+                        # imagemorefacts.source = "images/buttons/loadfactlight.png" if self.state == "down" else "images/buttons/loadfactdark.png"
 
                     on_release:
                         root.show_more_facts(self)
@@ -1130,20 +1212,18 @@ WindowManager:
                         size: self.parent.size
                         opacity: 0.5 if self.parent.disabled == True else 1
 
-            FloatLayout:
-                size_hint: 1,.1476
-
                 Button:
                     id: btnfacttohome
-                    size_hint: .92, .49
-                    background_color: 0,0,0,0
-                    pos_hint: {"center_x": .497, "center_y": .702}
+                    size_hint: .92, .065
+                    background_color: 0,0,0,1
+                    pos_hint: {"center_x": .5, "center_y": .09}
 
                     on_state:
                         imagefacttohome.source = "images/buttons/exitlight.png" if self.state == "down" else "images/buttons/exitdark.png"
 
                     on_release:
                         app.root.current = "home"
+                        imagemorefacts.source = "images/buttons/loadfactdark.png"
                         imagefacttohome.source = "images/buttons/exitdark.png"
 
                     Image:
@@ -1154,14 +1234,15 @@ WindowManager:
                         size: self.parent.size
                         opacity: 0.5 if self.parent.disabled == True else 1
 
+#quizresultscreen
 <QuizResult>:
     name: "quizresult"
     
     GridLayout:
         cols: 1
-        # size_hint: 1, 1
-        size_hint: None, 1
-        width: app.windowwidth
+        size_hint: 1, 1
+        # size_hint: None, 1
+        # width: app.windowwidth
         pos_hint: {"center_x": .5, "center_y": .5}
 
         canvas.before:
@@ -1180,7 +1261,7 @@ WindowManager:
                 Label:
                     text:
                         '\n'.join(("Space Trivia", "   Result"))
-                    font_size: "20dp"
+                    font_size: "20sp"
                     size_hint: 1, .1
                     pos_hint: {"center_x": .5, "top": .977}
 
@@ -1241,14 +1322,15 @@ WindowManager:
                             size: self.parent.size
                             opacity: 0.5 if self.parent.disabled == True else 1
 
+#rapidresultscreen
 <RapidResult>:
     name: "rapidresult"
 
     GridLayout:
         cols: 1
-        # size_hint: 1, 1
-        size_hint: None, 1
-        width: app.windowwidth
+        size_hint: 1, 1
+        # size_hint: None, 1
+        # width: app.windowwidth
         pos_hint: {"center_x": .5, "center_y": .5}
 
         canvas.before:
@@ -1267,7 +1349,7 @@ WindowManager:
                 Label:
                     text:
                         '\n'.join(("Rapid Fire", "   Result"))
-                    font_size: "20dp"
+                    font_size: "20sp"
                     size_hint: 1, .1
                     pos_hint: {"center_x": .5, "top": .977}
 
