@@ -5,7 +5,6 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.label import Label
 from kivy.lang import Builder
 from kivy.core.window import Window
-from kivy.clock import Clock
 from kivy.properties import ObjectProperty, StringProperty
 
 #App Version
@@ -218,7 +217,7 @@ class Quiz(Screen, object):
 
     
 
-    def start_quiz_ques(self):#, buttonnext, buttonhome):
+    def start_quiz_ques(self, buttonnext, buttonhome):
         global ques
         global loopques
         global r
@@ -254,10 +253,10 @@ class Quiz(Screen, object):
         #     self.Quiz_Score="0"
         if self.ques_no==5:
             self.ques_no=0
-            self.ids.btnquiznextques.bind(on_release=self.gotoresult)
-            # self.ids..bind(on_state=self.resultbutton,on_release=self.gotoresult)
+            buttonnext.bind(on_release=self.gotoresult)
+            # buttonnext.bind(on_state=self.resultbutton,on_release=self.gotoresult)
         # if self.ques_no==4:
-        #     self.ids..disabled = False
+        #     buttonnext.disabled = False
         #     self.ids.imagenextquiz.source = "images/buttons/resultdark.png"
         
         self.ids.btnquiznextques.disabled=True
@@ -389,48 +388,25 @@ class RapidFire(Screen, object):
     # removing the used ques for this quiz
     loopques.insert(0, ques.pop(r))
 
-    # def rapidtimerquestions(self):
-    #     from threading import Thread
+    def rapidtimer(self):
+        # from pytimedinput import timedInput
+        # userText, timedOut = timedInput("    Answer: ",4)
 
-    #     if __name__ == '__main__':
-    #         Thread(target = self.rapidtimer).start()
-    #         Thread(target = self.start_quiz_ques).start()
+        # if(timedOut):
+        #     self.ans="false"
+        #     # userText=self.ans
+        #     self.check_quiz_ans()
+        # else:
+        #     self.answerdsfs = userText
 
-    # def rapidtimer(self):
-    #     # from pytimedinput import timedInput
-    #     # userText, timedOut = timedInput("    Answer: ",4)
+        from threading import Thread
 
-    #     # if(timedOut):
-    #     #     self.ans="false"
-    #     #     # userText=self.ans
-    #     #     self.check_quiz_ans()
-    #     # else:
-    #     #     self.answerdsfs = userText
+        time.sleep(5)
+        self.check_quiz_ans()
 
-    #     from threading import Thread
+    def start_quiz_ques(self, buttonnext, buttonhome):
 
-    #     time.sleep(5)
-    #     self.check_quiz_ans()
-    
-    def timerforrapid(self):
-        Clock.schedule_interval(self.start_quiz_ques, 5)
-
-    def start_quiz_ques(self):
-        self.timerforrapid()
-
-        # from threading import Thread
-
-        # if __name__ == '__main__':
-        #     self.thread1 = Thread(target = self.rapidtimer)#.start()
-        #     self.thread2 = Thread(target = self.start_quiz_ques, args=(self.ids.btnquiznextques, self.ids.btnquiztohome))#.start()
-
-        #     self.thread1.start()
-        #     self.thread2.start()
-
-        #     self.thread1.join()
-        #     self.thread2.join()
-
-        # # self.rapidtimer()
+        # self.rapidtimer()
 
         global ques
         global loopques
@@ -467,10 +443,10 @@ class RapidFire(Screen, object):
         #     self.Quiz_Score="0"
         if self.ques_no==5:
             self.ques_no=0
-            self.ids.btnquiznextques.bind(on_release=self.gotoresult)
-            # self.ids.btnquiznextques.bind(on_state=self.resultbutton,on_release=self.gotoresult)
+            buttonnext.bind(on_release=self.gotoresult)
+            # buttonnext.bind(on_state=self.resultbutton,on_release=self.gotoresult)
         # if self.ques_no==4:
-        #     self.ids.btnquiznextques.disabled = False
+        #     buttonnext.disabled = False
         #     self.ids.imagenextquiz.source = "images/buttons/resultdark.png"
         
         self.ids.btnquiznextques.disabled=True

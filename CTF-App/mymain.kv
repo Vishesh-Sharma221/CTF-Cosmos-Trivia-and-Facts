@@ -66,7 +66,7 @@ WindowManager:
                 text: "[i][font=fonts/righteous.ttf][u]PLAY[/u][/font][/i]"
                 font_size: "60sp"
                 color: hex("#5dfc00")
-                pos_hint: {"center_x":.5, "center_y": .45}
+                pos_hint: {"center_x":.5, "center_y": .5}
                 size_hint: None, None
                 size: "200dp", "100dp"
                 # size_hint: None, None
@@ -386,15 +386,16 @@ WindowManager:
         FloatLayout:
             size: self.size
             pos: self.pos
+
             
             Label:
                 markup: True
                 text:
-                    '\n'.join(("                 [font=fonts/russoone.ttf][b][i]Choose[/i][/b][/font]","[font=fonts/russoone.ttf][i][b]         a Game Mode[/b][/i][/font]"," "," "," "," "," "," "," "," "," "," ","[size=30][font=fonts/russoone.ttf][i][b] Some Interesting Facts[/b][/i][/font][/size]","[size=30][font=fonts/russoone.ttf][i][b]           About Space[/b][/i][/font][/size]"))
+                    '\n'.join(("           [font=fonts/russoone.ttf][b][i]Choose[/i][/b][/font]","[font=fonts/russoone.ttf][i][b]    a Game Mode[/b][/i][/font]"," "," "," "," "," "," "," "," "," "," ","[size=30][font=fonts/russoone.ttf][i][b]Some Interesting Facts[/b][/i][/font][/size]","[size=30][font=fonts/russoone.ttf][i][b]          About Space[/b][/i][/font][/size]"))
                 font_size: "40sp"
                 size_hint: 1, .2
                 color: hex("#E7005E")
-                pos_hint: {"center_x":.5, "top":.675}
+                pos_hint: {"center_x":.5, "top":.7}
             
             Label:
                 text: "More..."
@@ -537,7 +538,7 @@ WindowManager:
                     valign: 'top'
                     padding_x: 10
                     size_hint: .92, .1
-                    pos_hint: {"center_x":.5, "top":.73}
+                    pos_hint: {"center_x":.5, "top":.75}
 
                 Button:
                     id: btnquizaudio
@@ -771,7 +772,7 @@ WindowManager:
                             imagenextquiz.source = "images/buttons/nextqueslight.png" if self.state == "down" else "images/buttons/nextquesdark.png"
                         
                         on_release:
-                            root.start_quiz_ques()#self, btnquiztohome)
+                            root.start_quiz_ques(self, btnquiztohome)
                             imageopt1.source = "images/buttons/optiondark.png"
                             imageopt2.source = "images/buttons/optiondark.png"
                             imageopt3.source = "images/buttons/optiondark.png"
@@ -835,7 +836,7 @@ WindowManager:
                     valign: 'top'
                     padding_x: 10
                     size_hint: .92, .1
-                    pos_hint: {"center_x":.5, "top":.73}
+                    pos_hint: {"center_x":.5, "top":.75}
 
                 Button:
                     id: btnquizaudio
@@ -1089,8 +1090,7 @@ WindowManager:
                             imagenextquiz.source = "images/buttons/nextqueslight.png" if self.state == "down" else "images/buttons/nextquesdark.png"
                         
                         on_release:
-                            root.start_quiz_ques()
-                            # root.rapidtimer()
+                            root.start_quiz_ques(self, btnquiztohome)
                             imageopt1.source = "images/buttons/optiondark.png"
                             imageopt2.source = "images/buttons/optiondark.png"
                             imageopt3.source = "images/buttons/optiondark.png"
