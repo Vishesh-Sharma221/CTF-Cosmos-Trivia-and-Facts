@@ -25,7 +25,7 @@ The modules used in this project are listed below:
 - `DateTime`
 - `random`
 - `pyttsx3`
--  `Speech Recognition`
+- `Speech Recognition`
 - `csv`
 - `time`
 - `timedInput`
@@ -52,8 +52,8 @@ The Limitations of this Project (according to the current version~v0.1) are:
 
 # Developers
 
-This application has been developed with the teamwork of Three Students (Team VAY) of Clhttps://github.com/Yugam4254 "click for github profile")ass 12th from Science Stream of Banasthali Public School, Session 2021-22; namely:
-- [Yugam Sehgal](https://github.com/Yugam4254 "click for github profile")
-- [Vishesh Sharma](https://github.com/Yugam4254 "click for github profile")
-- [Anshuman Khatri](https://github.com/AnshumanKhatri14 "click for github profile")
+This application has been developed with the teamwork of Three Students (Team VAY) of Class 12th from Science Stream of Banasthali Public School, Session 2021-22; namely:
+- [Yugam Sehgal](https://github.com/Yugam4254)
+- [Vishesh Sharma](https://github.com/Vishesh-Sharma221)
+- [Anshuman Khatri](https://github.com/AnshumanKhatri14)
 
