@@ -31,8 +31,20 @@ We have made this application as user - friendly as possible, so there’s no ne
 
 howtoplay_content='''Three modes:
     1.) Space Quiz
+
+        - An interactive and competetive game mode where you will be getting 5 questions per round ( 5 rounds in one game, you can restart the game mode to play again after 5 rounds)
+        - No Time Limit
+
     2.) Rapid Fire based on quiz questions.
-    3.) Facts about space.'''
+
+        - Also an interactive but more competetive game mode with 5 questions every round ( 5 rounds in one game, you can restart the game mode to play again after 5 rounds)
+        - 10 seconds to answer each question, if not answered in time you will get no score
+        - It is a one-time click game mode so you can't click the options multiple times 
+
+    3.) Facts about space.
+
+        - Totally different game mode from the other two, this game is just for fun and to gather some knowledge about space bodies through random space facts.
+        - You can also find facts for specific planets in our solar system.'''
 
 info_content='''This application has been developed with the teamwork of three students (Team VAY) of class 12th from Science stream in Banasthali Public School, session 2021-22; namely:
 
@@ -70,40 +82,50 @@ ques_content='''Q NO.,Question,Option 1,Option 2,Option 3,Option 4,Answer
 27,What protects Earth from meteoroids and radiation from the sun?,Magnetic Field,Clouds,Atmosphere,Orbit,Atmosphere
 28,How many of solar system's planets can be seen without a telescope?,2,5,4,3,5
 29,Which planet is closest in size to Earth?,Mercury,Venus,Mars,Neptune,Venus
-30,Which is the oldest planet in our solar system?,Saturn,Mars,Jupiter,Uranus,Jupiter'''
+30,Which is the oldest planet in our solar system?,Saturn,Mars,Jupiter,Uranus,Jupiter
+31,Which Earth sized planet is largely made up of diamonds?,Proxima 1,A Centauri,Sirius A,55 Cancri e,55 Cancri e 
+32,What was the first human voyage sent into space?,Apollo 11,Apollo 13,Vostok 1,Vostok 2,Vostok 1
+33,Who made the first human voyage for space?,Rick Astley,Ferdinand Magellan,Gallelio Galleli,Issac Newton,Ferdinand Magellan
+34,When did the first human landed on moon?,14 January 1987,10 May 1998,23 November 1956,20 July 1969,20 July 1969
+35,How old is Earth? (in billion years),1.12 years,2.51 years,4.54 years,25.56 years,4.54 years
+36,How wide is our Solar System? (diameter in billion kms),123.87 km,52.12 km,504.78 km,287.46 km,287.46 km'''
 
-fact_content='''Uranus is tilted on its side
-Jupiter's moon Io has towering volcanic eruptions
-Mars has the biggest volcano (that we know of)
-Mars also has the longest valley
-Venus has super-powerful winds
-There is water ice everywhere
-Spacecraft have visited every planet
-There could be life in the solar system, somewhere
-Mercury is still shrinking
-There are mountains on Pluto
-Footprints on the moon will stay for millions of years
-Some planets have no surface to land on
-Pieces of the same metal will permanently merge in space
-There are interstellar objects passing through our solar system
-Saturn would float in water
-Jupiter has at least 79 moons
-The hottest planet in our solar system is 450° C
-Halley's comet passes through Earth's vicinity every 75 years
-Neutron stars can spin  600 times per second
-1 day on Venus is longer than 1 earthly year
-In 3.75 billion years the Milky Way and Andromeda galaxies will collide
-Largest known asteroid is 965 km wide
-The Sun's mass takes up 99.86% of the solar system
-A volcano on mars is 3 times the size of Mt.Everest
-It would take 9.5 years to walk to moon
-Temperature of outer space is close to absolute zero
-Around 6000 satellites are currently orbiting our Earth
-There are more stars in the Universe than grains of sands on Earth
-Sunset on Mars appears blue
-The hottest planet in our solar system is 450° C
-Humanity have found around 60 potentially habitable exoplanets as of 2021
-The nearest habitable planet is estimated to be 12 light years away'''
+fact_content='''Random Facts,Sun,Mercury,Venus,Earth,Mars,Jupiter,Saturn,Uranus,Neptune
+Uranus is tilted on its side.,Sun takes up 99.86% of the mass in Solar System!,Mercury is the smallest and closest planet to the Sun.,Venus is the brightest and second closest planet to the Sun.,Earth is the only habitable and third closest planet to the Sun which we live on.,Mars also known as the red planet is the fourth closest planet to the Sun.,"Jupiter is the largest and fifth closest planet to the Sun. ",Saturn also known as the ring planet is the sixth closest to the Sun.,Uranus is the seventh from planet to the Sun.,Neptune is the coldest and eight planet from the Sun.
+"Jupiter's moon named ""Io"" has towering volcanic eruptions.",Sun is giant gas ball composed of hydrogen and helium.,Mercury's core is constantly shrinking in size.,"Venus's atmosphere is 96% all carbondioxide, with no water on it's surface, creating a greenhouse effect.","71% of the Earth's surface is covered with water, which only 3% of it is drinkable!",Shockingly there is water found on Mars in frozen form i.e. ice.,"Jupiter is 650.29 million km away from Earth, and is large enough to fit 1,300 Earths inside it!!",Saturn's ring isn't solid infact it's made up of millions of tiny particles such as ice and rocks held together by it's strong gravity!,Uranus's axis is so tilted ( almost 98° ) it appears to be rotating on its side.,Neptune being the coldest planet in our Solar System can go as low as -391° C or -671.8° F!!
+"Mars has the biggest volcano (that we know of) namely, Olympus Mons.","Sun is 149.48 million kms away from Earth, this distance is also known as the Astronomical Unit (A.U.)",Your weight on Mercury would be 38% of your weight on Earth.,"Venus's dense atmosphere traps heat, making it the hottest planet, hence the temperature reaching upto 450° C!","Earth's gravity and it's shape isn't uniform, more like an irregularly shaped ellipsoid.",The iron rich minerals present on Mars's surface is what gives it the red colour!,"Jupiter is the fastest spinning planet, and it's magnetic field is 14 times stronger than Earths.",Saturn is the most distant planet which can be seen by naked eye!,"Uranus is one of the coldest planet, with temperature hitting as low as -188.3° C or -370.94° F!",Neptune appears blue to eyes due to absorption of red and infrared light by it's methane atmosphere.
+Mars also has the longest valley Valles Marineris.,The Sun is big enough to fit 1.3 million Earth inside it!!,,,,,,,,
+"Venus has super-powerful winds, reaching 360kmph or 224mph!!",,,,,,,,,
+"The biggest star known in universe is UY Scuti, with a radius around 1,700 times larger than the sun!",,,,,,,,,
+An Spacecraft have visited each and every planet in our Solar System.,,,,,,,,,
+The largest blackhole Ton 618 has a mass of 66 million times of the Sun!!,,,,,,,,,
+Mercury's core is constantly shrinking in size.,,,,,,,,,
+Pluto is the only place after Earth which has white peaked mountain.,,,,,,,,,
+Footprints of humans on the moon will stay for millions of years due to absence of atmosphere on it.,,,,,,,,,
+Some planets do not even have a surface to land on!,,,,,,,,,
+"Pieces of the same metal will permanently merge in space, this phenomena is known as cold welding.",,,,,,,,,
+There are interstellar objects passing through our solar system.,,,,,,,,,
+"Saturn is composed of gases, making it less dense than water, hence making it float on it!",,,,,,,,,
+"Jupiter has the most moons in our solar system, with a total of 79 moons.",,,,,,,,,
+The hottest planet in our solar system aka Venus reaches upto 450° C!,,,,,,,,,
+Halley's comet passes through Earth's vicinity every 75 years.,,,,,,,,,
+Neutron stars can spin upto 600 times per second.,,,,,,,,,
+1 day on Venus is longer than 1 Earthly year.,,,,,,,,,
+In 3.75 billion years the Milky Way and Andromeda galaxies will collide.,,,,,,,,,
+Largest known asteroid is 965 km wide.,,,,,,,,,
+The Sun's mass takes up 99.86% of the solar system!,,,,,,,,,
+A volcano on Mars is 3 times the size of Mt.Everest.,,,,,,,,,
+It would take 9.5 years to walk to the Moon.,,,,,,,,,
+Temperature of outer space is close to absolute zero.,,,,,,,,,
+Around 6000 satellites are currently orbiting our Earth!!,,,,,,,,,
+There are more stars in the Universe than grains of sands on Earth!,,,,,,,,,
+Sunset on Mars appears Blue.,,,,,,,,,
+"Space X launched the first privately funded liquid-propellant rocket to reach the orbit, namely Falcon 1.",,,,,,,,,
+Humanity have found around 60 potentially habitable exoplanets as of 2021,,,,,,,,,
+The nearest habitable planet is estimated to be 12 light years away,,,,,,,,,
+NASA's first mission to demonstrate a planetary defense system is called DART.,,,,,,,,,
+"The full form of NASA's defense system DART is ""Double Asteroid Redirection Test"".",,,,,,,,,
+The oldest known exoplanet in the universe is PSR B12620-26 b with an age of 13  billion years!!,,,,,,,,,'''
 
 try:
     ques_file=open("questions.csv")
@@ -564,24 +586,34 @@ class Facts(Screen):
     def ChooseOption(self):
         if self.ids.chooseplanets.text=="Random Space Facts":
             self.optionchose=0
+            self.planetimage="random"
         if self.ids.chooseplanets.text=="Sun":
             self.optionchose=1
+            self.planetimage="sun"
         if self.ids.chooseplanets.text=="Mercury":
             self.optionchose=2
+            self.planetimage="mercury"
         if self.ids.chooseplanets.text=="Venus":
             self.optionchose=3
+            self.planetimage="venus"
         if self.ids.chooseplanets.text=="Earth":
             self.optionchose=4
+            self.planetimage="earth"
         if self.ids.chooseplanets.text=="Mars":
             self.optionchose=5
+            self.planetimage="mars"
         if self.ids.chooseplanets.text=="Jupiter":
             self.optionchose=6
+            self.planetimage="jupiter"
         if self.ids.chooseplanets.text=="Saturn":
             self.optionchose=7
+            self.planetimage="saturn"
         if self.ids.chooseplanets.text=="Uranus":
             self.optionchose=8
+            self.planetimage="uranus"
         if self.ids.chooseplanets.text=="Neptune":
             self.optionchose=9
+            self.planetimage="neptune"
 
     def show_more_facts(self, button):
         global facts
@@ -598,9 +630,15 @@ class Facts(Screen):
 
         self.diduno="DID YOU KNOW?"
 
-        loopfact.insert(1, facts.pop(rf))
+        loopfact.insert(1, facts.pop(rf))\
+    
+    factimage=StringProperty("")
 
     def buttonmorefacts(self, button):
+
+        self.factimage=f"images/planet_img/{self.planetimage}.png"
+
+
         if self.ids.imagemorefacts.source=="images/buttons/loadfactdark.png":
             self.ids.imagemorefacts.source="images/buttons/loadfactlight.png"# if button.state == "down" else "images/buttons/loadfactdark.png"
         
