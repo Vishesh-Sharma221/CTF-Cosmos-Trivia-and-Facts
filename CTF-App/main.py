@@ -350,6 +350,9 @@ class RapidFire(Screen, object):
     rapidcheck=StringProperty("")
     timervar=StringProperty("10")
     roundnum=StringProperty("1")
+
+    timercountdown=ObjectProperty()
+
     
     r=random.randint(1,len(ques)-1)
     ans1,ans2,ans3,ans4=ques[r][2],ques[r][3],ques[r][4],ques[r][5]
@@ -365,26 +368,45 @@ class RapidFire(Screen, object):
     # removing the used ques for this rapid fire
     loopques.insert(0, ques.pop(r))
     
+
+    # def __init__(self, **kwargs):
+#         super(RapidFire, self).__init__(**kwargs)
+#         self.timercountdown = Clock.schedule_interval(self.countdown, 1)
+    # def start_timer(self):
+    #     return self.timer()
+    # def end_timer(self):
+    #     return self.timerrapid
+    def timer(self):
+        self.timercountdown = Clock.schedule_interval(self.countdown, 1)
+        self.timerstoper = Clock.schedule_once(self.timerrapid, 10)
+
     def countdown(self, *args):
         self.ids.counter.text=str(int(self.ids.counter.text)-1)
 
     def timerrapid(self, *args):
-        self.timercountdown.cancel()    
+        self.timercountdown.cancel()
+        self.ans="false"
         self.check_rapid_ans()
 
-    def timer(self):
-        self.timercountdown = Clock.schedule_interval(self.countdown, 1)
-        Clock.schedule_once(self.timerrapid, 10)
+    def start_rapid_ques(self, buttonnext, buttonhome):
+        self.ids.counter.text="10"
 
-    # def __init__(self, **kwargs):
-    #         super(RapidFire, self).__init__(**kwargs)
-    #         self.timercountdown = Clock.schedule_interval(self.countdown, 1)
-    def start_timer(self):
-        return self.timer()
-    
+        # def timer(self):
+        #     self.timercountdown = Clock.schedule_interval(countdown, 1)
+        #     Clock.schedule_once(timerrapid, 10)
+
+        # def countdown(self, *args):
+        #     self.root.ids.counter.text=str(int(self.root.ids.counter.text)-1)
+
+        # def timerrapid(self, *args):
+        #     self.timercountdown.cancel()    
+        #     RapidFire.check_rapid_ans()
+
         
 
-    def start_rapid_ques(self, buttonnext, buttonhome):
+        # timer()
+        # Clock.schedule_interval(self.countdown, 1)
+        
 
         
         # self.timercountdown = Clock.schedule_interval(RapidFire.countdown, 1)
@@ -636,10 +658,6 @@ class CTFApp(App):
     voices = engine.getProperty('voices')
     engine.setProperty("voices", voices[0].id)
     engine.setProperty("rate", 178)
-    
-    def talk(self,audio):
-        self.engine.say(audio)
-        self.engine.runAndWait()
 
     appversion=StringProperty(f"{__version__}")
 

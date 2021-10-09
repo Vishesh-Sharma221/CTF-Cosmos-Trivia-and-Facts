@@ -394,8 +394,8 @@ WindowManager:
             Label:
                 markup: True
                 text:
-                    '\n'.join(("           [font=fonts/russoone.ttf][b][i]CHOOSE[/i][/b][/font]","[font=fonts/russoone.ttf][i][b]    A GAME MODE[/b][/i][/font]"," "," "," "," "," "," "," "," "," "," ","[size=30][font=fonts/russoone.ttf][i][b]SOME INTERESTING FACTS[/b][/i][/font][/size]","[size=30][font=fonts/russoone.ttf][i][b]          ABOUT SPACE[/b][/i][/font][/size]"))
-                font_size: "40sp"
+                    '\n'.join(("          [font=fonts/russoone.ttf][b][i]CHOOSE[/i][/b][/font]","[font=fonts/russoone.ttf][i][b]   A GAME MODE[/b][/i][/font]"," "," "," "," "," "," "," "," ","[size=22][font=fonts/russoone.ttf][i][b] SOME INTERESTING FACTS[/b][/i][/font][/size]","[size=22][font=fonts/russoone.ttf][i][b]           ABOUT SPACE[/b][/i][/font][/size]"))
+                font_size: "35sp"
                 size_hint: 1, .2
                 color: hex("#E7005E")
                 pos_hint: {"center_x":.5, "top":.7}
@@ -911,6 +911,7 @@ WindowManager:
                     on_release:
                         root.inputA(self)
                         root.check_rapid_ans()
+                        # root.timercountdown.cancel()
                         btnopt1.disabled=True
                         btnopt2.disabled=True
                         btnopt3.disabled=True
@@ -949,6 +950,7 @@ WindowManager:
                     on_release:
                         root.inputB(self)
                         root.check_rapid_ans()
+                        # root.timercountdown.cancel()
                         btnopt1.disabled=True
                         btnopt2.disabled=True
                         btnopt3.disabled=True
@@ -987,6 +989,7 @@ WindowManager:
                     on_release:
                         root.inputC(self)
                         root.check_rapid_ans()
+                        # root.timercountdown.cancel()
                         btnopt1.disabled=True
                         btnopt2.disabled=True
                         btnopt3.disabled=True
@@ -1025,6 +1028,7 @@ WindowManager:
                     on_release:
                         root.inputD(self)
                         root.check_rapid_ans()
+                        # root.timercountdown.cancel()
                         btnopt1.disabled=True
                         btnopt2.disabled=True
                         btnopt3.disabled=True
@@ -1052,7 +1056,7 @@ WindowManager:
                     padding_x: 10
 
                 WrappedLabel:
-                    id: quizrapidcheck
+                    id: rapidanscheck
                     text: root.rapidcheck
                     font_name: "fonts/ubuntu.ttf"
                     font_size: "22.5sp"
@@ -1109,6 +1113,7 @@ WindowManager:
                         
                         on_release:
                             root.start_rapid_ques(self, btnrapidtohome)
+                            root.timer()
                             imageopt1.source = "images/buttons/optiondark.png"
                             imageopt2.source = "images/buttons/optiondark.png"
                             imageopt3.source = "images/buttons/optiondark.png"
@@ -1288,7 +1293,7 @@ WindowManager:
                     pos_hint: {"center_x": .5, "top": .977}
 
                 Label:
-                    text: "Well Played!"
+                    text: "WELL PLAYED!!"
                     font_size: "40sp"
                     font_name: "fonts/ubuntu.ttf"
                     color: hex("#aa00ff")
@@ -1370,7 +1375,7 @@ WindowManager:
             FloatLayout:
                 orientation: "vertical"
                 size_hint: 1,.99
-                
+
                 Label:
                     text:
                         '\n'.join(("RAPID FIRE", "   RESULT"))
@@ -1381,7 +1386,7 @@ WindowManager:
                     pos_hint: {"center_x": .5, "top": .937}
 
                 Label:
-                    text: "Well Played!"
+                    text: "WELL PLAYED!!"
                     font_size: "40sp"
                     font_name: "fonts/ubuntu.ttf"
                     color: hex("#aa00ff")
