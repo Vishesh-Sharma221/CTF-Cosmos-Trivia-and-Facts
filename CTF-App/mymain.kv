@@ -281,9 +281,9 @@ WindowManager:
                                 text: root.howtoplayctfapp
                                 valign: "top"
                                 halign: "justify"
-                                pos_hint: {"center_x":.5,"y":.3}
+                                pos_hint: {"center_x":.5,"center_y":.4}
                                 padding_x: "25dp"
-                                font_size: "22sp"
+                                font_size: "18sp"
                                 font_name: "fonts/ubuntu.ttf"
 
                         FloatLayout:
@@ -530,7 +530,8 @@ WindowManager:
                     pos_hint: {"center_x": .5, "top": .974}
                 
                 Label:
-                    text: "Round: "+ root.roundnum +"     Ques: " + root.question_number + "/5     Score: " + str(root.Quiz_Score)
+                    markup: True
+                    text: "[color=#b7ff00]Round:[/color] "+ root.roundnum +"     [color=#ff005d]Ques:[/color] " + root.question_number + "/5     [color=#00a6ff]Score:[/color] " + str(root.Quiz_Score)
                     font_size: "20sp"
                     size_hint: 1,.1
                     pos_hint: {"center_x": .5, "top": .86}
@@ -843,7 +844,8 @@ WindowManager:
                 
 
                 Label:
-                    text: "Round: "+ root.roundnum +"     Ques: " + root.question_number + "/5     Score: " + str(root.Rapid_Score)
+                    markup: True
+                    text: "[color=#b7ff00]Round:[/color] "+ root.roundnum +"     [color=#ff005d]Ques:[/color] " + root.question_number + "/5     [color=#00a6ff]Score:[/color] " + str(root.Rapid_Score)
                     font_size: "20sp"
                     size_hint: 1,.1
                     pos_hint: {"center_x": .5, "top": .85885}
@@ -1186,10 +1188,17 @@ WindowManager:
                     font_name: "fonts/ubuntu.ttf"
                     halign: 'justify'
                     valign: 'center'
-                    padding_x: "27.5dp"
                     font_size: "25sp"
+                    padding_x: "25"
                     pos_hint: {'center_x': .5, 'center_y':.63}
                     size_hint: 1, .6
+                
+                Image:
+                    source: root.factimage
+                    keep_ratio: True
+                    pos_hint: {'center_x':.5, 'center_y': .385}
+                    size_hint: self.height, None
+                    height: "250dp"
 
                 Button:
                     id: btnfactaudio
