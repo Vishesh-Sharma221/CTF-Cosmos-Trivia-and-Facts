@@ -33,24 +33,24 @@ howtoplay_content='''Three modes:
     1.) Space Quiz
 
         - An interactive and competetive game mode where you will be getting 5 questions per round ( 5 rounds in one game, you can restart the game mode to play again after 5 rounds)
-        - No Time Limit
+        - No Time Limit.
 
-    2.) Rapid Fire based on quiz questions.
+    2.) Rapid Fire based on Quiz questions.
 
-        - Also an interactive but more competetive game mode with 5 questions every round ( 5 rounds in one game, you can restart the game mode to play again after 5 rounds)
-        - 10 seconds to answer each question, if not answered in time you will get no score
-        - It is a one-time click game mode so you can't click the options multiple times 
+        - Also an interactive but more competetive game mode with 5 questions per round ( 5 rounds in one game, you can restart the game mode to play again after 5 rounds)
+        - 10 seconds to answer each question, if not answered in time you will get no score.
+        - It is a One-Time Click game mode so you can't click the options multiple times .
 
-    3.) Facts about space.
+    3.) Facts about Space.
 
-        - Totally different game mode from the other two, this game is just for fun and to gather some knowledge about space bodies through random space facts.
-        - You can also find facts for specific planets in our solar system.'''
+        - Totally different game mode from the other two, this game is just for fun and to gather some knowledge about space bodies through random Space Facts.
+        - You can also find facts for specific Planets in our Solar System.'''
 
 info_content='''This application has been developed with the teamwork of three students (Team VAY) of class 12th from Science stream in Banasthali Public School, session 2021-22; namely:
 
     -> Vishesh Sharma
-    -> Yugam Sehgal
-    -> Anshuman Khatri'''
+    -> Anshuman Khatri
+    -> Yugam Sehgal'''
 
 ques_content='''Q NO.,Question,Option 1,Option 2,Option 3,Option 4,Answer
 1,Which is the smallest planet within our solar system?,Mercury,Uranus,Mars,Venus,Mercury
@@ -582,6 +582,7 @@ class Facts(Screen):
     loopfact.insert(1, facts.pop(rf))
 
     optionchose=0
+    planetimage="random"
 
     def ChooseOption(self):
         if self.ids.chooseplanets.text=="Random Space Facts":

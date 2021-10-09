@@ -396,9 +396,9 @@ WindowManager:
                 text:
                     '\n'.join(("          [font=fonts/russoone.ttf][b][i]CHOOSE[/i][/b][/font]","[font=fonts/russoone.ttf][i][b]   A GAME MODE[/b][/i][/font]"," "," "," "," "," "," "," "," ","[size=22][font=fonts/russoone.ttf][i][b] SOME INTERESTING FACTS[/b][/i][/font][/size]","[size=22][font=fonts/russoone.ttf][i][b]           ABOUT SPACE[/b][/i][/font][/size]"))
                 font_size: "35sp"
-                size_hint: 1, .2
+                size_hint: 1, 1
                 color: hex("#E7005E")
-                pos_hint: {"center_x":.5, "top":.7}
+                pos_hint: {"center_x":.5, "center_y":.6}
             
             Label:
                 text: "More..."
@@ -1198,7 +1198,7 @@ WindowManager:
                     keep_ratio: True
                     pos_hint: {'center_x':.5, 'center_y': .385}
                     size_hint: self.height, None
-                    height: "250dp"
+                    height: "225dp"
 
                 Button:
                     id: btnfactaudio
