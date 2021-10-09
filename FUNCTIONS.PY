@@ -234,8 +234,8 @@ def check_rapid_ans(answer,r):
         answer = listen().upper()
     else:
         from pytimedinput import timedInput
-
-        userText, timedOut = timedInput("    Answer: ",10)
+        
+        userText, timedOut = timedInput("Answer: ",10)
 
         if(timedOut):
             print("Time up!")
