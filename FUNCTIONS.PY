@@ -8,10 +8,9 @@ import speech_recognition as sr
 import time
 from threading import Timer
 
-engine = pyttsx3.init()
+engine = pyttsx3.init("sapi5")
 voices = engine.getProperty('voices')
-engine.setProperty("voices", voices[0].id)
-engine.setProperty("rate", 178)
+engine.setProperty('voice',voices[11].id) #English
 
 # Files Needed To Be Read
 
@@ -234,8 +233,8 @@ def check_rapid_ans(answer,r):
         answer = listen().upper()
     else:
         from pytimedinput import timedInput
-
-        userText, timedOut = timedInput("    Answer: ",10)
+        
+        userText, timedOut = timedInput("Answer: ",10)
 
         if(timedOut):
             print("Time up!")
