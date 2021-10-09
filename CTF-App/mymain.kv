@@ -11,7 +11,7 @@
 
 
 WindowManager:
-    transition: NoTransition()
+    transition: CardTransition()
     Home:
     # Setting:
     Info:
@@ -1294,12 +1294,12 @@ WindowManager:
 
                 Label:
                     text:
-                        '\n'.join(("SPACE TRIVIA", "   RESULT"))
+                        '\n'.join((" SPACE TRIVIA", "      RESULT"))
                     font_name: "fonts/righteous.ttf"
                     color: hex("#007ad1")
                     font_size: "40sp"
                     size_hint: 1, .1
-                    pos_hint: {"center_x": .5, "top": .977}
+                    pos_hint: {"center_x": .5, "top": .937}
 
                 Label:
                     text: "WELL PLAYED!!"
@@ -1387,7 +1387,7 @@ WindowManager:
 
                 Label:
                     text:
-                        '\n'.join(("RAPID FIRE", "   RESULT"))
+                        '\n'.join((" RAPID FIRE", "    RESULT"))
                     font_name: "fonts/righteous.ttf"
                     color: hex("#007ad1")
                     font_size: "40sp"

@@ -13,8 +13,8 @@ Q NO.,Question,Option 1,Option 2,Option 3,Option 4,Answer
 12,What phenomena keeps the planets in steady orbit around the sun?,Spaghettification,Solar winds,Vacuum of space,Gravity,Gravity
 13,Which is the largest star within our solar system?,Sun,Moon,Sirius,Polaris,Sun
 14,How many stars are in the Milky Way?,More than 2 million,More than 20 million,More than 10 billion,More than 100 billion,More than 100 billion
-15,"How old is the sun approximately? ",4 Billion,4.6 Billion,6 Billion,6.2 Billion,4.6 Billion
-16,"How long does the sun rays take to reach Earth in minutes? ",10,8,12,15,8
+15,How old is the sun approximately?,4 Billion,4.6 Billion,6 Billion,6.2 Billion,4.6 Billion
+16,How long does the sun rays take to reach Earth in minutes?,10,8,12,15,8
 17,How long does a solar eclipse last in minutes?,10,6.5,7.5,5,7.5
 18,Where is the Asteroid Belt located?,Between Mars and Jupiter,Between Venus and Mercury,Between Uranus and Neptune,Between Saturn and Jupiter,Between Mars and Jupiter
 19,What color is Mars's sunset?,Red,Pink,Blue,White,Blue
@@ -29,9 +29,9 @@ Q NO.,Question,Option 1,Option 2,Option 3,Option 4,Answer
 28,How many planets of solar system can be seen without telescope?,2,5,4,3,5
 29,Which planet is closest in size to Earth?,Mercury,Venus,Mars,Neptune,Venus
 30,Which is the oldest planet in our solar system?,Saturn,Mars,Jupiter,Uranus,Jupiter
-31,Which Earth sized planet is largely made up of diamonds?,Proxima 1,A Centauri,Sirius A,55 Cancri e,"55 Cancri e "
+31,Which Earth sized planet is largely made up of diamonds?,Proxima 1,A Centauri,Sirius A,55 Cancri e,55 Cancri e
 32,Name the first human spacecraft sent into space?,Apollo 11,Apollo 13,Vostok 1,Vostok 2,Vostok 1
 33,Who made the first human spacecraft?,Rick Astley,Ferdinand Magellan,Gallelio Galleli,Issac Newton,Ferdinand Magellan
 34,When did the first human landed on moon?,14-Jan-87,10-May-98,23-Nov-56,20-Jul-69,20-Jul-69
-35,"How old is Earth in billion years? ","1.12 ","2.51 ","4.54 ","25.56 ",4.54 years
-36,"How wide is our Solar System in billion kms? ","123.87 ","52.12 ","504.78 ","287.46 ",287.46 km
+35,How old is Earth in billion years?,1.12,2.51,4.54,25.56,4.54
+36,How wide is our Solar System in billion kms?,123.87,52.12,504.78,287.46,287.46
