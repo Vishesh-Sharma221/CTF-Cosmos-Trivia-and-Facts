@@ -5,13 +5,14 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.label import Label
 from kivy.lang import Builder
 from kivy.core.window import Window
-from kivy.properties import ObjectProperty, StringProperty
+from kivy.clock import Clock
+from kivy.properties import ObjectProperty, StringProperty, NumericProperty
 
 #App Version
 __version__="00.04.01"
 
 # window size
-Wfac=-8
+Wfac=3
 WindowWidth= (40-Wfac)*9
 WindowHeight= (40-Wfac)*19.5
 Window.size=(dp(WindowWidth), dp(WindowHeight))
@@ -104,27 +105,6 @@ The hottest planet in our solar system is 450° C
 Humanity have found around 60 potentially habitable exoplanets as of 2021
 The nearest habitable planet is estimated to be 12 light years away'''
 
-
-try:
-    about_file=open("aboutctf.txt")
-    about=about_file.read()
-except FileNotFoundError:
-    about_file=open("aboutctf.txt","w+")
-    about_file.write(about_content)
-    about_file.close()
-    about_file=open("aboutctf.txt")
-    about=about_file.read()
-
-try:
-    howtoplay_file=open("howtoplayctf.txt")
-    howtoplay=howtoplay_file.read()
-except FileNotFoundError:
-    howtoplay_file=open("howtoplayctf.txt","w+")
-    howtoplay_file.write(howtoplay_content)
-    howtoplay_file.close()
-    howtoplay_file=open("howtoplayctf.txt")
-    howtoplay=howtoplay_file.read()
-
 try:
     ques_file=open("questions.csv")
     read_ques_file=csv.reader(ques_file)
@@ -145,16 +125,6 @@ except FileNotFoundError:
     fact_file=open("facts.txt")
     read_facts_file=csv.reader(fact_file)
 
-try:
-    info_file=open("info.txt")
-    info=info_file.read()
-except FileNotFoundError:
-    info_file=open("info.txt","w+")
-    info_file.write(info_content)
-    info_file.close()
-    info_file=open("info.txt")
-    info=info_file.read()
-
 ques=[]         # 1-Q, 2-O1, 3-O2, 4-O3, 5-O4, 6-A
 for x in read_ques_file:
     ques.append(x)
@@ -174,9 +144,9 @@ class Home(Screen):
 #     pass
 
 class Info(Screen):
-    infos = StringProperty(f"{info}")
-    aboutctfapp=StringProperty(f"{about}")
-    howtoplayctfapp=StringProperty(f"{howtoplay}")
+    infos = StringProperty(f"{info_content}")
+    aboutctfapp=StringProperty(f"{about_content}")
+    howtoplayctfapp=StringProperty(f"{howtoplay_content}")
 
 class GameMode(Screen):
     pass
@@ -200,6 +170,7 @@ class Quiz(Screen, object):
     ans=StringProperty("false")
     nexttohome=StringProperty("Next")
     quizcheck=StringProperty("")
+    roundnum=StringProperty("1")
     
     r=random.randint(1,len(ques)-1)
     ans1,ans2,ans3,ans4=ques[r][2],ques[r][3],ques[r][4],ques[r][5]
@@ -215,14 +186,12 @@ class Quiz(Screen, object):
     # removing the used ques for this quiz
     loopques.insert(0, ques.pop(r))
 
-    
-
     def start_quiz_ques(self, buttonnext, buttonhome):
         global ques
         global loopques
         global r
 
-        # self.ids.btnquizcheck.disabled=True
+        self.ids.btnquizcheck.disabled=True
         self.ids.btnopt1.disabled=False
         self.ids.btnopt2.disabled=False
         self.ids.btnopt3.disabled=False
@@ -254,6 +223,12 @@ class Quiz(Screen, object):
         if self.ques_no==5:
             self.ques_no=0
             buttonnext.bind(on_release=self.gotoresult)
+
+        if self.ques_no==1:
+            self.roundnum=str(int(self.roundnum)+1)
+        
+        if self.roundnum=="6":
+            self.roundnum="1"
             # buttonnext.bind(on_state=self.resultbutton,on_release=self.gotoresult)
         # if self.ques_no==4:
         #     buttonnext.disabled = False
@@ -332,7 +307,7 @@ class Quiz(Screen, object):
         else:
             self.quizcheck=f"Your answer is wrong!\nCorrect answer: {self.answer}."
         
-        # self.ids.btnquizcheck.disabled=True
+        self.ids.btnquizcheck.disabled=True
         self.ids.btnopt1.disabled=True
         self.ids.btnopt2.disabled=True
         self.ids.btnopt3.disabled=True
@@ -343,7 +318,7 @@ class Quiz(Screen, object):
     def exitquiz(self):
         self.ids.btnquiznextques.disabled=True
         
-        # self.ids.btnquizcheck.disabled=False
+        self.ids.btnquizcheck.disabled=True
         self.ids.btnopt1.disabled=False
         self.ids.btnopt2.disabled=False
         self.ids.btnopt3.disabled=False
@@ -364,7 +339,7 @@ class RapidFire(Screen, object):
             ques.insert(1, loopques.pop(i))
 
     #default vals
-    Quiz_Score = StringProperty("0")
+    Rapid_Score = StringProperty("0")
     SCORE=0
     check=StringProperty("")
     ques_no=1
@@ -372,7 +347,9 @@ class RapidFire(Screen, object):
     #variables    
     ans=StringProperty("false")
     nexttohome=StringProperty("Next")
-    quizcheck=StringProperty("")
+    rapidcheck=StringProperty("")
+    timervar=StringProperty("10")
+    roundnum=StringProperty("1")
     
     r=random.randint(1,len(ques)-1)
     ans1,ans2,ans3,ans4=ques[r][2],ques[r][3],ques[r][4],ques[r][5]
@@ -385,34 +362,42 @@ class RapidFire(Screen, object):
     opt4=StringProperty(f"4.    {ques[r][5]}")
     talkquestion=f"Question {str(ques_no)}: {ques[r][1]}\nThe options are:\n first, {ques[r][2]}\n second, {ques[r][3]}\n third, {ques[r][4]}\n and fourth, {ques[r][5]}"
     
-    # removing the used ques for this quiz
+    # removing the used ques for this rapid fire
     loopques.insert(0, ques.pop(r))
+    
+    def countdown(self, *args):
+        self.ids.counter.text=str(int(self.ids.counter.text)-1)
 
-    def rapidtimer(self):
-        # from pytimedinput import timedInput
-        # userText, timedOut = timedInput("    Answer: ",4)
+    def timerrapid(self, *args):
+        self.timercountdown.cancel()    
+        self.check_rapid_ans()
 
-        # if(timedOut):
-        #     self.ans="false"
-        #     # userText=self.ans
-        #     self.check_quiz_ans()
-        # else:
-        #     self.answerdsfs = userText
+    def timer(self):
+        self.timercountdown = Clock.schedule_interval(self.countdown, 1)
+        Clock.schedule_once(self.timerrapid, 10)
 
-        from threading import Thread
+    # def __init__(self, **kwargs):
+    #         super(RapidFire, self).__init__(**kwargs)
+    #         self.timercountdown = Clock.schedule_interval(self.countdown, 1)
+    def start_timer(self):
+        return self.timer()
+    
+        
 
-        time.sleep(5)
-        self.check_quiz_ans()
+    def start_rapid_ques(self, buttonnext, buttonhome):
 
-    def start_quiz_ques(self, buttonnext, buttonhome):
-
-        # self.rapidtimer()
+        
+        # self.timercountdown = Clock.schedule_interval(RapidFire.countdown, 1)
+        # Clock.schedule_once(RapidFire.timerrapid, 10)    
+        
+        # self.timercountdown = Clock.schedule_interval(self.countdown, 1)
+        # Clock.schedule_once(self.timerrapid, 10)
 
         global ques
         global loopques
         global r
 
-        # self.ids.btnquizcheck.disabled=True
+        # self.ids.btnrapidcheck.disabled=True
         self.ids.btnopt1.disabled=False
         self.ids.btnopt2.disabled=False
         self.ids.btnopt3.disabled=False
@@ -434,32 +419,26 @@ class RapidFire(Screen, object):
         self.opt3=f"3.    {ques[r][4]}"
         self.opt4=f"4.    {ques[r][5]}"
         self.talkquestion=f"\nQuestion {str(self.ques_no)}: {ques[r][1]}\nThe options are:\n first, {ques[r][2]}\n second, {ques[r][3]}\n third, {ques[r][4]}\n and fourth, {ques[r][5]}"
-        self.quizcheck=""
-        
-        # removing the used ques for this quiz
+        self.rapidcheck=""
+
         loopques.insert(0, ques.pop(r))
 
-        # if self.ques_no==1:
-        #     self.Quiz_Score="0"
         if self.ques_no==5:
             self.ques_no=0
+            # self.roundnum=str(int(self.roundnum)+1)
             buttonnext.bind(on_release=self.gotoresult)
-            # buttonnext.bind(on_state=self.resultbutton,on_release=self.gotoresult)
-        # if self.ques_no==4:
-        #     buttonnext.disabled = False
-        #     self.ids.imagenextquiz.source = "images/buttons/resultdark.png"
         
-        self.ids.btnquiznextques.disabled=True
-    
-    # def resultbutton(self):
-    #     if self.ids.btnquiznextques.state == "down":
-    #         self.ids.imagenextquiz.source = "images/buttons/resultlight.png"
-    #     else:
-    #         self.ids.imagenextquiz.source = "images/buttons/resultdark.png"
+        if self.ques_no==1:
+            self.roundnum=str(int(self.roundnum)+1)
+        
+        if self.roundnum=="6":
+            self.roundnum="1"
 
-    def gotoresult(self, quiznextparent):
-        self.parent.current = "quizresult"
-        self.ids.btnquiznextques.unbind(on_release=self.gotoresult)
+        self.ids.btnrapidnextques.disabled=True
+
+    def gotoresult(self, rapidnextparent):
+        self.parent.current = "rapidresult"
+        self.ids.btnrapidnextques.unbind(on_release=self.gotoresult)
 
     def inputA(self, button):
         if self.ans1==self.answer:
@@ -513,60 +492,34 @@ class RapidFire(Screen, object):
         self.ids.imageopt2.source="images/buttons/optiondark.png"
         self.ids.imageopt3.source="images/buttons/optiondark.png"
 
-    def check_quiz_ans(self):
+    def check_rapid_ans(self):
 
         if self.ans=="true":
-            Quiz.SCORE += 1
-            self.Quiz_Score = str(int(self.Quiz_Score) + 1)
-            self.quizcheck="Your Answer is Correct!!"
+            RapidFire.SCORE += 1
+            self.Rapid_Score = str(int(self.Rapid_Score) + 1)
+            self.rapidcheck="Your Answer is Correct!!"
         else:
-            self.quizcheck=f"Your answer is wrong!\nCorrect answer: {self.answer}."
+            self.rapidcheck=f"Your answer is wrong!\nCorrect answer: {self.answer}."
         
-        # self.ids.btnquizcheck.disabled=True
         self.ids.btnopt1.disabled=True
         self.ids.btnopt2.disabled=True
         self.ids.btnopt3.disabled=True
         self.ids.btnopt4.disabled=True
 
-        self.ids.btnquiznextques.disabled=False
+        self.ids.btnrapidnextques.disabled=False
 
-    def exitquiz(self):
-        self.ids.btnquiznextques.disabled=True
+    def exitrapid(self):
+        self.ids.btnrapidnextques.disabled=True
         
-        # self.ids.btnquizcheck.disabled=False
         self.ids.btnopt1.disabled=False
         self.ids.btnopt2.disabled=False
         self.ids.btnopt3.disabled=False
         self.ids.btnopt4.disabled=False
-        self.quizcheck=""
+        self.rapidcheck=""
 
         self.ques_no=1
-        self.Quiz_Score = "0"
+        self.Rapid_Score = "0"
         self.question_number=f"{self.ques_no}"
-
-        # import msvcrt
-        # import sys
-
-        # # class TimeoutExpired(Exception):
-        # #     pass
-
-        # def input_with_timeout(prompt, timeout, timer=time.monotonic):
-        #     sys.stdout.write(prompt)
-        #     sys.stdout.flush()
-        #     endtime = timer() + timeout
-        #     result = []
-        #     while timer() < endtime:
-        #         if msvcrt.kbhit():
-        #             result.append(msvcrt.getwche()) 
-        #             if result[-1] == '\r':
-        #                 return ''.join(result[:-1])
-        #         time.sleep(0.04) 
-        #     # raise TimeoutExpired
-
-        # try:
-        #     answer = input_with_timeout("You have only 10seconds to Answer! : ", 10)
-        # except:#TimeoutExpired:
-        #     print('Sorry, times up')
 
 class Facts(Screen):
     global facts
@@ -621,7 +574,7 @@ class Facts(Screen):
         self.fact=f"{facts[rf][self.optionchose]}"
         # self.morefact="One More Fact"
 
-        self.diduno="Did you know?"
+        self.diduno="DID YOU KNOW?"
 
         loopfact.insert(1, facts.pop(rf))
 

@@ -232,10 +232,11 @@ WindowManager:
                             WrappedLabel:
                                 size: self.parent.size
                                 text: root.aboutctfapp
+                                valign: "top"
                                 halign: "justify"
                                 font_size: "22sp"
                                 font_name: "fonts/ubuntu.ttf"
-                                pos_hint: {"center_x":.5,"top":1}
+                                pos_hint: {"center_x":.5,"y":0}
                                 padding_x: "25dp"   
                             
                         FloatLayout:
@@ -278,8 +279,9 @@ WindowManager:
                             WrappedLabel:
                                 size: self.parent.size
                                 text: root.howtoplayctfapp
+                                valign: "top"
                                 halign: "justify"
-                                pos_hint: {"center_x":.5,"top":1}
+                                pos_hint: {"center_x":.5,"y":.3}
                                 padding_x: "25dp"
                                 font_size: "22sp"
                                 font_name: "fonts/ubuntu.ttf"
@@ -326,8 +328,9 @@ WindowManager:
                             WrappedLabel:
                                 size: self.parent.size
                                 text: root.infos
+                                valign: "top"
                                 halign: "justify"
-                                pos_hint: {"center_x":.5,"top":1}
+                                pos_hint: {"center_x":.5,"y":.2}
                                 padding_x: "25dp"
                                 font_size: "22sp"
                                 font_name: "fonts/ubuntu.ttf"
@@ -391,7 +394,7 @@ WindowManager:
             Label:
                 markup: True
                 text:
-                    '\n'.join(("           [font=fonts/russoone.ttf][b][i]Choose[/i][/b][/font]","[font=fonts/russoone.ttf][i][b]    a Game Mode[/b][/i][/font]"," "," "," "," "," "," "," "," "," "," ","[size=30][font=fonts/russoone.ttf][i][b]Some Interesting Facts[/b][/i][/font][/size]","[size=30][font=fonts/russoone.ttf][i][b]          About Space[/b][/i][/font][/size]"))
+                    '\n'.join(("           [font=fonts/russoone.ttf][b][i]CHOOSE[/i][/b][/font]","[font=fonts/russoone.ttf][i][b]    A GAME MODE[/b][/i][/font]"," "," "," "," "," "," "," "," "," "," ","[size=30][font=fonts/russoone.ttf][i][b]SOME INTERESTING FACTS[/b][/i][/font][/size]","[size=30][font=fonts/russoone.ttf][i][b]          ABOUT SPACE[/b][/i][/font][/size]"))
                 font_size: "40sp"
                 size_hint: 1, .2
                 color: hex("#E7005E")
@@ -518,27 +521,30 @@ WindowManager:
                 size_hint: 1,.99
                 
                 Label:
-                    text: "Space Trivia"
+                    text: "SPACE TRIVIA"
+                    bold: True
+                    font_name: "fonts/righteous.ttf"
+                    color: hex("#007ad1")
                     font_size: "40sp"
                     size_hint: 1, .1
-                    pos_hint: {"center_x": .5, "top": .967}
+                    pos_hint: {"center_x": .5, "top": .974}
                 
                 Label:
-                    text: "Question: " + root.question_number + "/5                               Score: " + str(root.Quiz_Score)
+                    text: "Round: "+ root.roundnum +"     Ques: " + root.question_number + "/5     Score: " + str(root.Quiz_Score)
                     font_size: "20sp"
                     size_hint: 1,.1
-                    pos_hint: {"center_x": .5, "top": .85885}
+                    pos_hint: {"center_x": .5, "top": .86}
                     
                 WrappedLabel:
                     id: quizquestionlabel
                     text: root.question
                     font_name: "fonts/ubuntu.ttf"
-                    font_size: "20sp"
+                    font_size: "22.5sp"
                     halign: 'left'
                     valign: 'top'
                     padding_x: 10
                     size_hint: .92, .1
-                    pos_hint: {"center_x":.5, "top":.75}
+                    pos_hint: {"center_x":.5, "top":.735}
 
                 Button:
                     id: btnquizaudio
@@ -589,6 +595,8 @@ WindowManager:
                     
                 Label:
                     text: root.opt1
+                    font_name: "fonts/ubuntu.ttf"
+                    font_size: "18sp"
                     text_size: self.size
                     size_hint: .92, .0723
                     pos_hint: {"center_x":.5, "top":.5785}
@@ -597,6 +605,8 @@ WindowManager:
                 
                 ToggleButton:
                     id: btnopt2
+                    font_name: "fonts/ubuntu.ttf"
+                    font_size: "20sp"
                     pos_hint: {"center_x":.5, "top":.4955}
                     size_hint: .92, .0723
                     background_color: 0,0,0,0
@@ -621,6 +631,8 @@ WindowManager:
                     
                 Label:
                     text: root.opt2
+                    font_name: "fonts/ubuntu.ttf"
+                    font_size: "18sp"
                     text_size: self.size
                     size_hint: .92, .0723
                     pos_hint: {"center_x":.5, "top":.4955}
@@ -653,6 +665,8 @@ WindowManager:
                     
                 Label:
                     text: root.opt3
+                    font_name: "fonts/ubuntu.ttf"
+                    font_size: "18sp"
                     text_size: self.size
                     size_hint: .92, .0723
                     pos_hint: {"center_x":.5, "top":.4122}
@@ -685,6 +699,8 @@ WindowManager:
                     
                 Label:
                     text: root.opt4
+                    font_name: "fonts/ubuntu.ttf"
+                    font_size: "18sp"
                     text_size: self.size
                     size_hint: .92, .0723
                     pos_hint: {"center_x":.5, "top":.3299}
@@ -694,8 +710,8 @@ WindowManager:
                 WrappedLabel:
                     id: quizquescheck
                     text: root.quizcheck
-                    font_name: 
-                    font_size: "25sp"
+                    font_name: "fonts/ubuntu.ttf"
+                    font_size: "22.5sp"
                     halign: "center"
                     size_hint: 1, .1
                     padding_x: "25dp"
@@ -816,30 +832,52 @@ WindowManager:
                 size_hint: 1,.99
                 
                 Label:
-                    text: "Rapid Fire"
+                    text: "RAPID FIRE"
+                    bold: True
+                    font_name: "fonts/righteous.ttf"
+                    color: hex("#007ad1")
                     font_size: "40sp"
                     size_hint: 1, .1
-                    pos_hint: {"center_x": .5, "top": .967}
+                    pos_hint: {"center_x": .5, "top": .974}
                 
+                
+
                 Label:
-                    text: "Question: " + root.question_number + "/5                               Score: " + str(root.Quiz_Score)
+                    text: "Round: "+ root.roundnum +"     Ques: " + root.question_number + "/5     Score: " + str(root.Rapid_Score)
                     font_size: "20sp"
                     size_hint: 1,.1
                     pos_hint: {"center_x": .5, "top": .85885}
+                
+                Label:
+                    text: "Time: "
+                    halign: 'left'
+                    font_size: "30sp"
+                    font_name: "fonts/ubuntu.ttf"
+                    size_hint: 1, .1
+                    pos_hint: {"center_x": .435, "center_y": .055}
+
+                Label:
+                    id: counter
+                    text: "10"
+                    halign: 'center'
+                    font_size: "35sp"
+                    font_name: "fonts/digital.otf"
+                    size_hint: 1, .1
+                    pos_hint: {"center_x": .585, "center_y": .055}
                     
                 WrappedLabel:
-                    id: quizquestionlabel
+                    id: rapidquestionlabel
                     text: root.question
                     font_name: "fonts/ubuntu.ttf"
-                    font_size: "20sp"
+                    font_size: "22.5sp"
                     halign: 'left'
                     valign: 'top'
                     padding_x: 10
                     size_hint: .92, .1
-                    pos_hint: {"center_x":.5, "top":.75}
+                    pos_hint: {"center_x":.5, "top":.735}
 
                 Button:
-                    id: btnquizaudio
+                    id: btnrapidaudio
                     pos_hint: {"center_x":.9, "top":.64}
                     size_hint: None, None
                     width: "25dp"
@@ -847,14 +885,14 @@ WindowManager:
                     background_color: 0,0,0,0
 
                     on_state:
-                        imagequizspeaker.opacity = .7 if self.state == "down" else 1
+                        imagerapidspeaker.opacity = .7 if self.state == "down" else 1
 
                     on_release:
                         app.talk(root.talkquestion)
-                        imagequizspeaker.opacity = 1
+                        imagerapidspeaker.opacity = 1
                     
                     Image:
-                        id: imagequizspeaker
+                        id: imagerapidspeaker
                         source: "images/buttons/speakericon.png"
                         center_x: self.parent.center_x
                         center_y: self.parent.center_y
@@ -872,13 +910,12 @@ WindowManager:
 
                     on_release:
                         root.inputA(self)
-                        root.check_quiz_ans()
+                        root.check_rapid_ans()
                         btnopt1.disabled=True
                         btnopt2.disabled=True
                         btnopt3.disabled=True
                         btnopt4.disabled=True
                         imageopt1.source = "images/buttons/optionselect.png" if self.state == "down" else "images/buttons/optiondark.png"
-                        # btnquizcheck.disabled = False if self.state == "down" else True
                     
                     Image:
                         id: imageopt1
@@ -892,6 +929,8 @@ WindowManager:
                     
                 Label:
                     text: root.opt1
+                    font_name: "fonts/ubuntu.ttf"
+                    font_size: "18sp"
                     text_size: self.size
                     size_hint: .92, .0723
                     pos_hint: {"center_x":.5, "top":.5785}
@@ -909,13 +948,12 @@ WindowManager:
 
                     on_release:
                         root.inputB(self)
-                        root.check_quiz_ans()
+                        root.check_rapid_ans()
                         btnopt1.disabled=True
                         btnopt2.disabled=True
                         btnopt3.disabled=True
                         btnopt4.disabled=True
                         imageopt2.source = "images/buttons/optionselect.png" if self.state == "down" else "images/buttons/optiondark.png"
-                        # btnquizcheck.disabled = False if self.state == "down" else True
                         
                     Image:
                         id: imageopt2
@@ -929,6 +967,8 @@ WindowManager:
                     
                 Label:
                     text: root.opt2
+                    font_name: "fonts/ubuntu.ttf"
+                    font_size: "18sp"
                     text_size: self.size
                     size_hint: .92, .0723
                     pos_hint: {"center_x":.5, "top":.4955}
@@ -946,13 +986,12 @@ WindowManager:
 
                     on_release:
                         root.inputC(self)
-                        root.check_quiz_ans()
+                        root.check_rapid_ans()
                         btnopt1.disabled=True
                         btnopt2.disabled=True
                         btnopt3.disabled=True
                         btnopt4.disabled=True
                         imageopt3.source = "images/buttons/optionselect.png" if self.state == "down" else "images/buttons/optiondark.png"
-                        # btnquizcheck.disabled = False if self.state == "down" else True
                         
                     Image:
                         id: imageopt3
@@ -966,6 +1005,8 @@ WindowManager:
                     
                 Label:
                     text: root.opt3
+                    font_name: "fonts/ubuntu.ttf"
+                    font_size: "18sp"
                     text_size: self.size
                     size_hint: .92, .0723
                     pos_hint: {"center_x":.5, "top":.4122}
@@ -983,13 +1024,12 @@ WindowManager:
 
                     on_release:
                         root.inputD(self)
-                        root.check_quiz_ans()
+                        root.check_rapid_ans()
                         btnopt1.disabled=True
                         btnopt2.disabled=True
                         btnopt3.disabled=True
                         btnopt4.disabled=True
                         imageopt4.source = "images/buttons/optionselect.png" if self.state == "down" else "images/buttons/optiondark.png"
-                        # btnquizcheck.disabled = False if self.state == "down" else True
                         
                     Image:
                         id: imageopt4
@@ -1003,6 +1043,8 @@ WindowManager:
                     
                 Label:
                     text: root.opt4
+                    font_name: "fonts/ubuntu.ttf"
+                    font_size: "18sp"
                     text_size: self.size
                     size_hint: .92, .0723
                     pos_hint: {"center_x":.5, "top":.3299}
@@ -1010,38 +1052,14 @@ WindowManager:
                     padding_x: 10
 
                 WrappedLabel:
-                    id: quizquescheck
-                    text: root.quizcheck
-                    font_name: 
-                    font_size: "25sp"
+                    id: quizrapidcheck
+                    text: root.rapidcheck
+                    font_name: "fonts/ubuntu.ttf"
+                    font_size: "22.5sp"
                     halign: "center"
                     size_hint: 1, .1
                     padding_x: "25dp"
                     pos_hint: {"center_x":.5, "top":.215}
-
-                # Button:
-                #     id: btnquizcheck
-                #     pos_hint: {"center_x":.5, "top": .0835}
-                #     size_hint: .92, .0723
-                #     background_color: 0,0,0,0
-                #     disabled: True
-
-                #     on_state:
-                #         imagequizcheck.source = "images/buttons/checkanslight.png" if self.state == "down" else "images/buttons/checkansdark.png"
-
-                #     on_release:
-                #         root.check_quiz_ans()
-                #         imagequizcheck.source = "images/buttons/checkansdark.png"
-
-                #     Image:
-                #         id: imagequizcheck
-                #         source: "images/buttons/checkansdark.png"
-                #         center_x: self.parent.center_x
-                #         center_y: self.parent.center_y
-                #         size: self.parent.size
-                #         opacity: 0.5 if self.parent.disabled == True else 1
-                #         allow_stretch: True
-                #         keep_ratio: False
 
             GridLayout:
                 cols:2
@@ -1050,7 +1068,7 @@ WindowManager:
                 
                 FloatLayout:
                     Button:
-                        id: btnquiztohome
+                        id: btnrapidtohome
                         size_hint: None, None
                         size: "150.5dp", "45dp"
                         background_color: 0,0,0,0
@@ -1058,19 +1076,19 @@ WindowManager:
                         disabled: False
 
                         on_state:
-                            imagequiztohome.source = "images/buttons/quitlight.png" if self.state == "down" else "images/buttons/quitdark.png"
+                            imagerapidtohome.source = "images/buttons/quitlight.png" if self.state == "down" else "images/buttons/quitdark.png"
                         
                         on_release:
                             app.root.current = "home"
-                            root.exitquiz()
+                            root.exitrapid()
                             imageopt1.source = "images/buttons/optiondark.png"
                             imageopt2.source = "images/buttons/optiondark.png"
                             imageopt3.source = "images/buttons/optiondark.png"
                             imageopt4.source = "images/buttons/optiondark.png"
-                            imagequiztohome.source = "images/buttons/quitdark.png"
+                            imagerapidtohome.source = "images/buttons/quitdark.png"
 
                         Image:
-                            id: imagequiztohome
+                            id: imagerapidtohome
                             source: "images/buttons/quitdark.png"
                             center_x: self.parent.center_x
                             center_y: self.parent.center_y
@@ -1079,7 +1097,7 @@ WindowManager:
                 
                 FloatLayout:
                     Button:
-                        id: btnquiznextques
+                        id: btnrapidnextques
                         size_hint: None, None
                         size: "150.5dp", "45dp"
                         background_color: 0,0,0,0
@@ -1087,22 +1105,22 @@ WindowManager:
                         disabled: True #disable it
 
                         on_state:
-                            imagenextquiz.source = "images/buttons/nextqueslight.png" if self.state == "down" else "images/buttons/nextquesdark.png"
+                            imagenextrapid.source = "images/buttons/nextqueslight.png" if self.state == "down" else "images/buttons/nextquesdark.png"
                         
                         on_release:
-                            root.start_quiz_ques(self, btnquiztohome)
+                            root.start_rapid_ques(self, btnrapidtohome)
                             imageopt1.source = "images/buttons/optiondark.png"
                             imageopt2.source = "images/buttons/optiondark.png"
                             imageopt3.source = "images/buttons/optiondark.png"
                             imageopt4.source = "images/buttons/optiondark.png"
-                            # imagenextquiz.source = "images/buttons/nextquesdark.png"
+                            # imagenextrapid.source = "images/buttons/nextquesdark.png"
                             btnopt1.state = 'normal'
                             btnopt2.state = 'normal'
                             btnopt3.state = 'normal'
                             btnopt4.state = 'normal'
-                        
+
                         Image:
-                            id: imagenextquiz
+                            id: imagenextrapid
                             source: "images/buttons/nextquesdark.png"
                             center_x: self.parent.center_x
                             center_y: self.parent.center_y
@@ -1130,10 +1148,12 @@ WindowManager:
                 size_hint: 1,1
 
                 Label:
-                    text: "Space Facts"
+                    text: "SPACE FACTS"
+                    font_name: "fonts/righteous.ttf"
+                    color: hex("#007ad1")
                     font_size: "40sp"
                     size_hint: 1, .1
-                    pos_hint: {"center_x": .5, "top": .98}
+                    pos_hint: {"center_x": .5, "top": .984}
 
                 Spinner:
                     id: chooseplanets
@@ -1153,7 +1173,7 @@ WindowManager:
                     font_size: "30sp"
                     pos_hint: {'center_x': .5, 'center_y':.755}
                     size_hint: 1, .1
-                    color: hex("#00bac7")
+                    color: hex("#ff7b00")
 
                 WrappedLabel:
                     id: factlabel
@@ -1163,7 +1183,7 @@ WindowManager:
                     valign: 'center'
                     padding_x: "27.5dp"
                     font_size: "25sp"
-                    pos_hint: {'center_x': .5, 'center_y':.67}
+                    pos_hint: {'center_x': .5, 'center_y':.63}
                     size_hint: 1, .6
 
                 Button:
@@ -1260,13 +1280,18 @@ WindowManager:
 
                 Label:
                     text:
-                        '\n'.join(("Space Trivia", "   Result"))
-                    font_size: "20sp"
+                        '\n'.join(("SPACE TRIVIA", "   RESULT"))
+                    font_name: "fonts/righteous.ttf"
+                    color: hex("#007ad1")
+                    font_size: "40sp"
                     size_hint: 1, .1
                     pos_hint: {"center_x": .5, "top": .977}
 
                 Label:
                     text: "Well Played!"
+                    font_size: "40sp"
+                    font_name: "fonts/ubuntu.ttf"
+                    color: hex("#aa00ff")
                     size_hint: .1, .1
                     pos_hint: {"center_x": .5, "center_y": .5}
 
@@ -1348,13 +1373,18 @@ WindowManager:
                 
                 Label:
                     text:
-                        '\n'.join(("Rapid Fire", "   Result"))
-                    font_size: "20sp"
+                        '\n'.join(("RAPID FIRE", "   RESULT"))
+                    font_name: "fonts/righteous.ttf"
+                    color: hex("#007ad1")
+                    font_size: "40sp"
                     size_hint: 1, .1
-                    pos_hint: {"center_x": .5, "top": .977}
+                    pos_hint: {"center_x": .5, "top": .937}
 
                 Label:
                     text: "Well Played!"
+                    font_size: "40sp"
+                    font_name: "fonts/ubuntu.ttf"
+                    color: hex("#aa00ff")
                     size_hint: .1, .1
                     pos_hint: {"center_x": .5, "center_y": .5}
             
